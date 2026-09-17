@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>THCS Chao Đâu</title>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css" />
+<style>
+/* =================================================================
+   RESET — không dùng border-radius lớn, không dùng shadow mềm
+   ================================================================= */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:auto}
+body{
+  font-family:Arial,Tahoma,Verdana,sans-serif;
+  font-size:12px;line-height:1.45;color:#222;
+  background:#dfe6ee;
+}
+a{color:#00519e;text-decoration:none}
+a:hover{color:#c00;text-decoration:underline}
+img{border:0;display:block}
+ul{list-style:none}
+input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
+.hidden{display:none!important}
+
+/* =================================================================
+   KHUNG TỔNG — viền ngoài như table cũ
+   ================================================================= */
+#wrap{
+  width:1180px;margin:0 auto;background:#fff;
+  border-left:1px solid #7a8ba0;border-right:1px solid #7a8ba0;
+  border-bottom:1px solid #7a8ba0;
+}
+
+/* =================================================================
+   TOP BAR
+   ================================================================= */
+.topbar{
+  background:#eef3f8;border-bottom:1px solid #b9c9dc;
+  padding:4px 10px;display:flex;justify-content:flex-end;gap:0;
+  font-size:11px;
+}
+.topbar a{
+  padding:2px 10px;border-right:1px solid #b9c9dc;
+  color:#00519e;display:inline-flex;align-items:center;gap:4px;
+}
+.topbar a:last-child{border-right:0}
+.topbar a:hover{color:#c00}
+.topbar i{font-size:10px}
+
+/* =================================================================
+   BANNER
+   ================================================================= */
+.banner{
+  height:100px;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#1a5fa8 0%,#0b4ea2 45%,#083d80 100%);
+  border-bottom:3px solid #ffc107;
+  padding:0 14px;display:flex;align-items:center;gap:14px;
+}
+.banner:before{
+  content:"";position:absolute;top:0;left:0;right:0;bottom:0;
+  background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1px);
+  background-size:6px 6px;opacity:.9;pointer-events:none;
+}
+.banner:after{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:rgba(255,255,255,.35);
+}
+.banner .badge{
+  position:relative;z-index:1;width:78px;height:78px;
+  background:#fff;border:2px solid #ffc107;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Times New Roman',serif;font-size:30px;font-weight:bold;
+  color:#0b4ea2;flex:0 0 auto;
+  box-shadow:0 2px 4px rgba(0,0,0,.4), inset 0 -3px 6px rgba(11,78,162,.15);
+}
+.banner .title{position:relative;z-index:1;color:#fff}
+.banner .title h1{
+  font-family:'Times New Roman',serif;font-size:26px;
+  font-weight:bold;text-transform:uppercase;letter-spacing:1.5px;
+  text-shadow:2px 2px 0 #000, 3px 3px 3px rgba(0,0,0,.5);
+  line-height:1.1;margin-bottom:3px;
+}
+.banner .title p{font-size:11px;font-style:italic;color:#dbe8f7;letter-spacing:.5px}
+
+/* =================================================================
+   MENU
+   ================================================================= */
+.menu{
+  background:linear-gradient(180deg,#1565c0,#0b4ea2 60%,#083d80);
+  border-bottom:1px solid #052a5a;
+  display:flex;flex-wrap:wrap;position:relative;z-index:100;
+}
+.menu > li{position:relative}
+.menu > li > a{
+  display:block;padding:9px 13px;color:#fff;font-size:11.5px;
+  font-weight:bold;text-transform:uppercase;letter-spacing:.2px;
+  border-right:1px solid #063d78;
+  border-left:1px solid #2f7ad0;
+  text-shadow:1px 1px 0 rgba(0,0,0,.35);
+}
+.menu > li:first-child > a{border-left:0}
+.menu > li > a:hover,
+.menu > li.on > a{
+  background:linear-gradient(180deg,#ffd54f,#ffc107 55%,#e6a700);
+  color:#0b4ea2;text-shadow:none;
+  border-left-color:#ffe082;border-right-color:#b28100;
+}
+.menu > li > ul{
+  display:none;position:absolute;top:100%;left:0;min-width:230px;
+  background:#fff;border:1px solid #0b4ea2;border-top:0;
+  box-shadow:2px 3px 0 rgba(11,78,162,.35);z-index:900;
+}
+.menu > li:hover > ul{display:block}
+.menu > li > ul > li > a{
+  display:block;padding:6px 12px;color:#333;font-size:11.5px;
+  border-bottom:1px dotted #c9d3df;background:#fdfdfd;
+}
+.menu > li > ul > li > a:hover{background:#e3f2fd;color:#c00;padding-left:18px}
+.menu > li > ul > li > a:before{
+  content:"›";color:#0b4ea2;margin-right:5px;font-weight:bold;
+}
+
+/* =================================================================
+   STRIP
+   ================================================================= */
+.strip{
+  display:flex;background:#fff;border-bottom:1px solid #b9c9dc;
+  height:32px;overflow:hidden;
+}
+.strip .clock{
+  width:215px;flex:0 0 auto;background:#0b4ea2;color:#fff;
+  display:flex;align-items:center;padding:0 12px;gap:6px;
+  font-size:11.5px;font-weight:bold;
+  border-right:3px solid #ffc107;
+}
+.strip .marquee{
+  flex:1;overflow:hidden;display:flex;align-items:center;
+  color:#c00;font-weight:bold;font-size:12.5px;
+}
+.strip .marquee span{
+  white-space:nowrap;padding-left:100%;
+  animation:mq 24s linear infinite;display:inline-block;
+}
+@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+.strip .search{
+  width:250px;flex:0 0 auto;display:flex;align-items:center;
+  border-left:1px solid #b9c9dc;padding:0 6px;gap:4px;
+  background:#eef3f8;
+}
+.strip .search input{
+  flex:1;border:1px solid #b9c9dc;padding:4px 8px;
+  font-size:11.5px;outline:none;background:#fff;
+}
+.strip .search input:focus{border-color:#0b4ea2}
+.strip .search button{
+  background:linear-gradient(180deg,#2a7ed0,#0b4ea2 60%,#083d80);
+  color:#fff;border:1px solid #052a5a;cursor:pointer;
+  padding:4px 10px;font-size:11px;
+}
+.strip .search button:hover{background:linear-gradient(180deg,#3b8ee0,#1565c0)}
+
+/* =================================================================
+   LAYOUT
+   ================================================================= */
+.main{display:flex;padding:8px;gap:8px;background:#dfe6ee}
+.col-left{width:200px;flex:0 0 200px}
+.col-mid{flex:1;min-width:0}
+.col-right{width:250px;flex:0 0 250px}
+
+/* =================================================================
+   KHỐI
+   ================================================================= */
+.box{background:#fff;border:1px solid #b9c9dc;margin-bottom:8px}
+.box > .head{
+  background:linear-gradient(180deg,#2a7ed0,#0b4ea2 55%,#083d80);
+  color:#fff;padding:6px 10px;font-size:11.5px;font-weight:bold;
+  text-transform:uppercase;letter-spacing:.3px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:2px solid #ffc107;
+  text-shadow:1px 1px 0 rgba(0,0,0,.3);
+}
+.box > .head i{margin-right:5px;font-size:11px}
+.box > .head.red{background:linear-gradient(180deg,#e53935,#c62828 55%,#8e1a1a)}
+.box > .head.orange{background:linear-gradient(180deg,#fb8c00,#ef6c00 55%,#b45309)}
+.box > .head.green{background:linear-gradient(180deg,#00897b,#00695c 55%,#004d40)}
+.box > .head .count{
+  background:#ffc107;color:#0b4ea2;padding:1px 7px;
+  font-size:10.5px;border:1px solid #b28100;
+}
+
+/* CỘT TRÁI */
+.mq-vertical{
+  height:110px;overflow:hidden;position:relative;
+  padding:8px 10px;font-size:11.5px;line-height:1.55;
+}
+.mq-vertical .list{animation:mqv 15s linear infinite}
+@keyframes mqv{0%{transform:translateY(100%)}100%{transform:translateY(-100%)}}
+.mq-vertical p{padding:3px 0 3px 14px;position:relative;color:#333}
+.mq-vertical p:before{
+  content:"◆";color:#c62828;font-size:9px;
+  position:absolute;left:0;top:4px;
+}
+.worktime{padding:9px 12px;font-size:11.5px}
+.worktime p{padding:2px 0}
+.worktime p.note{color:#888;font-style:italic;padding-top:5px}
+.quicklist a{
+  display:flex;align-items:center;gap:7px;
+  padding:7px 10px;border-bottom:1px dotted #c9d3dc;
+  font-size:11.5px;color:#00519e;font-weight:bold;
+}
+.quicklist a:last-child{border-bottom:0}
+.quicklist a:hover{background:#e8f2fc;color:#c00}
+.quicklist a i{color:#0b4ea2;font-size:13px;width:16px;text-align:center}
+
+/* TIN NỔI BẬT */
+.feat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:#b9c9dc}
+.feat{background:#fff;padding:8px;display:flex;flex-direction:column;position:relative}
+.feat .imgwrap{border:1px solid #b9c9dc;padding:2px;margin-bottom:6px;background:#f5f5f5}
+.feat .imgwrap .ph{
+  height:105px;display:flex;align-items:center;justify-content:center;
+  font-size:38px;color:#fff;
+}
+.feat a.t{
+  font-size:11.5px;color:#00519e;font-weight:bold;line-height:1.4;
+  padding:2px 0;border-bottom:1px dotted #ddd;
+}
+.feat a.t:hover{color:#c00}
+.feat .meta{
+  font-size:10.5px;color:#888;font-style:italic;
+  margin-top:5px;padding-top:4px;border-top:1px dotted #eee;
+}
+.feat .meta i{color:#c62828;margin-right:3px}
+
+/* TAB */
+.tab{margin-bottom:8px;border:1px solid #b9c9dc;background:#fff}
+.tab > .head{
+  background:linear-gradient(180deg,#2a7ed0,#0b4ea2 55%,#083d80);
+  border-bottom:2px solid #ffc107;color:#fff;
+  padding:6px 10px;font-size:11.5px;
+  display:flex;align-items:center;justify-content:space-between;
+  text-shadow:1px 1px 0 rgba(0,0,0,.3);
+}
+.tab > .head a{color:#fff;font-weight:bold;text-transform:uppercase}
+.tab > .head a:hover{color:#ffc107;text-decoration:none}
+.tab > .head a:first-child i{margin-right:5px;font-size:11px}
+.tab > .head .more{
+  font-size:10.5px;font-weight:normal;text-transform:none;
+  padding:2px 8px;border:1px solid rgba(255,255,255,.4);color:#fff;
+}
+.tab > .head .more:hover{background:#ffc107;color:#0b4ea2;border-color:#ffc107}
+.tab > .body{padding:10px}
+.tab .lead{display:flex;gap:10px;padding-bottom:8px;border-bottom:1px dotted #ccc;margin-bottom:6px}
+.tab .lead .imgwrap{border:1px solid #b9c9dc;padding:2px;background:#f5f5f5;flex:0 0 auto}
+.tab .lead .ph{
+  width:125px;height:85px;display:flex;align-items:center;justify-content:center;
+  font-size:32px;color:#fff;
+}
+.tab .lead .tt{
+  font-size:12.5px;font-weight:bold;color:#00519e;line-height:1.35;
+  display:block;margin-bottom:5px;
+}
+.tab .lead .tt:hover{color:#c00}
+.tab .lead p{font-size:11.5px;color:#555;line-height:1.55}
+.tab ul.li{padding-left:0;margin-top:2px}
+.tab ul.li li{
+  padding:6px 0;border-bottom:1px dotted #ddd;font-size:11.5px;color:#888;
+}
+.tab ul.li li a{color:#222;font-weight:600}
+.tab ul.li li a:hover{color:#c00}
+.tab ul.li li:before{
+  content:"▶";color:#c62828;font-size:8px;margin-right:5px;
+  display:inline-block;vertical-align:1px;
+}
+
+/* VĂN BẢN MỚI */
+.vb-item{padding:9px 10px;border-bottom:1px dotted #c9d3dc}
+.vb-item:last-child{border-bottom:0}
+.vb-item .code{
+  display:inline-block;background:#c62828;color:#fff;
+  font-size:10px;font-weight:bold;padding:1px 6px;
+  border-radius:2px;letter-spacing:.3px;margin-bottom:4px;
+}
+.vb-item .code.blue{background:#0b4ea2}
+.vb-item .tt{
+  display:block;color:#00519e;font-weight:bold;font-size:11.5px;
+  line-height:1.4;margin-bottom:3px;
+}
+.vb-item .tt:hover{color:#c00}
+.vb-item .dt{color:#888;font-size:10.5px;font-style:italic;display:block;margin-bottom:3px}
+.vb-item .desc{color:#444;font-size:11.5px;line-height:1.55;margin-bottom:5px}
+.vb-item .acts{display:flex;gap:14px;font-size:11px}
+.vb-item .acts a{color:#00519e}
+.vb-item .acts a:hover{color:#c00}
+.vb-item .acts i{margin-right:2px}
+
+/* DẠY-HỌC */
+.srv{padding:6px}
+.srv a{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 8px;margin-bottom:1px;
+  border:1px solid #dae4ef;background:#f8fbff;
+  font-size:11.5px;color:#00519e;font-weight:bold;
+}
+.srv a:last-child{margin-bottom:0}
+.srv a:hover{background:#e3f2fd;border-color:#0b4ea2;color:#c00}
+.srv a i{width:20px;text-align:center;color:#0b4ea2;font-size:14px}
+
+/* YOUTUBE / WEBLINK / STATS */
+.yt{padding:8px;background:#fff}
+.yt iframe{width:100%;height:135px;display:block;border:1px solid #b9c9dc}
+.wl{padding:8px}
+.wl select{
+  width:100%;padding:6px 8px;border:1px solid #b9c9dc;
+  background:#fff;outline:none;font-size:11.5px;
+}
+.wl select:focus{border-color:#0b4ea2}
+.stats{padding:6px 10px}
+.stats li{
+  display:flex;justify-content:space-between;
+  padding:5px 0;border-bottom:1px dotted #ddd;font-size:11.5px;
+}
+.stats li:last-child{border-bottom:0}
+.stats li span:first-child{color:#333;padding-left:14px;position:relative}
+.stats li span:first-child:before{content:"▪";color:#0b4ea2;position:absolute;left:0}
+.stats li span:last-child{
+  background:#ffc107;color:#0b4ea2;font-weight:bold;
+  padding:1px 8px;border:1px solid #b28100;font-size:11px;
+}
+
+/* FOOTER */
+.footer{
+  background:linear-gradient(180deg,#0b4ea2,#083d80);
+  border-top:3px solid #ffc107;color:#fff;
+  padding:14px 20px;text-align:center;font-size:11.5px;line-height:1.9;
+}
+.footer .name{
+  font-family:'Times New Roman',serif;font-size:14.5px;
+  font-weight:bold;text-transform:uppercase;letter-spacing:1px;
+  margin-bottom:5px;color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.5);
+}
+.footer b{color:#ffc107}
+
+/* =================================================================
+   LOGIN
+   ================================================================= */
+#LoginOverlay{
+  position:fixed;inset:0;background:rgba(11,78,162,.85);
+  z-index:9000;display:none;align-items:center;justify-content:center;
+  padding:20px;overflow-y:auto;
+}
+#LoginOverlay.show{display:flex}
+.login-card{
+  background:#fff;width:100%;max-width:380px;
+  border:1px solid #052a5a;box-shadow:4px 4px 0 rgba(0,0,0,.4);
+}
+.login-card .h{
+  background:linear-gradient(180deg,#2a7ed0,#0b4ea2 55%,#083d80);
+  padding:14px 16px;color:#fff;position:relative;
+  border-bottom:3px solid #ffc107;text-align:center;
+  text-shadow:1px 1px 0 rgba(0,0,0,.35);
+}
+.login-card .h .x{
+  position:absolute;top:6px;right:8px;color:#fff;
+  background:transparent;border:0;font-size:16px;cursor:pointer;
+  padding:3px 8px;line-height:1;
+}
+.login-card .h .x:hover{background:rgba(0,0,0,.25)}
+.login-card .h .crest{
+  width:52px;height:52px;margin:0 auto 8px;
+  background:#fff;border:2px solid #ffc107;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Times New Roman',serif;font-size:22px;font-weight:bold;
+  color:#0b4ea2;text-shadow:none;
+}
+.login-card .h h2{
+  font-family:'Times New Roman',serif;font-size:16px;
+  text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px;
+}
+.login-card .h p{font-size:10.5px;font-style:italic;color:#dbe8f7}
+.login-card .b{padding:18px}
+.login-card .f{margin-bottom:12px}
+.login-card .f label{
+  display:block;font-size:11px;font-weight:bold;margin-bottom:4px;color:#333;
+}
+.login-card .f input{
+  width:100%;padding:7px 9px;border:1px solid #b9c9dc;
+  font-size:12.5px;outline:none;background:#fcfdfe;
+}
+.login-card .f input:focus{border-color:#0b4ea2;background:#fff}
+.login-card .pw{position:relative}
+.login-card .pw .eye{
+  position:absolute;right:5px;top:50%;transform:translateY(-50%);
+  background:transparent;border:0;cursor:pointer;font-size:13px;
+  color:#888;padding:4px 6px;
+}
+.login-card .pw .eye:hover{color:#0b4ea2}
+.login-card .err{
+  background:#fdecea;border:1px solid #f5c2c0;color:#b71c1c;
+  padding:8px 10px;font-size:11.5px;margin-bottom:12px;
+  display:none;align-items:center;gap:6px;
+}
+.login-card .err.show{display:flex}
+.login-card .btn{
+  width:100%;padding:10px;cursor:pointer;
+  background:linear-gradient(180deg,#2a7ed0,#0b4ea2 55%,#083d80);
+  color:#fff;border:1px solid #052a5a;
+  font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:.5px;
+  text-shadow:1px 1px 0 rgba(0,0,0,.35);
+}
+.login-card .btn:hover{background:linear-gradient(180deg,#3b8ee0,#1565c0 55%,#0b4ea2)}
+.login-card .btn:disabled{opacity:.7;cursor:not-allowed}
+
+/* =================================================================
+   ADMIN PANEL
+   ================================================================= */
+#AdminPanel{display:none}
+#AdminPanel.show{display:block}
+.ad-bar{
+  background:linear-gradient(180deg,#1565c0,#0b4ea2 55%,#083d80);
+  color:#fff;padding:10px 14px;display:flex;justify-content:space-between;
+  align-items:center;gap:12px;flex-wrap:wrap;
+  border-bottom:3px solid #ffc107;
+}
+.ad-bar .info{display:flex;align-items:center;gap:10px}
+.ad-bar .ava{
+  width:40px;height:40px;background:#ffc107;color:#0b4ea2;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:18px;border:2px solid #fff;
+}
+.ad-bar h3{font-size:14px;margin-bottom:2px;text-shadow:1px 1px 0 rgba(0,0,0,.3)}
+.ad-bar p{font-size:11px;color:#dbe8f7}
+.ad-bar .btns{display:flex;gap:6px}
+.ad-bar button{
+  padding:6px 12px;cursor:pointer;font-size:11.5px;font-weight:bold;
+  border:1px solid #052a5a;
+}
+.ad-bar .v{background:#fff;color:#0b4ea2}
+.ad-bar .v:hover{background:#ffc107;color:#0b4ea2}
+.ad-bar .o{background:#c62828;color:#fff;border-color:#8e1a1a}
+.ad-bar .o:hover{background:#8e1a1a}
+
+.ad-body{display:flex;gap:8px;padding:8px;background:#dfe6ee}
+.ad-body .fcol{flex:0 0 380px}
+.ad-body .lcol{flex:1;min-width:0}
+
+.f{margin-bottom:10px}
+.f label{display:block;font-size:11.5px;font-weight:bold;margin-bottom:4px}
+.f label .r{color:#c00}
+.f input[type=text],
+.f input[type=date],
+.f select,
+.f textarea{
+  width:100%;padding:6px 8px;border:1px solid #b9c9dc;
+  font-size:12px;outline:none;background:#fcfdfe;
+}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:#0b4ea2;background:#fff}
+.f textarea{resize:vertical;min-height:65px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn-post{
+  width:100%;padding:10px;cursor:pointer;
+  background:linear-gradient(180deg,#43a047,#2e7d32 55%,#1b5e20);
+  color:#fff;border:1px solid #145214;
+  font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:.4px;
+}
+.btn-post:hover{background:linear-gradient(180deg,#4caf50,#388e3c 55%,#2e7d32)}
+
+.ad-item{
+  display:flex;gap:10px;align-items:center;
+  padding:9px 10px;border-bottom:1px dotted #c9d3dc;
+}
+.ad-item:last-child{border-bottom:0}
+.ad-item .th{
+  width:44px;height:44px;border:1px solid #999;flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;color:#fff;
+}
+.ad-item .m{flex:1;min-width:0}
+.ad-item .m b{
+  display:block;color:#00519e;font-size:11.5px;
+  margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.ad-item .m small{color:#888;font-size:10.5px}
+.btn-del{
+  background:#fdecea;color:#b71c1c;border:1px solid #f5c2c0;
+  padding:4px 10px;font-size:11px;font-weight:bold;cursor:pointer;
+  flex:0 0 auto;
+}
+.btn-del:hover{background:#c62828;color:#fff;border-color:#c62828}
+
+.bg0{background:linear-gradient(180deg,#2a7ed0,#0b4ea2)}
+.bg1{background:linear-gradient(180deg,#26a69a,#00695c)}
+.bg2{background:linear-gradient(180deg,#ab47bc,#6a1b9a)}
+.bg3{background:linear-gradient(180deg,#fb8c00,#e65100)}
+.bg4{background:linear-gradient(180deg,#e53935,#b71c1c)}
+.bg5{background:linear-gradient(180deg,#29b6f6,#0277bd)}
+
+#Toast{
+  position:fixed;bottom:18px;right:18px;z-index:9999;
+  background:#2e7d32;color:#fff;padding:10px 16px;
+  border:1px solid #1b5e20;font-size:12px;font-weight:bold;
+  box-shadow:3px 3px 0 rgba(0,0,0,.3);
+  transform:translateY(120%);opacity:0;transition:.28s;
+  display:flex;align-items:center;gap:7px;max-width:340px;
+}
+#Toast.show{transform:translateY(0);opacity:1}
+#Toast.err{background:#c62828;border-color:#8e1a1a}
+
+/* RESPONSIVE */
+@media (max-width:1200px){
+  #wrap{width:100%}
+  .main{flex-wrap:wrap}
+  .col-left,.col-right{flex:1 1 100%;width:auto}
+  .col-mid{flex:1 1 100%}
+  .ad-body{flex-wrap:wrap}
+  .ad-body .fcol,.ad-body .lcol{flex:1 1 100%}
+}
+@media (max-width:820px){
+  .menu > li{width:50%;border-bottom:1px solid #063d78}
+  .menu > li > a{border-right:1px solid #063d78}
+  .strip{height:auto;flex-wrap:wrap}
+  .strip .clock,.strip .search{width:100%;border:0;padding:5px 8px}
+  .strip .marquee{width:100%;padding:5px 8px}
+  .feat-grid{grid-template-columns:1fr}
+  .banner{height:auto;padding:12px;flex-direction:column;text-align:center;gap:8px}
+  .banner .badge{width:64px;height:64px;font-size:24px}
+  .banner .title h1{font-size:16px}
+  .row2{grid-template-columns:1fr}
+  .tab .lead{flex-direction:column}
+  .tab .lead .ph{width:100%;height:150px}
+}
+</style>
+</head>
+<body>
+
+<div id="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <a href="#" id="btnOpenLogin"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+    <a href="#"><i class="far fa-comment"></i> Góp ý</a>
+    <a href="#"><i class="fas fa-sitemap"></i> Sơ đồ trang</a>
+  </div>
+
+  <!-- BANNER -->
+  <div class="banner">
+    <div class="badge">CĐ</div>
+    <div class="title">
+      <h1>TRƯỜNG THCS CHAO ĐÂU</h1>
+      <p>Cổng thông tin điện tử — Nơi ươm mầm những giấc mơ</p>
+    </div>
+  </div>
+
+  <!-- MENU -->
+  <ul class="menu">
+    <li class="on"><a href="#"><i class="fas fa-home"></i> Trang chủ</a></li>
+    <li>
+      <a href="#">Giới thiệu ▾</a>
+      <ul>
+        <li><a href="#">Ban giám hiệu</a></li>
+        <li><a href="#">Các đoàn thể</a></li>
+        <li><a href="#">Cơ cấu tổ chức</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Nội quy, quy định</a></li>
+    <li>
+      <a href="#">Nội dung công khai ▾</a>
+      <ul>
+        <li><a href="#">Điều kiện đảm bảo chất lượng</a></li>
+        <li><a href="#">Kế hoạch – kết quả hoạt động</a></li>
+        <li><a href="#">Thông tin chung</a></li>
+        <li><a href="#">Thu chi – tài chính</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Văn bản chỉ đạo ▾</a>
+      <ul>
+        <li><a href="#">Văn bản các cấp</a></li>
+        <li><a href="#">Văn bản trường</a></li>
+        <li><a href="#">Lấy ý kiến dự thảo</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Hoạt động giáo dục ▾</a>
+      <ul>
+        <li><a href="#">Tin tức</a></li>
+        <li><a href="#">Sự kiện</a></li>
+        <li><a href="#">Tư vấn học đường</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Kế hoạch ▾</a>
+      <ul>
+        <li><a href="#">Kế hoạch tuần</a></li>
+        <li><a href="#">Kế hoạch tháng</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Tài nguyên ▾</a>
+      <ul>
+        <li><a href="#">Tài nguyên dạy – học</a></li>
+        <li><a href="#">Hệ thống vnEdu</a></li>
+        <li><a href="#">Hệ thống Elearning</a></li>
+        <li><a href="#">Phòng họp ảo</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Phòng truyền thống</a></li>
+  </ul>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="clock"><i class="far fa-clock"></i> <span id="topClock">Đang tải...</span></div>
+    <div class="marquee">
+      <span><i class="fas fa-bullhorn" style="color:#0b4ea2"></i>
+        Chào mừng bạn đến với cổng thông tin điện tử Trường THCS Chao Đâu — Tuyển sinh lớp 6 năm học 2026–2027 đang mở!</span>
+    </div>
+    <div class="search">
+      <input type="text" placeholder="Từ khóa tìm kiếm...">
+      <button><i class="fas fa-search"></i></button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- CỘT TRÁI -->
+    <div class="col-left">
+      <div class="box">
+        <div class="head"><span><i class="fas fa-bullhorn"></i> Thông báo</span></div>
+        <div class="mq-vertical">
+          <div class="list">
+            <p>Chào mừng bạn đến với cổng thông tin điện tử!</p>
+            <p>Tuyển sinh lớp 6 năm học 2026–2027 đang mở.</p>
+            <p>Lịch nghỉ Tết Nguyên Đán sẽ được thông báo sau.</p>
+            <p>Họp phụ huynh học sinh định kỳ vào ngày 20 hàng tháng.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="head"><span><i class="far fa-clock"></i> Giờ làm việc</span></div>
+        <div class="worktime">
+          <p><b>Sáng:</b> 7:00 – 11:30</p>
+          <p><b>Chiều:</b> 13:30 – 17:00</p>
+          <p class="note">(Từ thứ 2 đến thứ 6)</p>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="head"><span><i class="fas fa-link"></i> Liên kết nhanh</span></div>
+        <div class="quicklist">
+          <a href="#"><i class="fas fa-search"></i> Tra cứu điểm thi</a>
+          <a href="#"><i class="fas fa-graduation-cap"></i> Kết quả học tập</a>
+          <a href="#"><i class="fas fa-book"></i> Hệ thống vnEdu</a>
+          <a href="#"><i class="fas fa-laptop"></i> Hệ thống Elearning</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CỘT GIỮA -->
+    <div class="col-mid">
+
+      <div class="box">
+        <div class="head red"><span><i class="fas fa-star"></i> Tin nổi bật</span></div>
+        <div class="feat-grid" id="featGrid"></div>
+      </div>
+
+      <div class="tab">
+        <div class="head">
+          <a href="#"><i class="far fa-newspaper"></i> Tin tức</a>
+          <a href="#" class="more">Xem tất cả »</a>
+        </div>
+        <div class="body" id="tabNews"></div>
+      </div>
+
+      <div class="tab">
+        <div class="head" style="background:linear-gradient(180deg,#e53935,#c62828 55%,#8e1a1a)">
+          <a href="#"><i class="far fa-calendar-alt"></i> Sự kiện</a>
+          <a href="#" class="more">Xem tất cả »</a>
+        </div>
+        <div class="body" id="tabEvents"></div>
+      </div>
+
+      <div class="tab">
+        <div class="head" style="background:linear-gradient(180deg,#fb8c00,#ef6c00 55%,#b45309)">
+          <a href="#"><i class="far fa-bell"></i> Thông báo</a>
+          <a href="#" class="more">Xem tất cả »</a>
+        </div>
+        <div class="body" id="tabNotice"></div>
+      </div>
+
+      <div class="tab">
+        <div class="head" style="background:linear-gradient(180deg,#00897b,#00695c 55%,#004d40)">
+          <a href="#"><i class="fas fa-user-plus"></i> Tuyển sinh</a>
+          <a href="#" class="more">Xem tất cả »</a>
+        </div>
+        <div class="body" id="tabAdmissions"></div>
+      </div>
+
+    </div>
+
+    <!-- CỘT PHẢI -->
+    <div class="col-right">
+
+      <div class="box">
+        <div class="head"><span><i class="fas fa-file-alt"></i> Văn bản mới</span></div>
+        <div class="vb-item">
+          <span class="code">QĐ 1631</span>
+          <a href="#" class="tt">Về việc ban hành Bộ Quy tắc văn hóa giao thông cho GV và HS</a>
+          <span class="dt"><i class="far fa-calendar"></i> Ngày ban hành: 18/10/2024</span>
+          <div class="acts">
+            <a href="#"><i class="far fa-eye"></i> Xem chi tiết</a>
+            <a href="#"><i class="fas fa-download"></i> Tải về</a>
+          </div>
+        </div>
+        <div class="vb-item">
+          <span class="code">CT 09/UBND</span>
+          <a href="#" class="tt">Về nhiệm vụ chủ yếu trong dịp Tết Nguyên Đán Ất Tỵ</a>
+          <span class="dt"><i class="far fa-calendar"></i> Ngày ban hành: 20/12/2024</span>
+          <div class="acts">
+            <a href="#"><i class="far fa-eye"></i> Xem chi tiết</a>
+            <a href="#"><i class="fas fa-download"></i> Tải về</a>
+          </div>
+        </div>
+        <div class="vb-item">
+          <span class="code blue">KH 04/NH</span>
+          <a href="#" class="tt">Kế hoạch tổ chức Ngày hội STEM năm học 2025–2026</a>
+          <span class="dt"><i class="far fa-calendar"></i> Ngày ban hành: 05/01/2025</span>
+          <div class="acts">
+            <a href="#"><i class="far fa-eye"></i> Xem chi tiết</a>
+            <a href="#"><i class="fas fa-download"></i> Tải về</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="head"><span><i class="fas fa-graduation-cap"></i> Thông tin Dạy – Học</span></div>
+        <div class="srv">
+          <a href="#"><i class="fas fa-chart-line"></i> Tra cứu Kết quả học tập</a>
+          <a href="#"><i class="fas fa-poll"></i> Tra cứu điểm thi</a>
+          <a href="#"><i class="fas fa-cloud"></i> Liên kết vnEdu</a>
+          <a href="#"><i class="fas fa-play-circle"></i> Liên kết eLearning</a>
+          <a href="#"><i class="fas fa-folder-open"></i> Hệ thống QLVB &amp; HSCV</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="head"><span><i class="fab fa-youtube"></i> Video</span></div>
+        <div class="yt">
+          <iframe src="https://www.youtube.com/embed/5QeuPIu3y3Q" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="head"><span><i class="fas fa-globe"></i> Liên kết website</span></div>
+        <div class="wl">
+          <select onchange="if(this.value) window.open(this.value,'_blank')">
+            <option value="">-- Chọn liên kết website --</option>
+            <option value="https://vnedu.vn">Hệ thống vnEdu</option>
+            <option value="https://lms.vnedu.vn">Hệ thống eLearning</option>
+            <option value="https://moet.gov.vn">Bộ Giáo dục &amp; Đào tạo</option>
+            <option value="https://hcm.edu.vn">Sở GD&amp;ĐT TP.HCM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="head"><span><i class="fas fa-chart-bar"></i> Thống kê truy cập</span></div>
+        <ul class="stats">
+          <li><span>Đang online:</span><span>12</span></li>
+          <li><span>Hôm nay:</span><span>248</span></li>
+          <li><span>Trong tuần:</span><span>1.456</span></li>
+          <li><span>Tất cả:</span><span>52.891</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="name">TRƯỜNG THCS CHAO ĐÂU</div>
+    <div><b>Địa chỉ:</b> 123 Đường Ước Mơ, P. Bình Thạnh, TP. Hồ Chí Minh</div>
+    <div><b>Điện thoại:</b> (028) 1234 5678 — <b>Email:</b> info@chaodau.edu.vn</div>
+    <div><b>Chịu trách nhiệm nội dung:</b> Ban Giám hiệu Trường THCS Chao Đâu</div>
+    <div style="margin-top:5px;font-size:10.5px;opacity:.85">© 2025 Trường THCS Chao Đâu — Bảo lưu mọi quyền.</div>
+  </div>
+
+</div>
+
+<!-- LOGIN -->
+<div id="LoginOverlay">
+  <div class="login-card">
+    <div class="h">
+      <button class="x" id="btnCloseLogin">✕</button>
+      <div class="crest">CĐ</div>
+      <h2>Đăng nhập quản trị</h2>
+      <p>Dành riêng cho Ban giám hiệu</p>
+    </div>
+    <div class="b">
+      <div class="err" id="loginErr">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>Sai tên đăng nhập hoặc mật khẩu!</span>
+      </div>
+      <form id="loginForm">
+        <div class="f">
+          <label><i class="fas fa-user"></i> Tên đăng nhập</label>
+          <input type="text" id="lUser" placeholder="Nhập tên đăng nhập..." autocomplete="username" required>
+        </div>
+        <div class="f">
+          <label><i class="fas fa-lock"></i> Mật khẩu</label>
+          <div class="pw">
+            <input type="password" id="lPass" placeholder="Nhập mật khẩu..." autocomplete="current-password" required>
+            <button type="button" class="eye" id="toggleEye">👁</button>
+          </div>
+        </div>
+        <button type="submit" class="btn" id="btnLogin">
+          <i class="fas fa-sign-in-alt"></i> Đăng nhập
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="AdminPanel">
+  <div class="ad-bar">
+    <div class="info">
+      <div class="ava">👤</div>
+      <div>
+        <h3>Bảng điều khiển quản trị</h3>
+        <p>Xin chào, <b id="adminName">Quản trị viên</b> — bạn có thể đăng tải và quản lý thông tin trường.</p>
+      </div>
+    </div>
+    <div class="btns">
+      <button class="v" id="btnViewSite"><i class="fas fa-eye"></i> Xem trang</button>
+      <button class="o" id="btnLogout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+    </div>
+  </div>
+
+  <div class="ad-body">
+    <div class="fcol">
+      <div class="box">
+        <div class="head"><span><i class="fas fa-plus-circle"></i> Đăng bài viết mới</span></div>
+        <div style="padding:12px">
+          <form id="postForm">
+            <div class="f">
+              <label>Tiêu đề bài viết <span class="r">*</span></label>
+              <input type="text" id="pTitle" placeholder="VD: Lễ khai giảng năm học 2025-2026" required>
+            </div>
+            <div class="row2">
+              <div class="f">
+                <label>Danh mục <span class="r">*</span></label>
+                <select id="pCat" required>
+                  <option value="Tin tức">Tin tức</option>
+                  <option value="Sự kiện">Sự kiện</option>
+                  <option value="Thông báo">Thông báo</option>
+                  <option value="Tuyển sinh">Tuyển sinh</option>
+                </select>
+              </div>
+              <div class="f">
+                <label>Ngày đăng <span class="r">*</span></label>
+                <input type="date" id="pDate" required>
+              </div>
+            </div>
+            <div class="row2">
+              <div class="f">
+                <label>Icon (mã HTML)</label>
+                <input type="text" id="pIcon" value="📰" maxlength="6">
+              </div>
+              <div class="f">
+                <label>Màu nền</label>
+                <select id="pColor">
+                  <option value="0">Xanh dương</option>
+                  <option value="1">Xanh ngọc</option>
+                  <option value="2">Tím</option>
+                  <option value="3">Cam</option>
+                  <option value="4">Đỏ</option>
+                  <option value="5">Xanh cyan</option>
+                </select>
+              </div>
+            </div>
+            <div class="f">
+              <label>Mô tả ngắn <span class="r">*</span></label>
+              <textarea id="pExcerpt" placeholder="Tóm tắt ngắn gọn..." required></textarea>
+            </div>
+            <div class="f">
+              <label>Nội dung chi tiết</label>
+              <textarea id="pContent" placeholder="Nội dung đầy đủ (không bắt buộc)..."></textarea>
+            </div>
+            <button type="submit" class="btn-post"><i class="fas fa-paper-plane"></i> Đăng bài viết</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="lcol">
+      <div class="box">
+        <div class="head">
+          <span><i class="fas fa-list"></i> Danh sách bài viết</span>
+          <span class="count" id="postCount">0</span>
+        </div>
+        <div id="adminList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="Toast"></div>
+
+<script>
+/* ============================================================
+   CẤU HÌNH TÀI KHOẢN ADMIN
+   ============================================================ */
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "Phuc2012@";
+const ADMIN_NAME = "Quản trị viên";
+const STORAGE_KEY = "chaodau_posts_v6";
+const SESSION_KEY = "chaodau_session_v6";
+
+/* DỮ LIỆU MẶC ĐỊNH */
+const DEFAULT_POSTS = [
+  { id:"p1", title:"Lễ khai giảng năm học 2025 – 2026 long trọng và rộn ràng",
+    cat:"Sự kiện", date:"2025-09-05", icon:"🎉", color:4,
+    excerpt:"Hơn 2.400 học sinh cùng quý thầy cô đã tham dự Lễ khai giảng trong không khí trang trọng và tràn đầy cảm xúc.",
+    content:"Sáng ngày 05/09/2025, Trường THCS Chao Đâu long trọng tổ chức Lễ khai giảng năm học mới 2025 – 2026 với sự tham dự của đông đảo quý vị đại biểu, quý thầy cô và toàn thể học sinh." },
+  { id:"p2", title:"Học sinh Chao Đâu đạt giải Nhất kỳ thi Olympic Toán cấp Thành phố",
+    cat:"Tin tức", date:"2025-08-20", icon:"🏆", color:3,
+    excerpt:"Em Nguyễn Minh Anh – lớp 9A1 xuất sắc giành Huy chương Vàng, mang vinh quang về cho nhà trường.",
+    content:"Đây là thành tích đáng tự hào, minh chứng cho chất lượng đào tạo và sự nỗ lực không ngừng của thầy trò nhà trường." },
+  { id:"p3", title:"Thông báo tuyển sinh lớp 6 năm học 2026 – 2027",
+    cat:"Tuyển sinh", date:"2025-07-01", icon:"📝", color:1,
+    excerpt:"Nhà trường chính thức mở cổng đăng ký tuyển sinh trực tuyến từ ngày 01/07/2025.",
+    content:"Phụ huynh và học sinh có thể đăng ký trực tuyến hoặc nộp hồ sơ trực tiếp tại văn phòng nhà trường trong giờ hành chính." },
+  { id:"p4", title:"Ngày hội STEM sáng tạo 2025 – Sân chơi của những ý tưởng",
+    cat:"Sự kiện", date:"2025-06-15", icon:"🔬", color:2,
+    excerpt:"Hơn 60 dự án sáng tạo của học sinh được trưng bày tại Ngày hội STEM thường niên.",
+    content:"Ngày hội STEM là sân chơi bổ ích giúp học sinh vận dụng kiến thức vào thực tiễn, rèn luyện kỹ năng làm việc nhóm." },
+  { id:"p5", title:"Lịch nghỉ Tết Nguyên Đán 2026 – Thông báo chính thức",
+    cat:"Thông báo", date:"2025-12-10", icon:"🧧", color:4,
+    excerpt:"Nhà trường thông báo lịch nghỉ Tết Nguyên Đán và kế hoạch trở lại học tập sau kỳ nghỉ.",
+    content:"Học sinh nghỉ Tết từ ngày 15/01/2026 đến hết ngày 02/02/2026. Học sinh trở lại trường vào ngày 03/02/2026." },
+  { id:"p6", title:"Câu lạc bộ Tiếng Anh giao tiếp mở rộng thành viên năm học mới",
+    cat:"Tin tức", date:"2025-05-28", icon:"🌏", color:5,
+    excerpt:"CLB Tiếng Anh Chao Đâu tuyển thêm thành viên, sinh hoạt vào thứ 4 hàng tuần.",
+    content:"Câu lạc bộ là nơi học sinh rèn luyện khả năng giao tiếp tiếng Anh trong môi trường thân thiện và sáng tạo." }
+];
+
+/* UTIL */
+const $  = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const esc = str => String(str ?? "").replace(/[&<>"']/g, m => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+})[m]);
+const fmtDate = iso => {
+  if(!iso) return "";
+  const d = new Date(iso + "T00:00:00");
+  return isNaN(d) ? iso : d.toLocaleDateString("vi-VN",{day:"2-digit",month:"2-digit",year:"numeric"});
+};
+const showToast = (msg, type="ok") => {
+  const t = $("#Toast");
+  t.innerHTML = (type==="ok" ? "✅ " : "⚠️ ") + esc(msg);
+  t.className = type;
+  t.classList.add("show");
+  clearTimeout(t._t);
+  t._t = setTimeout(()=> t.classList.remove("show"), 3200);
+};
+
+/* LƯU TRỮ */
+function loadPosts(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_POSTS));
+      return [...DEFAULT_POSTS];
+    }
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [...DEFAULT_POSTS];
+  }catch{ return [...DEFAULT_POSTS]; }
+}
+function savePosts(list){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
+  catch{ showToast("Không thể lưu dữ liệu!","err"); }
+}
+let allPosts = loadPosts();
+
+/* ĐỒNG HỒ */
+function tickClock(){
+  const d = new Date();
+  const days = ["Chủ nhật","Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7"];
+  const pad = n => String(n).padStart(2,"0");
+  const s = `${days[d.getDay()]}, ${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} - ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  const el = $("#topClock");
+  if(el) el.textContent = s;
+}
+tickClock();
+setInterval(tickClock, 1000);
+
+/* RENDER TIN NỔI BẬT */
+function renderFeatured(){
+  const box = $("#featGrid");
+  const top3 = [...allPosts]
+    .sort((a,b)=> (b.date||"").localeCompare(a.date||""))
+    .slice(0,3);
+
+  if(!top3.length){
+    box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;grid-column:1/-1">Chưa có bài viết nào.</div>';
+    return;
+  }
+
+  box.innerHTML = top3.map(p => `
+    <div class="feat">
+      <div class="imgwrap">
+        <div class="ph bg${Number(p.color)||0}">${esc(p.icon||"📰")}</div>
+      </div>
+      <a href="#" class="t" data-id="${esc(p.id)}">${esc(p.title)}</a>
+      <div class="meta"><i class="far fa-calendar"></i> ${esc(fmtDate(p.date))}</div>
+    </div>
+  `).join("");
+
+  box.querySelectorAll(".t").forEach(a=>{
+    a.addEventListener("click", e=>{
+      e.preventDefault();
+      showPostDetail(a.dataset.id);
+    });
+  });
+}
+
+/* RENDER TAB */
+function renderTab(cat, containerId){
+  const box = $(containerId);
+  const list = allPosts
+    .filter(p => p.cat === cat)
+    .sort((a,b)=> (b.date||"").localeCompare(a.date||""));
+
+  if(!list.length){
+    box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;font-style:italic">Chưa có bài viết trong mục này.</div>';
+    return;
+  }
+
+  const first = list[0];
+  const rest = list.slice(1,5);
+
+  box.innerHTML = `
+    <div class="lead">
+      <div class="imgwrap">
+        <div class="ph bg${Number(first.color)||0}">${esc(first.icon||"📰")}</div>
+      </div>
+      <div>
+        <a href="#" class="tt" data-id="${esc(first.id)}">${esc(first.title)}</a>
+        <p>${esc(first.excerpt)}</p>
+      </div>
+    </div>
+    <ul class="li">
+      ${rest.map(p => `
+        <li><a href="#" data-id="${esc(p.id)}">${esc(p.title)}</a></li>
+      `).join("")}
+    </ul>
+  `;
+
+  box.querySelectorAll("a[data-id]").forEach(a=>{
+    a.addEventListener("click", e=>{
+      e.preventDefault();
+      showPostDetail(a.dataset.id);
+    });
+  });
+}
+
+function showPostDetail(id){
+  const p = allPosts.find(x => x.id === id);
+  if(!p) return;
+  alert(
+    "📰 " + p.title + "\n\n" +
+    "Danh mục: " + p.cat + "\n" +
+    "Ngày đăng: " + fmtDate(p.date) + "\n\n" +
+    (p.content || p.excerpt)
+  );
+}
+
+function renderAll(){
+  renderFeatured();
+  renderTab("Tin tức",    "#tabNews");
+  renderTab("Sự kiện",    "#tabEvents");
+  renderTab("Thông báo",  "#tabNotice");
+  renderTab("Tuyển sinh", "#tabAdmissions");
+}
+
+/* RENDER ADMIN LIST */
+function renderAdminList(){
+  const box = $("#adminList");
+  $("#postCount").textContent = allPosts.length;
+
+  if(!allPosts.length){
+    box.innerHTML = '<div style="padding:20px;text-align:center;color:#888">Chưa có bài viết nào.</div>';
+    return;
+  }
+
+  const sorted = [...allPosts].sort((a,b)=> (b.date||"").localeCompare(a.date||""));
+
+  box.innerHTML = sorted.map(p => `
+    <div class="ad-item">
+      <div class="th bg${Number(p.color)||0}">${esc(p.icon||"📰")}</div>
+      <div class="m">
+        <b>${esc(p.title)}</b>
+        <small>📁 ${esc(p.cat)} &nbsp;•&nbsp; 📅 ${esc(fmtDate(p.date))}</small>
+      </div>
+      <button class="btn-del" data-del="${esc(p.id)}">
+        <i class="fas fa-trash"></i> Xóa
+      </button>
+    </div>
+  `).join("");
+
+  box.querySelectorAll("[data-del]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const id = btn.dataset.del;
+      const p = allPosts.find(x => x.id === id);
+      if(!p) return;
+      if(confirm('Bạn chắc chắn muốn xóa bài viết:\n"' + p.title + '" ?')){
+        allPosts = allPosts.filter(x => x.id !== id);
+        savePosts(allPosts);
+        renderAdminList();
+        renderAll();
+        showToast("Đã xóa bài viết!");
+      }
+    });
+  });
+}
+
+/* LOGIN */
+const overlay = $("#LoginOverlay");
+const openLogin = () => {
+  overlay.classList.add("show");
+  $("#loginErr").classList.remove("show");
+  $("#loginForm").reset();
+  setTimeout(()=> $("#lUser").focus(), 120);
+};
+const closeLogin = () => overlay.classList.remove("show");
+
+$("#btnOpenLogin").addEventListener("click", e=>{ e.preventDefault(); openLogin(); });
+$("#btnCloseLogin").addEventListener("click", closeLogin);
+overlay.addEventListener("click", e=>{ if(e.target === overlay) closeLogin(); });
+document.addEventListener("keydown", e=>{ if(e.key === "Escape") closeLogin(); });
+
+$("#toggleEye").addEventListener("click", ()=>{
+  const inp = $("#lPass");
+  const isPw = inp.type === "password";
+  inp.type = isPw ? "text" : "password";
+  $("#toggleEye").textContent = isPw ? "🙈" : "👁";
+});
+
+$("#loginForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  const btn = $("#btnLogin");
+  const u = $("#lUser").value.trim();
+  const p = $("#lPass").value;
+
+  $("#loginErr").classList.remove("show");
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang kiểm tra...';
+
+  setTimeout(()=>{
+    if(u === ADMIN_USER && p === ADMIN_PASS){
+      sessionStorage.setItem(SESSION_KEY, "1");
+      closeLogin();
+      setAdminMode(true);
+      showToast("Đăng nhập thành công!");
+    } else {
+      $("#loginErr").classList.add("show");
+      $("#lPass").value = "";
+      $("#lPass").focus();
+    }
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Đăng nhập';
+  }, 500);
+});
+
+/* ADMIN MODE */
+function setAdminMode(state){
+  if(state){
+    $("#AdminPanel").classList.add("show");
+    $("#adminName").textContent = ADMIN_NAME;
+    renderAdminList();
+    document.getElementById("wrap").style.display = "none";
+    document.getElementById("LoginOverlay").style.display = "none";
+  } else {
+    $("#AdminPanel").classList.remove("show");
+    document.getElementById("wrap").style.display = "";
+    document.getElementById("LoginOverlay").style.display = "";
+  }
+}
+
+$("#btnLogout").addEventListener("click", ()=>{
+  sessionStorage.removeItem(SESSION_KEY);
+  setAdminMode(false);
+  showToast("Đã đăng xuất.");
+  window.scrollTo({ top:0, behavior:"smooth" });
+});
+$("#btnViewSite").addEventListener("click", ()=>{
+  setAdminMode(false);
+  window.scrollTo({ top:0, behavior:"smooth" });
+});
+
+/* FORM ĐĂNG BÀI */
+$("#postForm").addEventListener("submit", e=>{
+  e.preventDefault();
+
+  const title = $("#pTitle").value.trim();
+  const cat   = $("#pCat").value;
+  const date  = $("#pDate").value;
+  const icon  = $("#pIcon").value.trim() || "📰";
+  const color = $("#pColor").value;
+  const excerpt = $("#pExcerpt").value.trim();
+  const content = $("#pContent").value.trim();
+
+  if(!title || !date || !excerpt){
+    showToast("Vui lòng điền đầy đủ các trường bắt buộc!", "err");
+    return;
+  }
+
+  allPosts.unshift({
+    id: "p" + Date.now() + Math.random().toString(36).slice(2,7),
+    title, cat, date, icon, color: Number(color),
+    excerpt, content: content || excerpt
+  });
+
+  savePosts(allPosts);
+  renderAdminList();
+  renderAll();
+
+  e.target.reset();
+  $("#pIcon").value = "📰";
+  $("#pColor").value = "0";
+  $("#pDate").value = new Date().toISOString().split("T")[0];
+
+  showToast("Đăng bài viết thành công!");
+});
+
+/* KHỞI TẠO */
+(function(){
+  $("#pDate").value = new Date().toISOString().split("T")[0];
+  renderAll();
+  if(sessionStorage.getItem(SESSION_KEY) === "1") setAdminMode(true);
+})();
+</script>
+</body>
+</html>
