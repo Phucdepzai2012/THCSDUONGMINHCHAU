@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>THCS Chao Đâu</title>
+<link rel="icon" id="siteFavicon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230b4ea2'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='42' fill='white' font-family='Arial' font-weight='700'%3EC%C4%90%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css" />
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -208,6 +209,11 @@ input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
 .file-upload .txt{font-size:11.5px;color:#555}
 .file-upload .fname{font-size:11px;color:#c00;font-weight:bold;margin-top:4px}
 .img-preview{margin-top:6px;max-width:100%;border:1px solid #b9c9dc;max-height:120px;width:auto}
+.upload-progress{height:7px;background:#e5edf6;border:1px solid #b9c9dc;margin-top:6px;overflow:hidden;display:none}
+.upload-progress.show{display:block}
+.upload-progress i{display:block;width:0;height:100%;background:linear-gradient(90deg,#43a047,#2e7d32);transition:width .15s}
+.upload-percent{font-size:10.5px;color:#2e7d32;font-weight:bold;margin-top:3px;display:none}
+.upload-percent.show{display:block}
 
 .ad-item{display:flex;gap:10px;align-items:center;padding:9px 10px;border-bottom:1px dotted #c9d3dc}
 .ad-item:last-child{border-bottom:0}
@@ -396,9 +402,9 @@ input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
     <div class="b">
       <div class="err" id="loginErr"><i class="fas fa-exclamation-triangle"></i><span>Sai tên đăng nhập hoặc mật khẩu!</span></div>
       <form id="loginForm">
-        <div class="f"><label><i class="fas fa-user"></i> Tên đăng nhập</label><input type="text" id="lUser" placeholder="Nhập tên đăng nhập..." required></div>
+        <div class="f"><label><i class="fas fa-user"></i> Email quản trị</label><input type="email" id="lUser" placeholder="admin@example.com" autocomplete="username" required></div>
         <div class="f"><label><i class="fas fa-lock"></i> Mật khẩu</label>
-          <div class="pw"><input type="password" id="lPass" placeholder="Nhập mật khẩu..." required><button type="button" class="eye" id="toggleEye">👁</button></div>
+          <div class="pw"><input type="password" id="lPass" placeholder="Nhập mật khẩu Firebase..." autocomplete="current-password" required><button type="button" class="eye" id="toggleEye">👁</button></div>
         </div>
         <button type="submit" class="btn" id="btnLogin"><i class="fas fa-sign-in-alt"></i> Đăng nhập</button>
       </form>
@@ -452,6 +458,8 @@ input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
                   <div class="fname" id="pImageName"></div>
                 </label>
                 <img id="pImagePreview" class="img-preview hidden">
+                <div class="upload-progress" id="pUploadProgress"><i></i></div>
+                <div class="upload-percent" id="pUploadPercent">0%</div>
               </div>
               <div class="row2">
                 <div class="f"><label>Icon emoji (nếu không có ảnh)</label><input type="text" id="pIcon" value="📰" maxlength="6"></div>
@@ -514,6 +522,8 @@ input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
                   <div class="txt">Bấm để chọn file PDF</div>
                   <div class="fname" id="dFileName"></div>
                 </label>
+                <div class="upload-progress" id="dUploadProgress"><i></i></div>
+                <div class="upload-percent" id="dUploadPercent">0%</div>
               </div>
               <div class="f"><label>Số/ký hiệu văn bản <span class="r">*</span></label><input type="text" id="dCode" placeholder="VD: QĐ 1631" required></div>
               <div class="f"><label>Tiêu đề văn bản <span class="r">*</span></label><input type="text" id="dTitle" required></div>
@@ -560,6 +570,15 @@ input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
               <div class="txt">Chọn ảnh nền banner</div>
               <div class="fname" id="sBgName"></div>
             </label>
+          </div>
+          <div class="f"><label>Icon website / favicon (tùy chọn)</label>
+            <label class="file-upload" for="sIconFile">
+              <input type="file" id="sIconFile" accept="image/*,.ico,image/svg+xml">
+              <div class="ico"><i class="fas fa-star"></i></div>
+              <div class="txt">Chọn icon website (PNG, JPG, SVG, ICO)</div>
+              <div class="fname" id="sIconName"></div>
+            </label>
+            <div class="hint">Icon này hiển thị trên tab trình duyệt. Có thể thay bất cứ lúc nào.</div>
           </div>
         </div>
       </div>
@@ -655,10 +674,11 @@ input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, collection, addDoc, deleteDoc, doc, getDoc, setDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getStorage, ref as sRef, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-/* ⚠️⚠️⚠️ DÁN FIREBASE CONFIG CỦA BẠN VÀO ĐÂY ⚠️⚠️⚠️ */
+/* ⚠️ DÁN firebaseConfig CỦA PROJECT CỦA BẠN VÀO ĐÂY */
 const firebaseConfig = {
   apiKey: "PASTE_FIREBASE_CONFIG_HERE",
   authDomain: "PASTE_FIREBASE_CONFIG_HERE",
@@ -668,12 +688,10 @@ const firebaseConfig = {
   appId: "PASTE_FIREBASE_CONFIG_HERE"
 };
 
-const FB_READY = firebaseConfig.apiKey && !firebaseConfig.apiKey.startsWith("PASTE_");
-
-const ADMIN_USER = "admin";
-const ADMIN_PASS = "Phuc2012@";
+const FB_READY = Object.values(firebaseConfig).every(v => typeof v === "string" && v.trim() && !v.startsWith("PASTE_"));
 const ADMIN_NAME = "Quản trị viên";
-const SESSION_KEY = "chaodau_session_v8";
+const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
+const MAX_PDF_BYTES = 30 * 1024 * 1024;
 
 const $  = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
@@ -682,13 +700,15 @@ const fmtDate = iso => { if(!iso) return ""; const d = new Date(iso+"T00:00:00")
 const showToast = (msg,type="ok") => { const t=$("#Toast"); t.innerHTML=(type==="ok"?"✅ ":"⚠️ ")+esc(msg); t.className=type; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),3200); };
 
 let allPosts = [], allNotices = [], allDocs = [], settings = null;
-let db, storage, postsCol, noticesCol, docsCol;
+let db, auth, storage, postsCol, noticesCol, docsCol;
+let currentAdmin = null;
 
 const DEFAULT_SETTINGS = {
   bannerTitle: "TRƯỜNG THCS CHAO ĐÂU",
   bannerSubtitle: "Cổng thông tin điện tử — Nơi ươm mầm những giấc mơ",
   bannerLogo: "",
   bannerBg: "",
+  siteIcon: "",
   marquee: "Chào mừng bạn đến với cổng thông tin điện tử Trường THCS Chao Đâu — Tuyển sinh lớp 6 năm học 2026–2027 đang mở!",
   address: "123 Đường Ước Mơ, P. Bình Thạnh, TP. Hồ Chí Minh",
   phone: "(028) 1234 5678",
@@ -724,10 +744,11 @@ const DEFAULT_SETTINGS = {
 if(!FB_READY){
   const w = document.createElement("div");
   w.id = "fbWarn";
-  w.innerHTML = `<b>⚠️ Chưa cấu hình Firebase!</b><br>Đọc lại <b>hướng dẫn setup</b> ở trên, sau đó dán <code>firebaseConfig</code> vào dòng có chữ <code>PASTE_FIREBASE_CONFIG_HERE</code> trong code.`;
+  w.innerHTML = `<b>⚠️ Chưa cấu hình Firebase!</b><br>Dán <code>firebaseConfig</code> của project Firebase vào phần cấu hình trong mã nguồn.`;
   document.getElementById("wrap").insertBefore(w, document.querySelector(".main"));
 } else {
   const app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
   db = getFirestore(app);
   storage = getStorage(app);
   postsCol = collection(db, "posts");
@@ -754,6 +775,32 @@ if(!FB_READY){
     applySettings(settings);
     if($("#AdminPanel").classList.contains("show")) fillSettingsForm();
   });
+
+  onAuthStateChanged(auth, async user => {
+    if(!user){
+      currentAdmin = null;
+      setAdmin(false);
+      return;
+    }
+    try {
+      const adminDoc = await getDoc(doc(db, "admins", user.uid));
+      if(!adminDoc.exists()){
+        currentAdmin = null;
+        await signOut(auth);
+        setAdmin(false);
+        showToast("Tài khoản này chưa được cấp quyền quản trị.", "err");
+        return;
+      }
+      currentAdmin = {uid:user.uid, email:user.email || "", ...adminDoc.data()};
+      $("#adminName").textContent = currentAdmin.name || user.email || ADMIN_NAME;
+      setAdmin(true);
+    } catch(err){
+      currentAdmin = null;
+      try{ await signOut(auth); }catch{}
+      setAdmin(false);
+      showToast("Không kiểm tra được quyền admin: " + err.message, "err");
+    }
+  });
 }
 
 function tickClock(){
@@ -769,6 +816,7 @@ function applySettings(s){
   $("#bannerTitle").textContent = s.bannerTitle;
   $("#bannerSubtitle").textContent = s.bannerSubtitle;
   $("#bannerLogo").innerHTML = s.bannerLogo ? `<img src="${esc(s.bannerLogo)}" alt="logo">` : "CĐ";
+  const fav = $("#siteFavicon"); if(fav) fav.href = s.siteIcon || fav.dataset.defaultIcon || fav.href;
   const banner = $("#banner");
   if(s.bannerBg){ banner.style.backgroundImage = `url('${s.bannerBg}')`; banner.classList.add("bg-img"); }
   else { banner.style.backgroundImage = ""; banner.classList.remove("bg-img"); }
@@ -874,7 +922,7 @@ function renderAdminPosts(){
     b.disabled = true; b.innerHTML = '<span class="loading-mini"></span>';
     try {
       const p = allPosts.find(x => x.id === id);
-      if(p?.imageUrl && p.imagePath){ try{ await deleteObject(sRef(storage, p.imagePath)); }catch{} }
+      if(p?.imagePath) await removeStorageFile(p.imagePath);
       await deleteDoc(doc(db, "posts", id));
       showToast("Đã xóa!");
     } catch(e){ showToast("Lỗi: " + e.message, "err"); }
@@ -914,7 +962,7 @@ function renderAdminDocs(){
     b.disabled = true;
     try {
       const d = allDocs.find(x => x.id === b.dataset.del);
-      if(d?.filePath){ try{ await deleteObject(sRef(storage, d.filePath)); }catch{} }
+      if(d?.filePath) await removeStorageFile(d.filePath);
       await deleteDoc(doc(db, "documents", b.dataset.del));
       showToast("Đã xóa!");
     } catch(e){ showToast("Lỗi: " + e.message, "err"); }
@@ -936,21 +984,25 @@ $("#btnCloseLogin").addEventListener("click", () => overlay.classList.remove("sh
 overlay.addEventListener("click", e => { if(e.target === overlay) overlay.classList.remove("show"); });
 $("#toggleEye").addEventListener("click", () => { const i=$("#lPass"); i.type = i.type === "password" ? "text" : "password"; $("#toggleEye").textContent = i.type === "text" ? "🙈" : "👁"; });
 
-$("#loginForm").addEventListener("submit", e => {
+$("#loginForm").addEventListener("submit", async e => {
   e.preventDefault();
-  const b = $("#btnLogin"); b.disabled = true; b.innerHTML = '<span class="loading-mini"></span> Đang kiểm tra...';
-  setTimeout(() => {
-    if($("#lUser").value.trim() === ADMIN_USER && $("#lPass").value === ADMIN_PASS){
-      sessionStorage.setItem(SESSION_KEY, "1");
-      overlay.classList.remove("show");
-      setAdmin(true);
-      showToast("Đăng nhập thành công!");
-    } else {
-      $("#loginErr").classList.add("show");
-      $("#lPass").value = ""; $("#lPass").focus();
-    }
+  if(!FB_READY || !auth){ showToast("Firebase chưa được cấu hình.", "err"); return; }
+  const b = $("#btnLogin");
+  b.disabled = true; b.innerHTML = '<span class="loading-mini"></span> Đang kiểm tra...';
+  $("#loginErr").classList.remove("show");
+  try {
+    await signInWithEmailAndPassword(auth, $("#lUser").value.trim(), $("#lPass").value);
+    overlay.classList.remove("show");
+    showToast("Đăng nhập Firebase thành công! Đang kiểm tra quyền...");
+  } catch(err){
+    $("#loginErr span").textContent = err.code === "auth/invalid-credential" || err.code === "auth/wrong-password" || err.code === "auth/user-not-found"
+      ? "Sai email hoặc mật khẩu Firebase!"
+      : (err.message || "Không thể đăng nhập.");
+    $("#loginErr").classList.add("show");
+    $("#lPass").value = ""; $("#lPass").focus();
+  } finally {
     b.disabled = false; b.innerHTML = '<i class="fas fa-sign-in-alt"></i> Đăng nhập';
-  }, 400);
+  }
 });
 
 function setAdmin(state){
@@ -966,16 +1018,59 @@ function setAdmin(state){
     document.getElementById("LoginOverlay").style.display = "";
   }
 }
-$("#btnLogout").addEventListener("click", () => { sessionStorage.removeItem(SESSION_KEY); setAdmin(false); showToast("Đã đăng xuất."); });
+$("#btnLogout").addEventListener("click", async () => {
+  try{ if(auth) await signOut(auth); }catch(err){ showToast("Lỗi đăng xuất: " + err.message, "err"); return; }
+  currentAdmin = null; setAdmin(false); showToast("Đã đăng xuất.");
+});
 $("#btnViewSite").addEventListener("click", () => { setAdmin(false); window.scrollTo({top:0,behavior:"smooth"}); });
 
 /* ===== UPLOAD HELPERS ===== */
-async function uploadFile(file, folder){
-  const path = `${folder}/${Date.now()}_${file.name}`;
-  const r = sRef(storage, path);
-  await uploadBytes(r, file);
-  const url = await getDownloadURL(r);
-  return { url, path };
+function sanitizeFileName(name){
+  return String(name || "file").normalize("NFKD").replace(/[^\w.\-]+/g,"_").replace(/^_+|_+$/g,"").slice(0,120) || "file";
+}
+function setUploadProgress(progressId, percentId, value){
+  const bar = $(progressId), txt = $(percentId);
+  if(!bar || !txt) return;
+  bar.classList.add("show"); txt.classList.add("show");
+  bar.querySelector("i").style.width = `${Math.max(0, Math.min(100, value))}%`;
+  txt.textContent = `${Math.round(value)}%`;
+}
+function clearUploadProgress(progressId, percentId){
+  const bar = $(progressId), txt = $(percentId);
+  if(!bar || !txt) return;
+  bar.classList.remove("show"); txt.classList.remove("show");
+  bar.querySelector("i").style.width = "0%"; txt.textContent = "0%";
+}
+function validateFile(file, kind){
+  if(!file) throw new Error("Chưa chọn file.");
+  if(kind === "pdf"){
+    if(file.type !== "application/pdf" && !/\.pdf$/i.test(file.name)) throw new Error("Chỉ được tải file PDF.");
+    if(file.size > MAX_PDF_BYTES) throw new Error("PDF vượt quá 30 MB.");
+  } else {
+    if(!file.type.startsWith("image/")) throw new Error("Chỉ được tải file ảnh.");
+    if(file.size > MAX_IMAGE_BYTES) throw new Error("Ảnh vượt quá 8 MB.");
+  }
+}
+function uploadFile(file, folder, kind="image", progressIds=null){
+  return new Promise((resolve,reject)=>{
+    try {
+      validateFile(file, kind);
+      const path = `${folder}/${Date.now()}_${Math.random().toString(36).slice(2,8)}_${sanitizeFileName(file.name)}`;
+      const r = sRef(storage, path);
+      const metadata = {contentType: file.type || (kind === "pdf" ? "application/pdf" : "application/octet-stream")};
+      const task = uploadBytesResumable(r, file, metadata);
+      task.on("state_changed", snapshot => {
+        const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        if(progressIds) setUploadProgress(progressIds[0], progressIds[1], pct);
+      }, reject, async () => {
+        try{ resolve({url: await getDownloadURL(r), path}); }catch(err){ reject(err); }
+      });
+    } catch(err){ reject(err); }
+  });
+}
+async function removeStorageFile(path){
+  if(!path || !storage) return;
+  try{ await deleteObject(sRef(storage, path)); }catch(err){ console.warn("Không xóa được file cũ:", err); }
 }
 
 /* ===== POST FORM ===== */
@@ -995,7 +1090,7 @@ $("#postForm").addEventListener("submit", async e => {
   try {
     let imageUrl = "", imagePath = "";
     if(pImageFile){
-      const up = await uploadFile(pImageFile, "posts");
+      const up = await uploadFile(pImageFile, "posts", "image", ["#pUploadProgress","#pUploadPercent"]);
       imageUrl = up.url; imagePath = up.path;
     }
     await addDoc(postsCol, {
@@ -1009,7 +1104,7 @@ $("#postForm").addEventListener("submit", async e => {
       imageUrl, imagePath,
       createdAt: serverTimestamp()
     });
-    e.target.reset(); pImageFile = null;
+    e.target.reset(); pImageFile = null; clearUploadProgress("#pUploadProgress","#pUploadPercent");
     $("#pIcon").value = "📰"; $("#pColor").value = "0";
     $("#pDate").value = new Date().toISOString().split("T")[0];
     $("#pImageName").textContent = ""; $("#pImagePreview").classList.add("hidden");
@@ -1045,7 +1140,7 @@ $("#docForm").addEventListener("submit", async e => {
   if(!dFile){ showToast("Vui lòng chọn file PDF!", "err"); return; }
   const btn = $("#btnDoc"); btn.disabled = true; btn.innerHTML = '<span class="loading-mini"></span> Đang tải lên...';
   try {
-    const up = await uploadFile(dFile, "documents");
+    const up = await uploadFile(dFile, "documents", "pdf", ["#dUploadProgress","#dUploadPercent"]);
     await addDoc(docsCol, {
       code: $("#dCode").value.trim(),
       title: $("#dTitle").value.trim(),
@@ -1056,7 +1151,7 @@ $("#docForm").addEventListener("submit", async e => {
       fileName: dFile.name,
       createdAt: serverTimestamp()
     });
-    e.target.reset(); dFile = null; $("#dFileName").textContent = "";
+    e.target.reset(); dFile = null; $("#dFileName").textContent = ""; clearUploadProgress("#dUploadProgress","#dUploadPercent");
     showToast("Đăng văn bản thành công!");
   } catch(err){ showToast("Lỗi: " + err.message, "err"); }
   finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Đăng văn bản'; }
@@ -1068,6 +1163,7 @@ function fillSettingsForm(){
   const s = settings;
   $("#sBannerTitle").value = s.bannerTitle || "";
   $("#sBannerSubtitle").value = s.bannerSubtitle || "";
+  $("#sIconName").textContent = s.siteIcon ? "Đã có icon website trên Firebase" : "";
   $("#sMarquee").value = s.marquee || "";
   $("#sAddress").value = s.address || "";
   $("#sPhone").value = s.phone || "";
@@ -1138,9 +1234,10 @@ function getWebLinks(containerId){
 window.addLinkRow = addLinkRow;
 window.addWebLinkRow = addWebLinkRow;
 
-let sLogoFile = null, sBgFile = null;
+let sLogoFile = null, sBgFile = null, sIconFile = null;
 $("#sLogoFile").addEventListener("change", e => { sLogoFile = e.target.files[0] || null; $("#sLogoName").textContent = sLogoFile ? sLogoFile.name : ""; });
 $("#sBgFile").addEventListener("change", e => { sBgFile = e.target.files[0] || null; $("#sBgName").textContent = sBgFile ? sBgFile.name : ""; });
+$("#sIconFile").addEventListener("change", e => { sIconFile = e.target.files[0] || null; $("#sIconName").textContent = sIconFile ? sIconFile.name : (settings?.siteIcon ? "Đã có icon website trên Firebase" : ""); });
 
 $("#settingsForm").addEventListener("submit", async e => {
   e.preventDefault();
@@ -1149,22 +1246,38 @@ $("#settingsForm").addEventListener("submit", async e => {
   try {
     let bannerLogo = settings?.bannerLogo || "";
     let bannerBg = settings?.bannerBg || "";
+    let siteIcon = settings?.siteIcon || "";
+    let newLogoPath = settings?.bannerLogoPath || "";
+    let newBgPath = settings?.bannerBgPath || "";
+    let newIconPath = settings?.siteIconPath || "";
 
     if(sLogoFile){
-      const up = await uploadFile(sLogoFile, "banner");
+      const up = await uploadFile(sLogoFile, "banner", "image");
       bannerLogo = up.url;
+      if(settings?.bannerLogoPath && settings.bannerLogoPath !== up.path) await removeStorageFile(settings.bannerLogoPath);
+      newLogoPath = up.path;
       sLogoFile = null; $("#sLogoName").textContent = "";
     }
     if(sBgFile){
-      const up = await uploadFile(sBgFile, "banner");
+      const up = await uploadFile(sBgFile, "banner", "image");
       bannerBg = up.url;
+      if(settings?.bannerBgPath && settings.bannerBgPath !== up.path) await removeStorageFile(settings.bannerBgPath);
+      newBgPath = up.path;
       sBgFile = null; $("#sBgName").textContent = "";
+    }
+    if(sIconFile){
+      const up = await uploadFile(sIconFile, "favicon", "image");
+      siteIcon = up.url;
+      if(settings?.siteIconPath && settings.siteIconPath !== up.path) await removeStorageFile(settings.siteIconPath);
+      newIconPath = up.path;
+      sIconFile = null; $("#sIconName").textContent = "Đã lưu icon website";
     }
 
     await setDoc(doc(db, "settings", "site"), {
       bannerTitle: $("#sBannerTitle").value.trim(),
       bannerSubtitle: $("#sBannerSubtitle").value.trim(),
-      bannerLogo, bannerBg,
+      bannerLogo, bannerBg, siteIcon,
+      bannerLogoPath: newLogoPath, bannerBgPath: newBgPath, siteIconPath: newIconPath,
       marquee: $("#sMarquee").value.trim(),
       address: $("#sAddress").value.trim(),
       phone: $("#sPhone").value.trim(),
@@ -1194,7 +1307,6 @@ $("#settingsForm").addEventListener("submit", async e => {
 (function(){
   $("#pDate").value = new Date().toISOString().split("T")[0];
   $("#dDate").value = new Date().toISOString().split("T")[0];
-  if(sessionStorage.getItem(SESSION_KEY) === "1") setAdmin(true);
 })();
 </script>
 </body>
