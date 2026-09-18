@@ -434,6 +434,10 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 </div>
 </div>
 </div>
+<div id="firebaseChunkLoader" style="padding:14px 10px;background:#edf1f5;text-align:center;color:#6d7d8f;border-top:1px solid #c7d3e2">
+  <button id="loadMoreChunks" type="button" style="display:none;padding:8px 18px;border:1px solid #0b58a8;background:linear-gradient(180deg,#1974c5,#0b58a8);color:#fff;font-weight:bold;cursor:pointer">Tải thêm dữ liệu</button>
+  <span id="chunkStatus">Đang tải dữ liệu Firebase…</span>
+</div>
 <div class="footer">
 <div class="name" id="footerName">TRƯỜNG THCS CHAO ĐÂU</div>
 <div><b>Địa chỉ:</b> <span id="footerAddress">123 Đường Ước Mơ, P. Bình Thạnh, TP.HCM</span></div>
@@ -706,7 +710,7 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, collection, addDoc, deleteDoc, doc, getDoc, setDoc, updateDoc, getDocs, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, addDoc, deleteDoc, doc, getDoc, setDoc, updateDoc, getDocs, query, orderBy, limit, startAfter, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 /* ⚠️ DÁN firebaseConfig CỦA PROJECT CỦA BẠN VÀO ĐÂY */
 const firebaseConfig = {
   apiKey: "AIzaSyCDQsJ_NrGK5ouRLS7vFr55OBZQ0nKhHSk",
@@ -785,25 +789,104 @@ db = getFirestore(app);
 postsCol = collection(db, "posts");
 noticesCol = collection(db, "notices");
 docsCol = collection(db, "documents");
-async function loadPublicDataFast(){
+const FIREBASE_CHUNK_SIZE = 8;
+const firebaseChunks = {
+  posts: { cursor:null, hasMore:true, loading:false },
+  notices: { cursor:null, hasMore:true, loading:false },
+  docs: { cursor:null, hasMore:true, loading:false }
+};
+let firebaseInitialReady = false;
+
+async function loadFirebaseChunk(kind, reset=false){
+  const meta = firebaseChunks[kind];
+  if(!meta || meta.loading || (!meta.hasMore && !reset)) return;
+  meta.loading = true;
+  if(reset){ meta.cursor=null; meta.hasMore=true; }
+  try{
+    let q;
+    if(kind === 'posts'){
+      q = meta.cursor
+        ? query(postsCol, orderBy('createdAt','desc'), startAfter(meta.cursor), limit(FIREBASE_CHUNK_SIZE))
+        : query(postsCol, orderBy('createdAt','desc'), limit(FIREBASE_CHUNK_SIZE));
+    } else if(kind === 'notices'){
+      q = meta.cursor
+        ? query(noticesCol, orderBy('order','asc'), startAfter(meta.cursor), limit(FIREBASE_CHUNK_SIZE))
+        : query(noticesCol, orderBy('order','asc'), limit(FIREBASE_CHUNK_SIZE));
+    } else {
+      q = meta.cursor
+        ? query(docsCol, orderBy('createdAt','desc'), startAfter(meta.cursor), limit(FIREBASE_CHUNK_SIZE))
+        : query(docsCol, orderBy('createdAt','desc'), limit(FIREBASE_CHUNK_SIZE));
+    }
+
+    const snap = await getDocs(q);
+    const rows = snap.docs.map(d=>({id:d.id,...d.data()}));
+    meta.cursor = snap.docs.length ? snap.docs[snap.docs.length-1] : meta.cursor;
+    meta.hasMore = snap.docs.length === FIREBASE_CHUNK_SIZE;
+
+    if(kind === 'posts') allPosts = reset ? rows : [...allPosts, ...rows];
+    if(kind === 'notices') allNotices = reset ? rows : [...allNotices, ...rows];
+    if(kind === 'docs') allDocs = reset ? rows : [...allDocs, ...rows];
+
+    saveCachedData();
+    renderAll();
+    if(document.getElementById('AdminPanel')?.classList.contains('show')){
+      renderAdminPosts(); renderAdminNotices(); renderAdminDocs();
+    }
+  }catch(err){
+    console.warn('Firebase chunk error ['+kind+']:', err);
+  }finally{
+    meta.loading = false;
+  }
+}
+
+async function loadInitialFirebaseChunks(){
   loadCachedData();
-  // Hiện giao diện + cache trước, tuyệt đối không chờ Firebase.
   if(settings) applySettings(settings);
   renderAll();
-  const jobs = await Promise.allSettled([
-    getDocs(query(postsCol, orderBy("createdAt","desc"), limit(12))),
-    getDocs(query(noticesCol, orderBy("order","asc"), limit(12))),
-    getDocs(query(docsCol, orderBy("createdAt","desc"), limit(12))),
-    getDoc(doc(db, "settings", "site"))
+  const results = await Promise.allSettled([
+    loadFirebaseChunk('posts', true),
+    loadFirebaseChunk('notices', true),
+    loadFirebaseChunk('docs', true),
+    getDoc(doc(db,'settings','site'))
   ]);
-  let changed=false;
-  if(jobs[0].status === "fulfilled") { allPosts=jobs[0].value.docs.map(d=>({id:d.id,...d.data()})); changed=true; }
-  if(jobs[1].status === "fulfilled") { allNotices=jobs[1].value.docs.map(d=>({id:d.id,...d.data()})); changed=true; }
-  if(jobs[2].status === "fulfilled") { allDocs=jobs[2].value.docs.map(d=>({id:d.id,...d.data()})); changed=true; }
-  if(jobs[3].status === "fulfilled") { const snap=jobs[3].value; settings=snap.exists()?{...DEFAULT_SETTINGS,...snap.data()}:{...DEFAULT_SETTINGS}; changed=true; applySettings(settings); }
-  if(changed){ saveCachedData(); renderAll(); if($("#AdminPanel").classList.contains("show")){renderAdminPosts();renderAdminNotices();renderAdminDocs();fillSettingsForm();} }
-  if(jobs.some(x=>x.status === "rejected")) console.warn("Một số Firebase query lỗi/chậm:", jobs.filter(x=>x.status==="rejected").map(x=>x.reason?.message));
+  const s = results[3];
+  if(s?.status === 'fulfilled'){
+    settings = s.value.exists() ? {...DEFAULT_SETTINGS,...s.value.data()} : {...DEFAULT_SETTINGS};
+    saveCachedData();
+    applySettings(settings);
+  }
+  firebaseInitialReady = true;
+  updateChunkStatus();
+  maybeShowChunkButton();
 }
+
+async function loadNextFirebaseChunks(){
+  const btn=document.getElementById('loadMoreChunks');
+  if(btn){ btn.disabled=true; btn.textContent='Đang tải…'; }
+  await Promise.all([
+    loadFirebaseChunk('posts'),
+    loadFirebaseChunk('notices'),
+    loadFirebaseChunk('docs')
+  ]);
+  if(btn){ btn.disabled=false; btn.textContent='Tải thêm dữ liệu'; }
+  updateChunkStatus();
+  maybeShowChunkButton();
+}
+
+function updateChunkStatus(){
+  const el=document.getElementById('chunkStatus');
+  if(!el) return;
+  const more = firebaseChunks.posts.hasMore || firebaseChunks.notices.hasMore || firebaseChunks.docs.hasMore;
+  el.textContent = more ? `Firebase: đã tải ${allPosts.length} bài • ${allNotices.length} thông báo • ${allDocs.length} văn bản` : 'Firebase: đã tải hết dữ liệu';
+}
+
+function maybeShowChunkButton(){
+  const btn=document.getElementById('loadMoreChunks');
+  if(!btn) return;
+  const more = firebaseChunks.posts.hasMore || firebaseChunks.notices.hasMore || firebaseChunks.docs.hasMore;
+  btn.style.display = (firebaseInitialReady && more) ? 'inline-block' : 'none';
+}
+
 
 function loadCachedData(){
   try{
@@ -829,7 +912,14 @@ async function getStorageFast(){
   return {api,storage};
 }
 
-loadPublicDataFast();
+loadInitialFirebaseChunks();
+const chunkBtn=document.getElementById("loadMoreChunks");
+if(chunkBtn) chunkBtn.addEventListener("click", loadNextFirebaseChunks);
+const chunkLoader=document.getElementById("firebaseChunkLoader");
+if(chunkLoader && "IntersectionObserver" in window){
+  const io=new IntersectionObserver(entries=>{ if(entries.some(e=>e.isIntersecting) && firebaseInitialReady){ const more=firebaseChunks.posts.hasMore || firebaseChunks.notices.hasMore || firebaseChunks.docs.hasMore; if(more) loadNextFirebaseChunks(); } },{rootMargin:"500px"});
+  io.observe(chunkLoader);
+}
 onAuthStateChanged(auth, user => {
   if(user && user.email === ADMIN_EMAIL){
     currentAdmin = {uid:user.uid, email:ADMIN_EMAIL, name:ADMIN_NAME, role:"admin"};
