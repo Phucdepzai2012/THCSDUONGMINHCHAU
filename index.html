@@ -706,8 +706,7 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, collection, addDoc, deleteDoc, doc, getDoc, setDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+import { getFirestore, collection, addDoc, deleteDoc, doc, getDoc, setDoc, updateDoc, getDocs, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 /* ⚠️ DÁN firebaseConfig CỦA PROJECT CỦA BẠN VÀO ĐÂY */
 const firebaseConfig = {
   apiKey: "AIzaSyCDQsJ_NrGK5ouRLS7vFr55OBZQ0nKhHSk",
@@ -734,6 +733,8 @@ const showToast = (msg,type="ok") => { const t=$("#Toast"); t.innerHTML=(type===
 let allPosts = [], allNotices = [], allDocs = [], settings = null;
 let db, auth, storage, postsCol, noticesCol, docsCol;
 let currentAdmin = null;
+let firebaseAuthPromise = null;
+let storageApiPromise = null;
 const DEFAULT_SETTINGS = {
 bannerTitle: "THCS Ngô Văn Sở",
 bannerSubtitle: "Cổng thông tin điện tử",
@@ -780,56 +781,59 @@ document.getElementById("wrap").insertBefore(w, document.querySelector(".main"))
 const app = initializeApp(firebaseConfig);
 auth = getAuth(app);
 db = getFirestore(app);
-storage = getStorage(app);
 postsCol = collection(db, "posts");
 noticesCol = collection(db, "notices");
 docsCol = collection(db, "documents");
-onSnapshot(query(postsCol, orderBy("createdAt","desc")), snap => {
-allPosts = snap.docs.map(d => ({id: d.id, ...d.data()}));
-renderAll(); if($("#AdminPanel").classList.contains("show")) renderAdminPosts();
-});
-onSnapshot(query(noticesCol, orderBy("order","asc")), snap => {
-allNotices = snap.docs.map(d => ({id: d.id, ...d.data()}));
-renderNotices(); if($("#AdminPanel").classList.contains("show")) renderAdminNotices();
-});
-onSnapshot(query(docsCol, orderBy("createdAt","desc")), snap => {
-allDocs = snap.docs.map(d => ({id: d.id, ...d.data()}));
-renderDocs(); if($("#AdminPanel").classList.contains("show")) renderAdminDocs();
-});
-onSnapshot(doc(db, "settings", "site"), snap => {
-settings = snap.exists() ? {...DEFAULT_SETTINGS, ...snap.data()} : {...DEFAULT_SETTINGS};
-applySettings(settings);
-if($("#AdminPanel").classList.contains("show")) fillSettingsForm();
-});
-onAuthStateChanged(auth, async user => {
-if(!user){
-currentAdmin = null;
-setAdmin(false);
-return;
+async function loadPublicDataFast(){
+  loadCachedData();
+  // Hiện giao diện + cache trước, tuyệt đối không chờ Firebase.
+  if(settings) applySettings(settings);
+  renderAll();
+  const jobs = await Promise.allSettled([
+    getDocs(query(postsCol, orderBy("createdAt","desc"), limit(12))),
+    getDocs(query(noticesCol, orderBy("order","asc"), limit(12))),
+    getDocs(query(docsCol, orderBy("createdAt","desc"), limit(12))),
+    getDoc(doc(db, "settings", "site"))
+  ]);
+  let changed=false;
+  if(jobs[0].status === "fulfilled") { allPosts=jobs[0].value.docs.map(d=>({id:d.id,...d.data()})); changed=true; }
+  if(jobs[1].status === "fulfilled") { allNotices=jobs[1].value.docs.map(d=>({id:d.id,...d.data()})); changed=true; }
+  if(jobs[2].status === "fulfilled") { allDocs=jobs[2].value.docs.map(d=>({id:d.id,...d.data()})); changed=true; }
+  if(jobs[3].status === "fulfilled") { const snap=jobs[3].value; settings=snap.exists()?{...DEFAULT_SETTINGS,...snap.data()}:{...DEFAULT_SETTINGS}; changed=true; applySettings(settings); }
+  if(changed){ saveCachedData(); renderAll(); if($("#AdminPanel").classList.contains("show")){renderAdminPosts();renderAdminNotices();renderAdminDocs();fillSettingsForm();} }
+  if(jobs.some(x=>x.status === "rejected")) console.warn("Một số Firebase query lỗi/chậm:", jobs.filter(x=>x.status==="rejected").map(x=>x.reason?.message));
 }
-try {
-const adminDoc = await getDoc(doc(db, "admins", user.uid));
-if(user.email === ADMIN_EMAIL){
-  if(!adminDoc.exists()){ try{ await setDoc(doc(db, "admins", user.uid), {name: ADMIN_NAME, username: ADMIN_USERNAME, email: ADMIN_EMAIL, role:"admin", createdAt: serverTimestamp()}, {merge:true}); }catch{} }
-  currentAdmin = {uid:user.uid, email:user.email || ADMIN_EMAIL, name: ADMIN_NAME, role:"admin", ...(adminDoc.exists()?adminDoc.data():{})};
-} else {
-  if(!adminDoc.exists()){
-    currentAdmin = null;
-    await signOut(auth);
-    setAdmin(false);
-    showToast("Tài khoản này chưa được cấp quyền quản trị.", "err");
-    return;
+
+function loadCachedData(){
+  try{
+    const c = JSON.parse(localStorage.getItem("chaodau_fast_cache") || "null");
+    if(!c) return;
+    allPosts = Array.isArray(c.posts) ? c.posts : [];
+    allNotices = Array.isArray(c.notices) ? c.notices : [];
+    allDocs = Array.isArray(c.docs) ? c.docs : [];
+    settings = c.settings ? {...DEFAULT_SETTINGS,...c.settings} : null;
+  }catch{}
+}
+function saveCachedData(){
+  try{ localStorage.setItem("chaodau_fast_cache", JSON.stringify({posts:allPosts.slice(0,12), notices:allNotices.slice(0,12), docs:allDocs.slice(0,12), settings})); }catch{}
+}
+
+async function getStorageApi(){
+  if(!storageApiPromise) storageApiPromise=import("https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js");
+  return storageApiPromise;
+}
+async function getStorageFast(){
+  const api=await getStorageApi();
+  if(!storage) storage=api.getStorage(app);
+  return {api,storage};
+}
+
+loadPublicDataFast();
+onAuthStateChanged(auth, user => {
+  if(user && user.email === ADMIN_EMAIL){
+    currentAdmin = {uid:user.uid, email:ADMIN_EMAIL, name:ADMIN_NAME, role:"admin"};
+    $("#adminName").textContent = ADMIN_NAME;
   }
-  currentAdmin = {uid:user.uid, email:user.email || "", ...adminDoc.data()};
-}
-$("#adminName").textContent = currentAdmin.name || user.email || ADMIN_NAME;
-setAdmin(true);
-} catch(err){
-currentAdmin = null;
-try{ await signOut(auth); }catch{}
-setAdmin(false);
-showToast("Không kiểm tra được quyền admin: " + err.message, "err");
-}
 });
 }
 function tickClock(){
@@ -906,8 +910,9 @@ alert("📰 " + p.title + "\n\nDanh mục: " + p.cat + "\nNgày: " + fmtDate(p.d
 }
 function renderDocs(){
 const box = $("#docList");
-if(!allDocs.length){ box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;font-style:italic">Chưa có văn bản.</div>'; return; }
-box.innerHTML = allDocs.slice(0,5).map(d => `
+const visibleDocs = allDocs.filter(d => d.status !== "error" && d.fileUrl);
+if(!visibleDocs.length){ box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;font-style:italic">Chưa có văn bản.</div>'; return; }
+box.innerHTML = visibleDocs.slice(0,5).map(d => `
 <div class="vb-item">
 <span class="code">${esc(d.code)}</span>
 <a href="${esc(d.fileUrl)}" target="_blank" class="tt">${esc(d.title)}</a>
@@ -945,6 +950,7 @@ try {
 const p = allPosts.find(x => x.id === id);
 if(p?.imagePath) await removeStorageFile(p.imagePath);
 await deleteDoc(doc(db, "posts", id));
+allPosts=allPosts.filter(x=>x.id!==id); saveCachedData(); renderAll(); renderAdminPosts();
 showToast("Đã xóa!");
 } catch(e){ showToast("Lỗi: " + e.message, "err"); }
 }));
@@ -961,7 +967,7 @@ box.innerHTML = allNotices.map(n => `
 box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => {
 if(!confirm("Xóa thông báo này?")) return;
 b.disabled = true;
-try { await deleteDoc(doc(db, "notices", b.dataset.del)); showToast("Đã xóa!"); }
+try { await deleteDoc(doc(db, "notices", b.dataset.del)); allNotices=allNotices.filter(x=>x.id!==b.dataset.del); saveCachedData(); renderNotices(); renderAdminNotices(); showToast("Đã xóa!"); }
 catch(e){ showToast("Lỗi: " + e.message, "err"); }
 }));
 }
@@ -973,7 +979,7 @@ box.innerHTML = allDocs.map(d => `
 <div class="ad-item">
 <div class="th bg4"><i class="fas fa-file-pdf" style="font-size:20px"></i></div>
 <div class="m"><b>${esc(d.code)} — ${esc(d.title)}</b><small>📅 ${esc(fmtDate(d.date))}</small></div>
-<a href="${esc(d.fileUrl)}" target="_blank" style="padding:4px 8px;background:#0b4ea2;color:#fff;font-size:11px;text-decoration:none;flex:0 0 auto">Xem</a>
+<a href="${esc(d.fileUrl)}" target="_blank" style="padding:4px 8px;background:#0b4ea2;color:#fff;font-size:11px;text-decoration:none;flex:0 0 auto;display:${d.fileUrl?"inline-block":"none"}">Xem</a><span style="font-size:10.5px;color:${d.status==="uploading"?"#a66":"#c00"};padding:0 4px">${d.status==="uploading"?"Đang tải PDF…":(d.status==="error"?"Lỗi tải PDF":"")}</span>
 <button class="btn-del" data-del="${esc(d.id)}"><i class="fas fa-trash"></i></button>
 </div>`).join("");
 box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => {
@@ -983,6 +989,7 @@ try {
 const d = allDocs.find(x => x.id === b.dataset.del);
 if(d?.filePath) await removeStorageFile(d.filePath);
 await deleteDoc(doc(db, "documents", b.dataset.del));
+allDocs=allDocs.filter(x=>x.id!==b.dataset.del); saveCachedData(); renderDocs(); renderAdminDocs();
 showToast("Đã xóa!");
 } catch(e){ showToast("Lỗi: " + e.message, "err"); }
 }));
@@ -1005,36 +1012,18 @@ $("#loginForm").addEventListener("submit", async e => {
   const username = $("#lUser").value.trim();
   const password = $("#lPass").value;
   const b = $("#btnLogin");
-  b.disabled = true; b.innerHTML = '<span class="loading-mini"></span> Đang kiểm tra...';
+  b.disabled = true; b.innerHTML = '<span class="loading-mini"></span> Đang đăng nhập...';
   $("#loginErr").classList.remove("show");
   try {
-    if(username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD){
-      throw new Error("BAD_ADMIN_LOGIN");
-    }
-    if(!FB_READY || !auth){
-      setAdmin(true);
-      overlay.classList.remove("show");
-      showToast("Đăng nhập admin cục bộ thành công. Firebase chưa sẵn sàng.", "err");
-      return;
-    }
-    let cred;
-    try {
-      cred = await signInWithEmailAndPassword(auth, ADMIN_EMAIL, ADMIN_PASSWORD);
-    } catch(err){
-      if(err.code === "auth/user-not-found" || err.code === "auth/invalid-credential"){
-        cred = await createUserWithEmailAndPassword(auth, ADMIN_EMAIL, ADMIN_PASSWORD);
-      } else {
-        throw err;
-      }
-    }
-    try {
-      await setDoc(doc(db, "admins", cred.user.uid), {name: ADMIN_NAME, username: ADMIN_USERNAME, email: ADMIN_EMAIL, role: "admin", updatedAt: serverTimestamp()}, {merge:true});
-    } catch(err){ console.warn("Không ghi được admins/: ", err); }
-    currentAdmin = {uid: cred.user.uid, email: ADMIN_EMAIL, name: ADMIN_NAME, role: "admin"};
+    if(username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) throw new Error("BAD_ADMIN_LOGIN");
+    // Mở giao diện ngay: không chờ Firebase/Firestore.
+    currentAdmin = {uid:"local-admin", email:ADMIN_EMAIL, name:ADMIN_NAME, role:"admin"};
     $("#adminName").textContent = ADMIN_NAME;
     setAdmin(true);
     overlay.classList.remove("show");
     showToast("Đăng nhập admin thành công!");
+    // Đồng bộ Firebase ở nền để lần sau vẫn có phiên đăng nhập.
+    if(FB_READY && auth) startFirebaseAuth().catch(err=>console.warn("Firebase admin auth nền:",err));
   } catch(err){
     $("#loginErr span").textContent = err.message === "BAD_ADMIN_LOGIN" ? "Sai tên đăng nhập hoặc mật khẩu!" : (err.message || "Không thể đăng nhập.");
     $("#loginErr").classList.add("show");
@@ -1061,6 +1050,31 @@ try{ if(auth) await signOut(auth); }catch(err){ showToast("Lỗi đăng xuất: 
 currentAdmin = null; setAdmin(false); showToast("Đã đăng xuất.");
 });
 $("#btnViewSite").addEventListener("click", () => { setAdmin(false); window.scrollTo({top:0,behavior:"smooth"}); });
+function startFirebaseAuth(){
+  if(firebaseAuthPromise) return firebaseAuthPromise;
+  firebaseAuthPromise=(async()=>{
+    if(!auth) throw new Error("Firebase Auth chưa sẵn sàng");
+    let cred;
+    try{ cred=await signInWithEmailAndPassword(auth,ADMIN_EMAIL,ADMIN_PASSWORD); }
+    catch(err){
+      if(err.code === "auth/user-not-found" || err.code === "auth/invalid-credential") cred=await createUserWithEmailAndPassword(auth,ADMIN_EMAIL,ADMIN_PASSWORD);
+      else throw err;
+    }
+    currentAdmin.uid=cred.user.uid;
+    // Chỉ tạo/cập nhật hồ sơ admin, không chặn giao diện.
+    try{ await setDoc(doc(db,"admins",cred.user.uid),{name:ADMIN_NAME,username:ADMIN_USERNAME,email:ADMIN_EMAIL,role:"admin",updatedAt:serverTimestamp()},{merge:true}); }catch{}
+    return true;
+  })().catch(err=>{ firebaseAuthPromise=null; throw err; });
+  return firebaseAuthPromise;
+}
+
+async function ensureFirebaseAdmin(timeoutMs=5000){
+  if(!FB_READY || !auth || !db) return false;
+  if(auth.currentUser?.email === ADMIN_EMAIL) return true;
+  const p=startFirebaseAuth();
+  return await Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej(new Error("Firebase đang phản hồi chậm. Vui lòng thử lại.")),timeoutMs))]);
+}
+
 /* ===== UPLOAD HELPERS ===== */
 function sanitizeFileName(name){
 return String(name || "file").normalize("NFKD").replace(/[^\w.\-]+/g,"_").replace(/^_+|_+$/g,"").slice(0,120) || "file";
@@ -1088,26 +1102,34 @@ if(!file.type.startsWith("image/")) throw new Error("Chỉ được tải file �
 if(file.size > MAX_IMAGE_BYTES) throw new Error("Ảnh vượt quá 8 MB.");
 }
 }
+async function optimizeImageFile(file){
+  if(!file || !file.type.startsWith("image/") || /gif|svg/i.test(file.type)) return file;
+  try{
+    const bitmap=await createImageBitmap(file); const max=1600; const scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height));
+    if(scale>=1 && file.size<700*1024) {bitmap.close(); return file;}
+    const canvas=document.createElement("canvas"); canvas.width=Math.max(1,Math.round(bitmap.width*scale)); canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+    canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height); bitmap.close();
+    const blob=await new Promise(r=>canvas.toBlob(r,"image/webp",0.82));
+    if(!blob) return file; return new File([blob], file.name.replace(/\.[^.]+$/,".webp"), {type:"image/webp",lastModified:Date.now()});
+  }catch{return file;}
+}
+
 function uploadFile(file, folder, kind="image", progressIds=null){
-return new Promise((resolve,reject)=>{
-try {
-validateFile(file, kind);
-const path = `${folder}/${Date.now()}_${Math.random().toString(36).slice(2,8)}_${sanitizeFileName(file.name)}`;
-const r = sRef(storage, path);
-const metadata = {contentType: file.type || (kind === "pdf" ? "application/pdf" : "application/octet-stream")};
-const task = uploadBytesResumable(r, file, metadata);
-task.on("state_changed", snapshot => {
-const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-if(progressIds) setUploadProgress(progressIds[0], progressIds[1], pct);
-}, reject, async () => {
-try{ resolve({url: await getDownloadURL(r), path}); }catch(err){ reject(err); }
-});
-} catch(err){ reject(err); }
+return new Promise(async (resolve,reject)=>{
+try{
+validateFile(file,kind);
+const {api,storage:st}=await getStorageFast();
+const path=`${folder}/${Date.now()}_${Math.random().toString(36).slice(2,8)}_${sanitizeFileName(file.name)}`;
+const r=api.ref(st,path);
+const metadata={contentType:file.type||(kind==="pdf"?"application/pdf":"application/octet-stream")};
+const task=api.uploadBytesResumable(r,file,metadata);
+task.on("state_changed",snapshot=>{const pct=(snapshot.bytesTransferred/snapshot.totalBytes)*100;if(progressIds)setUploadProgress(progressIds[0],progressIds[1],pct);},reject,async()=>{try{resolve({url:await api.getDownloadURL(r),path});}catch(err){reject(err);}});
+}catch(err){reject(err);}
 });
 }
 async function removeStorageFile(path){
-if(!path || !storage) return;
-try{ await deleteObject(sRef(storage, path)); }catch(err){ console.warn("Không xóa được file cũ:", err); }
+if(!path || !FB_READY) return;
+try{const {api,storage:st}=await getStorageFast(); await api.deleteObject(api.ref(st,path));}catch(err){console.warn("Không xóa được file cũ:",err);}
 }
 /* ===== POST FORM ===== */
 let pImageFile = null;
@@ -1119,74 +1141,59 @@ if(f){ prev.src = URL.createObjectURL(f); prev.classList.remove("hidden"); }
 else prev.classList.add("hidden");
 });
 $("#postForm").addEventListener("submit", async e => {
-e.preventDefault();
-if(!FB_READY){ showToast("Chưa cấu hình Firebase!", "err"); return; }
-const btn = $("#btnPost"); btn.disabled = true; btn.innerHTML = '<span class="loading-mini"></span> Đang đăng...';
-try {
-let imageUrl = "", imagePath = "";
-if(pImageFile){
-const up = await uploadFile(pImageFile, "posts", "image", ["#pUploadProgress","#pUploadPercent"]);
-imageUrl = up.url; imagePath = up.path;
-}
-await addDoc(postsCol, {
-title: $("#pTitle").value.trim(),
-cat: $("#pCat").value,
-date: $("#pDate").value,
-icon: $("#pIcon").value.trim() || "📰",
-color: Number($("#pColor").value),
-excerpt: $("#pExcerpt").value.trim(),
-content: $("#pContent").value.trim() || $("#pExcerpt").value.trim(),
-imageUrl, imagePath,
-createdAt: serverTimestamp()
-});
-e.target.reset(); pImageFile = null; clearUploadProgress("#pUploadProgress","#pUploadPercent");
-$("#pIcon").value = "📰"; $("#pColor").value = "0";
-$("#pDate").value = new Date().toISOString().split("T")[0];
-$("#pImageName").textContent = ""; $("#pImagePreview").classList.add("hidden");
-showToast("Đăng bài thành công! Mọi người đều thấy.");
-} catch(err){ showToast("Lỗi: " + err.message, "err"); }
-finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Đăng bài viết'; }
+  e.preventDefault();
+  if(!FB_READY){ showToast("Chưa cấu hình Firebase!", "err"); return; }
+  const btn = $("#btnPost"); btn.disabled = true; btn.innerHTML = '<span class="loading-mini"></span> Đang đăng...';
+  try {
+    const imageFile = pImageFile;
+    await ensureFirebaseAdmin();
+    const payload = {title:$("#pTitle").value.trim(),cat:$("#pCat").value,date:$("#pDate").value,icon:$("#pIcon").value.trim()||"📰",color:Number($("#pColor").value),excerpt:$("#pExcerpt").value.trim(),content:$("#pContent").value.trim()||$("#pExcerpt").value.trim(),imageUrl:"",imagePath:"",createdAt:serverTimestamp()};
+    const added = await addDoc(postsCol,payload);
+    const localPost = {...payload,id:added.id,createdAt:Date.now()};
+    allPosts=[localPost,...allPosts].slice(0,12); saveCachedData(); renderAll(); renderAdminPosts();
+    // Hiện thành công ngay sau khi Firestore ghi xong. Ảnh tải nền, không chặn bài viết.
+    e.target.reset(); pImageFile=null; $("#pIcon").value="📰"; $("#pColor").value="0"; $("#pDate").value=new Date().toISOString().split("T")[0]; $("#pImageName").textContent=""; $("#pImagePreview").classList.add("hidden"); clearUploadProgress("#pUploadProgress","#pUploadPercent");
+    showToast("Đăng bài thành công!");
+    if(imageFile){
+      (async()=>{
+        try{
+          const optimized=await optimizeImageFile(imageFile);
+          const up=await uploadFile(optimized,"posts","image",["#pUploadProgress","#pUploadPercent"]);
+          await updateDoc(doc(db,"posts",added.id),{imageUrl:up.url,imagePath:up.path});
+          const local=allPosts.find(x=>x.id===added.id); if(local){local.imageUrl=up.url;local.imagePath=up.path;saveCachedData();renderAll();renderAdminPosts();}
+          clearUploadProgress("#pUploadProgress","#pUploadPercent");
+          showToast("Ảnh bài viết đã tải xong!");
+        }catch(err){ console.warn("Ảnh tải nền lỗi:",err); showToast("Bài đã đăng, nhưng ảnh chưa tải được.","err"); }
+      })();
+    }
+  } catch(err){ showToast("Lỗi: "+err.message,"err"); }
+  finally{ btn.disabled=false; btn.innerHTML='<i class="fas fa-paper-plane"></i> Đăng bài viết'; }
 });
 /* ===== NOTICE FORM ===== */
 $("#noticeForm").addEventListener("submit", async e => {
-e.preventDefault();
-if(!FB_READY){ showToast("Chưa cấu hình Firebase!", "err"); return; }
-const btn = $("#btnNotice"); btn.disabled = true;
-try {
-await addDoc(noticesCol, {
-text: $("#nText").value.trim(),
-order: Number($("#nOrder").value) || 0,
-createdAt: serverTimestamp()
-});
-e.target.reset(); $("#nOrder").value = "0";
-showToast("Đã thêm thông báo!");
-} catch(err){ showToast("Lỗi: " + err.message, "err"); }
-finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-plus-circle"></i> Thêm thông báo'; }
+ e.preventDefault(); if(!FB_READY){showToast("Chưa cấu hình Firebase!","err");return;}
+ const textVal=$("#nText").value.trim(), orderVal=Number($("#nOrder").value)||0; const btn=$("#btnNotice"); btn.disabled=true; btn.innerHTML='<span class="loading-mini"></span> Đang lưu...';
+ try{ await ensureFirebaseAdmin(); const added=await addDoc(noticesCol,{text:textVal,order:orderVal,createdAt:serverTimestamp()}); allNotices=[...allNotices,{id:added.id,text:textVal,order:orderVal,createdAt:Date.now()}].sort((a,b)=>(a.order||0)-(b.order||0)).slice(0,12); saveCachedData(); renderNotices(); renderAdminNotices(); e.target.reset(); $("#nOrder").value="0"; showToast("Đã thêm thông báo!"); }
+ catch(err){showToast("Lỗi: "+err.message,"err");}
+ finally{btn.disabled=false;btn.innerHTML='<i class="fas fa-plus-circle"></i> Thêm thông báo';}
 });
 /* ===== DOC FORM ===== */
 let dFile = null;
 $("#dFile").addEventListener("change", e => { dFile = e.target.files[0] || null; $("#dFileName").textContent = dFile ? dFile.name : ""; });
 $("#docForm").addEventListener("submit", async e => {
-e.preventDefault();
-if(!FB_READY){ showToast("Chưa cấu hình Firebase!", "err"); return; }
-if(!dFile){ showToast("Vui lòng chọn file PDF!", "err"); return; }
-const btn = $("#btnDoc"); btn.disabled = true; btn.innerHTML = '<span class="loading-mini"></span> Đang tải lên...';
-try {
-const up = await uploadFile(dFile, "documents", "pdf", ["#dUploadProgress","#dUploadPercent"]);
-await addDoc(docsCol, {
-code: $("#dCode").value.trim(),
-title: $("#dTitle").value.trim(),
-date: $("#dDate").value || "",
-desc: $("#dDesc").value.trim(),
-fileUrl: up.url,
-filePath: up.path,
-fileName: dFile.name,
-createdAt: serverTimestamp()
-});
-e.target.reset(); dFile = null; $("#dFileName").textContent = ""; clearUploadProgress("#dUploadProgress","#dUploadPercent");
-showToast("Đăng văn bản thành công!");
-} catch(err){ showToast("Lỗi: " + err.message, "err"); }
-finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Đăng văn bản'; }
+ e.preventDefault(); if(!FB_READY){showToast("Chưa cấu hình Firebase!","err");return;} if(!dFile){showToast("Vui lòng chọn file PDF!","err");return;}
+ const file=dFile, code=$("#dCode").value.trim(), title=$("#dTitle").value.trim(), date=$("#dDate").value||"", desc=$("#dDesc").value.trim(); const btn=$("#btnDoc"); btn.disabled=true; btn.innerHTML='<span class="loading-mini"></span> Đang tạo...';
+ try{
+   await ensureFirebaseAdmin();
+   const added=await addDoc(docsCol,{code,title,date,desc,fileUrl:"",filePath:"",fileName:file.name,status:"uploading",createdAt:serverTimestamp()});
+   allDocs=[{id:added.id,code,title,date,desc,fileUrl:"",filePath:"",fileName:file.name,status:"uploading",createdAt:Date.now()},...allDocs].slice(0,12); saveCachedData(); renderDocs(); renderAdminDocs();
+   e.target.reset(); dFile=null; $("#dFileName").textContent=""; clearUploadProgress("#dUploadProgress","#dUploadPercent"); showToast("Đã tạo văn bản, PDF đang tải nền!");
+   (async()=>{
+     try{ const up=await uploadFile(file,"documents","pdf",["#dUploadProgress","#dUploadPercent"]); await updateDoc(doc(db,"documents",added.id),{fileUrl:up.url,filePath:up.path,status:"ready"}); const local=allDocs.find(x=>x.id===added.id); if(local){local.fileUrl=up.url;local.filePath=up.path;local.status="ready";saveCachedData();renderDocs();renderAdminDocs();} clearUploadProgress("#dUploadProgress","#dUploadPercent"); showToast("PDF đã tải xong!"); }
+     catch(err){ console.warn("PDF tải nền lỗi:",err); try{await updateDoc(doc(db,"documents",added.id),{status:"error"});}catch{} showToast("Văn bản đã tạo nhưng PDF chưa tải được.","err"); }
+   })();
+ }catch(err){showToast("Lỗi: "+err.message,"err");}
+ finally{btn.disabled=false;btn.innerHTML='<i class="fas fa-cloud-upload-alt"></i> Đăng văn bản';}
 });
 /* ===== SETTINGS FORM ===== */
 function fillSettingsForm(){
