@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>THCS Chao Đâu</title>
-<link rel="icon" id="siteFavicon" href="<data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230b4ea2'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='42' fill='white' font-family='Arial' font-weight='700'%3EC%C4%90%3C/text%3E%3C/svg%3E>">
+<title>THCS Ngô Văn Sở</title>
+<link rel="icon" id="siteFavicon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230b4ea2'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='42' fill='white' font-family='Arial' font-weight='700'%3EC%C4%90%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css" />
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -16,14 +16,14 @@ ul{list-style:none}
 input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
 .hidden{display:none!important}
 #wrap{width:1180px;margin:0 auto;background:#fff;border-left:1px solid #7a8ba0;border-right:1px solid #7a8ba0;border-bottom:1px solid #7a8ba0}
-.topbar{background:#eef3f8;border-bottom:1px solid #b9c9dc;padding:4px 10px;display:flex;justify-content:flex-end;gap:0;font-size:11px}
+.topbar{background:#eef3f8;border-bottom:1px solid #b9c9dc;padding:4px 10px;display:flex;justify-content:flex-end;font-size:11px}
 .topbar a{padding:2px 10px;border-right:1px solid #b9c9dc;color:#00519e;display:inline-flex;align-items:center;gap:4px}
 .topbar a:last-child{border-right:0}
 .topbar a:hover{color:#c00}
 .banner{min-height:100px;position:relative;overflow:hidden;background:linear-gradient(180deg,#1a5fa8 0%,#0b4ea2 45%,#083d80 100%);border-bottom:3px solid #ffc107;padding:10px 14px;display:flex;align-items:center;gap:14px}
 .banner.bg-img{background-size:cover;background-position:center}
 .banner.bg-img:before{background:rgba(0,0,0,.4)}
-.banner:before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1px);background-size:6px 6px;opacity:.9;pointer-events:none}
+.banner:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1px);background-size:6px 6px;opacity:.9;pointer-events:none}
 .banner .badge{position:relative;z-index:1;width:78px;height:78px;background:#fff;border:2px solid #ffc107;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Times New Roman',serif;font-size:30px;font-weight:bold;color:#0b4ea2;flex:0 0 auto;overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,.4)}
 .banner .badge img{width:100%;height:100%;object-fit:cover}
 .banner .title{position:relative;z-index:1;color:#fff}
@@ -122,7 +122,6 @@ input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
 .footer{background:linear-gradient(180deg,#0b4ea2,#083d80);border-top:3px solid #ffc107;color:#fff;padding:14px 20px;text-align:center;font-size:11.5px;line-height:1.9}
 .footer .name{font-family:'Times New Roman',serif;font-size:14.5px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
 .footer b{color:#ffc107}
-/* LOGIN */
 #LoginOverlay{position:fixed;inset:0;background:rgba(11,78,162,.85);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
 #LoginOverlay.show{display:flex}
 .login-card{background:#fff;width:100%;max-width:380px;border:1px solid #052a5a;box-shadow:4px 4px 0 rgba(0,0,0,.4)}
@@ -143,7 +142,6 @@ input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
 .login-card .btn{width:100%;padding:10px;cursor:pointer;background:linear-gradient(180deg,#2a7ed0,#0b4ea2 55%,#083d80);color:#fff;border:1px solid #052a5a;font-size:12px;font-weight:bold;text-transform:uppercase}
 .login-card .btn:hover{background:linear-gradient(180deg,#3b8ee0,#1565c0)}
 .login-card .btn:disabled{opacity:.7}
-/* ADMIN */
 #AdminPanel{display:none}
 #AdminPanel.show{display:block}
 .ad-bar{background:linear-gradient(180deg,#1565c0,#0b4ea2 55%,#083d80);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:3px solid #ffc107}
@@ -205,7 +203,6 @@ input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
 .bg3{background:linear-gradient(180deg,#fb8c00,#e65100)}
 .bg4{background:linear-gradient(180deg,#e53935,#b71c1c)}
 .bg5{background:linear-gradient(180deg,#29b6f6,#0277bd)}
-/* Bảng liên kết editable */
 .link-row{display:grid;grid-template-columns:40px 1fr 2fr 40px;gap:6px;margin-bottom:6px;align-items:center}
 .link-row input{padding:5px 7px;border:1px solid #b9c9dc;font-size:11.5px;outline:none}
 .link-row input:focus{border-color:#0b4ea2}
@@ -225,47 +222,20 @@ input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
 @keyframes sp{to{transform:rotate(360deg)}}
 @media (max-width:1200px){#wrap{width:100%}.main{flex-wrap:wrap}.col-left,.col-right{flex:1 1 100%;width:auto}.col-mid{flex:1 1 100%}.ad-body{flex-wrap:wrap}.ad-body .fcol,.ad-body .lcol{flex:1 1 100%}}
 @media (max-width:820px){.menu > li{width:50%}.strip{height:auto;flex-wrap:wrap}.feat-grid{grid-template-columns:1fr}.row2,.row3{grid-template-columns:1fr}.tab .lead{flex-direction:column}.link-row{grid-template-columns:1fr}}
-
-/* ===== GIAO DIỆN THAM CHIẾU CODE 2 ===== */
-body{background:#e9edf2;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif}
+body{background:#e9edf2}
 #wrap{width:1263px;max-width:calc(100vw - 18px);margin:8px auto 18px;background:#fff;border:1px solid #b8c7d9;box-shadow:0 1px 4px rgba(0,0,0,.14)}
 .topbar{height:30px;background:#f4f6f8;border-bottom:1px solid #c7d3e2;align-items:center}
-.topbar a{font-size:11px;color:#0754a0;padding:4px 11px}
 .banner{min-height:112px;background:linear-gradient(180deg,#1771c6 0%,#0a58aa 58%,#08458a 100%);border-bottom:3px solid #ffdc38;padding:12px 20px;position:relative}
 .banner:after{content:"";position:absolute;right:0;top:0;width:44%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.10));pointer-events:none}
-.banner .badge{width:78px;height:78px;border:3px solid #ffd43b;box-shadow:0 2px 5px rgba(0,0,0,.25)}
-.banner .title h1{font-size:27px;letter-spacing:1.2px;text-shadow:1px 2px 0 rgba(0,0,0,.45)}
-.banner .title p{font-size:12px;color:#e6f1ff}
 .menu{background:linear-gradient(180deg,#1267bb,#0b55a5 62%,#084486);border-bottom:2px solid #06396e}
-.menu > li > a{padding:10px 13px;font-size:11px;border-right:1px solid rgba(255,255,255,.12);text-shadow:1px 1px 0 rgba(0,0,0,.2)}
-.menu > li > a:hover,.menu > li.on > a{background:linear-gradient(180deg,#ffe04d,#ffc928 58%,#eeae08);color:#073d7d}
-.strip{height:34px;background:#fff;border-bottom:1px solid #c7d3e2}
-.strip .clock{width:215px;background:#0a58aa;border-right:3px solid #ffd42f}
-.strip .marquee{font-size:13px;color:#0b58a8}
-.strip .search{width:260px;background:#eef3f8}
-.strip .search input{border-color:#bfd0e3}
 .main{padding:10px;background:#edf1f5;gap:10px}
 .col-left{width:215px;flex-basis:215px}.col-right{width:265px;flex-basis:265px}
-.box,.tab{border-color:#bdcad8;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.box,.tab{border-color:#bdcad8;box-shadow:0 1px 2px rgba(0,0,0,.04)}
 .box > .head,.tab > .head{background:linear-gradient(180deg,#1974c5,#0b58a8 58%,#074487);border-bottom:2px solid #ffd43b;padding:7px 10px}
 .box > .head.red{background:linear-gradient(180deg,#dd3935,#c62525 58%,#941919)}
-.feat-grid{gap:1px;background:#bdcad8}
-.feat{padding:8px;background:#fff}.feat .imgwrap{height:118px}
-.tab .head .more{border-color:rgba(255,255,255,.6)}
-.vb-item .code{background:#cf2a25}.vb-item .code.blue{background:#0a58aa}
 .footer{background:linear-gradient(180deg,#0a58aa,#074487);border-top:3px solid #ffd43b}
-#LoginOverlay{background:rgba(2,54,111,.74)}
-.login-card{border-color:#06396e;box-shadow:5px 6px 0 rgba(0,0,0,.22)}
-.login-card .h{background:linear-gradient(180deg,#1974c5,#0b58a8 58%,#074487);border-bottom:3px solid #ffd43b}
-.ad-bar{background:linear-gradient(180deg,#1267bb,#0b55a5 60%,#084486);border-bottom:3px solid #ffd43b}
-.ad-tabs{background:#084486;border-bottom:2px solid #ffd43b}.ad-tabs button.active{color:#0b58a8;border-top-color:#ffd43b}
-.ad-panel{background:#edf1f5}
-@media(max-width:900px){#wrap{max-width:100vw;width:100%;margin:0}.main{display:block}.col-left,.col-right{width:auto}.col-mid{width:auto}.banner{padding:12px}.menu>li{width:50%}.strip .clock{width:185px}.strip .search{width:200px}}
-
-
-/* ===== CODE 2 VISUAL BASE — preserve legacy school-portal look ===== */
 html,body{min-height:100%;}
-body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;font-size:12px;line-height:1.45;}
+body{background:#dfe6ee;color:#222;font-size:12px;line-height:1.45;}
 #wrap{width:1263px;max-width:calc(100vw - 18px);margin:8px auto 18px;background:#fff;border:1px solid #aebdce;border-top:0;box-shadow:0 1px 3px rgba(0,0,0,.12);}
 .topbar{height:31px;padding:0 10px;background:#f2f5f8;border-bottom:1px solid #c5d1df;align-items:center;}
 .topbar a{height:30px;padding:0 11px;color:#0754a0;font-size:11px;border-right:1px solid #c5d1df;display:inline-flex;align-items:center;gap:5px;}
@@ -274,9 +244,8 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 .code2-banner-image{display:block;width:100%;height:112px;object-fit:cover;object-position:center center;max-width:none;}
 .code2-banner .badge,.code2-banner .title{display:none!important;}
 .code2-banner:before,.code2-banner:after{display:none!important;}
-.menu{background:linear-gradient(180deg,#176bbd 0%,#0d55a4 62%,#084481 100%);border-bottom:1px solid #06396d;box-shadow:none;}
+.menu{background:linear-gradient(180deg,#176bbd 0%,#0d55a4 62%,#084481 100%);border-bottom:1px solid #06396d;}
 .menu>li> a{padding:9px 12px;color:#fff;font-size:11px;font-weight:bold;text-transform:none;border-right:1px solid rgba(0,0,0,.18);border-left:1px solid rgba(255,255,255,.12);text-shadow:1px 1px 0 rgba(0,0,0,.25);}
-.menu>li:first-child>a{border-left:0;}
 .menu>li>a:hover,.menu>li.on>a{background:linear-gradient(180deg,#ffe15a,#ffcc2b 58%,#eeb108 100%);color:#073e7a;text-shadow:none;}
 .menu>li>ul{min-width:220px;border:1px solid #0b4e98;border-top:0;box-shadow:2px 3px 0 rgba(7,61,117,.18);}
 .menu>li>ul>li>a{padding:7px 11px;font-size:11px;background:#fff;color:#333;}
@@ -284,23 +253,17 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 .strip .clock{width:216px;background:#0b58a9;border-right:3px solid #f3cf28;font-size:11px;}
 .strip .marquee{font-size:12px;color:#c00;font-weight:bold;}
 .strip .search{width:258px;background:#eef3f7;border-left:1px solid #c5d1df;}
-.strip .search input{padding:5px 8px;border:1px solid #bac9d9;font-size:11px;}
-.strip .search button{padding:5px 10px;background:linear-gradient(180deg,#2b79c8,#0b58a9 60%,#083f7b);border:1px solid #06396d;}
 .main{padding:8px;background:#dfe6ee;gap:8px;}
 .col-left{width:220px;flex:0 0 220px;}
 .col-mid{flex:1;min-width:0;}
 .col-right{width:270px;flex:0 0 270px;}
-.box,.tab{border:1px solid #bcc9d7;background:#fff;border-radius:0;box-shadow:none;margin-bottom:8px;}
+.box,.tab{border:1px solid #bcc9d7;background:#fff;margin-bottom:8px;}
 .box>.head,.tab>.head{background:linear-gradient(180deg,#2777c4,#0d58a9 56%,#083f7b);border-bottom:2px solid #f3cf28;padding:7px 9px;color:#fff;font-size:11px;font-weight:bold;text-shadow:1px 1px 0 rgba(0,0,0,.28);}
 .box>.head.red{background:linear-gradient(180deg,#df403b,#c82c28 55%,#961e1b);}
 .box>.head .count{background:#ffce25;color:#063f7c;border:1px solid #b99600;}
-.feat-grid{gap:1px;background:#c1ccd8;}
 .feat{padding:7px;background:#fff;}
 .feat .imgwrap{height:112px;border:1px solid #bdc9d6;padding:2px;background:#f6f7f8;margin-bottom:5px;}
-.feat a.t{font-size:11px;line-height:1.35;}
 .tab>.body{padding:9px;}
-.tab>.head a{color:#fff;text-decoration:none;}
-.tab>.head .more{font-size:10px;padding:2px 7px;border:1px solid rgba(255,255,255,.48);}
 .mq-vertical{height:112px;padding:7px 9px;font-size:11px;}
 .quicklist a{padding:7px 9px;font-size:11px;}
 .vb-item{padding:8px 9px;}
@@ -309,9 +272,8 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 .yt iframe{height:150px;}
 .footer{background:linear-gradient(180deg,#0b58a9,#073f7b);border-top:3px solid #f3cf28;padding:14px 18px;}
 #LoginOverlay{background:rgba(5,57,110,.78);}
-.login-card{border:1px solid #06396d;border-radius:0;box-shadow:4px 5px 0 rgba(0,0,0,.24);}
+.login-card{border:1px solid #06396d;box-shadow:4px 5px 0 rgba(0,0,0,.24);}
 .login-card .h{background:linear-gradient(180deg,#2777c4,#0d58a9 56%,#083f7b);border-bottom:3px solid #f3cf28;}
-.login-card .h .crest{border-radius:50%;}
 .login-card .btn{background:linear-gradient(180deg,#2777c4,#0d58a9 56%,#083f7b);border:1px solid #06396d;}
 .ad-bar{background:linear-gradient(180deg,#176bbd,#0d55a4 60%,#084481);border-bottom:3px solid #f3cf28;}
 .ad-tabs{background:#073f7b;border-bottom:2px solid #f3cf28;}
@@ -322,12 +284,11 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 </style>
 </head>
 <body>
-<!-- Merged: code 1 functionality + code 2 visual style. Admin: admin / Phuc2012@ -->
 <div id="wrap">
 <div class="topbar">
-<a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#" id="btnOpenLogin"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
-<a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#"><i class="far fa-comment"></i> Góp ý</a>
-<a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#"><i class="fas fa-sitemap"></i> Sơ đồ trang</a>
+<a href="#" id="btnOpenLogin"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+<a href="#"><i class="far fa-comment"></i> Góp ý</a>
+<a href="#"><i class="fas fa-sitemap"></i> Sơ đồ trang</a>
 </div>
 <div class="banner code2-banner" id="banner">
 <img id="bannerImage" class="code2-banner-image" src="https://storage-edu.vnpt.vn/edu-lci/8428/DUY/banner%20moi.gif" alt="Banner Trường THCS Ngô Văn Sở">
@@ -338,28 +299,28 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 </div>
 </div>
 <ul class="menu">
-<li class="on"><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#"><i class="fas fa-home"></i> Trang chủ</a></li>
-<li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Giới thiệu ▾</a>
-<ul><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Ban giám hiệu</a></li><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Các đoàn thể</a></li><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Cơ cấu tổ chức</a></li></ul>
+<li class="on"><a href="#"><i class="fas fa-home"></i> Trang chủ</a></li>
+<li><a href="#">Giới thiệu ▾</a>
+<ul><li><a href="#">Ban giám hiệu</a></li><li><a href="#">Các đoàn thể</a></li><li><a href="#">Cơ cấu tổ chức</a></li></ul>
 </li>
-<li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Nội quy, quy định</a></li>
-<li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Nội dung công khai ▾</a>
-<ul><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Điều kiện đảm bảo chất lượng</a></li><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Kế hoạch – kết quả</a></li><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Thu chi tài chính</a></li></ul>
+<li><a href="#">Nội quy, quy định</a></li>
+<li><a href="#">Nội dung công khai ▾</a>
+<ul><li><a href="#">Điều kiện đảm bảo chất lượng</a></li><li><a href="#">Kế hoạch – kết quả</a></li><li><a href="#">Thu chi tài chính</a></li></ul>
 </li>
-<li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Văn bản chỉ đạo ▾</a>
-<ul><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Văn bản các cấp</a></li><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Văn bản trường</a></li></ul>
+<li><a href="#">Văn bản chỉ đạo ▾</a>
+<ul><li><a href="#">Văn bản các cấp</a></li><li><a href="#">Văn bản trường</a></li></ul>
 </li>
-<li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Hoạt động giáo dục ▾</a>
-<ul><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Tin tức</a></li><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Sự kiện</a></li><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Tư vấn học đường</a></li></ul>
+<li><a href="#">Hoạt động giáo dục ▾</a>
+<ul><li><a href="#">Tin tức</a></li><li><a href="#">Sự kiện</a></li><li><a href="#">Tư vấn học đường</a></li></ul>
 </li>
-<li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Tài nguyên ▾</a>
-<ul><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Tài nguyên dạy – học</a></li><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Hệ thống vnEdu</a></li><li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Elearning</a></li></ul>
+<li><a href="#">Tài nguyên ▾</a>
+<ul><li><a href="#">Tài nguyên dạy – học</a></li><li><a href="#">Hệ thống vnEdu</a></li><li><a href="#">Elearning</a></li></ul>
 </li>
-<li><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#">Phòng truyền thống</a></li>
+<li><a href="#">Phòng truyền thống</a></li>
 </ul>
 <div class="strip">
 <div class="clock"><i class="far fa-clock"></i> <span id="topClock">Đang tải...</span></div>
-<div class="marquee"><span id="marqueeText"><i class="fas fa-bullhorn" style="color:#0b4ea2"></i> Chào mừng bạn đến với cổng thông tin điện tử Trường THCS Chao Đâu!</span></div>
+<div class="marquee"><span id="marqueeText"><i class="fas fa-bullhorn" style="color:#0b4ea2"></i> Chào mừng bạn đến với cổng thông tin điện tử Trường THCS Ngô Văn Sở!</span></div>
 <div class="search">
 <input type="text" placeholder="Từ khóa tìm kiếm...">
 <button><i class="fas fa-search"></i></button>
@@ -390,19 +351,19 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 <div class="feat-grid" id="featGrid"></div>
 </div>
 <div class="tab">
-<div class="head"><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#"><i class="far fa-newspaper"></i> Tin tức</a><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#" class="more">Xem tất cả »</a></div>
+<div class="head"><a href="#"><i class="far fa-newspaper"></i> Tin tức</a><a href="#" class="more">Xem tất cả »</a></div>
 <div class="body" id="tabNews"></div>
 </div>
 <div class="tab">
-<div class="head" style="background:linear-gradient(180deg,#e53935,#c62828 55%,#8e1a1a)"><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#"><i class="far fa-calendar-alt"></i> Sự kiện</a><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#" class="more">Xem tất cả »</a></div>
+<div class="head" style="background:linear-gradient(180deg,#e53935,#c62828 55%,#8e1a1a)"><a href="#"><i class="far fa-calendar-alt"></i> Sự kiện</a><a href="#" class="more">Xem tất cả »</a></div>
 <div class="body" id="tabEvents"></div>
 </div>
 <div class="tab">
-<div class="head" style="background:linear-gradient(180deg,#fb8c00,#ef6c00 55%,#b45309)"><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#"><i class="far fa-bell"></i> Thông báo</a><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#" class="more">Xem tất cả »</a></div>
+<div class="head" style="background:linear-gradient(180deg,#fb8c00,#ef6c00 55%,#b45309)"><a href="#"><i class="far fa-bell"></i> Thông báo</a><a href="#" class="more">Xem tất cả »</a></div>
 <div class="body" id="tabNotice"></div>
 </div>
 <div class="tab">
-<div class="head" style="background:linear-gradient(180deg,#00897b,#00695c 55%,#004d40)"><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#"><i class="fas fa-user-plus"></i> Tuyển sinh</a><a href="https://phucdepzai2012.github.io/THCSDUONGMINHCHAU/#" class="more">Xem tất cả »</a></div>
+<div class="head" style="background:linear-gradient(180deg,#00897b,#00695c 55%,#004d40)"><a href="#"><i class="fas fa-user-plus"></i> Tuyển sinh</a><a href="#" class="more">Xem tất cả »</a></div>
 <div class="body" id="tabAdmissions"></div>
 </div>
 </div>
@@ -426,24 +387,20 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 <div class="box">
 <div class="head"><span><i class="fas fa-chart-bar"></i> Thống kê truy cập</span></div>
 <ul class="stats" id="statsList">
-<li><span>Đang online:</span><span>12</span></li>
-<li><span>Hôm nay:</span><span>248</span></li>
-<li><span>Trong tuần:</span><span>1.456</span></li>
-<li><span>Tất cả:</span><span>52.891</span></li>
+<li><span>Đang online:</span><span id="stOnline">…</span></li>
+<li><span>Hôm nay:</span><span id="stToday">…</span></li>
+<li><span>Trong tuần:</span><span id="stWeek">…</span></li>
+<li><span>Tất cả:</span><span id="stTotal">…</span></li>
 </ul>
 </div>
 </div>
 </div>
-<div id="firebaseChunkLoader" style="padding:14px 10px;background:#edf1f5;text-align:center;color:#6d7d8f;border-top:1px solid #c7d3e2">
-  <button id="loadMoreChunks" type="button" style="display:none;padding:8px 18px;border:1px solid #0b58a8;background:linear-gradient(180deg,#1974c5,#0b58a8);color:#fff;font-weight:bold;cursor:pointer">Tải thêm dữ liệu</button>
-  <span id="chunkStatus">Đang tải dữ liệu Firebase…</span>
-</div>
 <div class="footer">
-<div class="name" id="footerName">TRƯỜNG THCS CHAO ĐÂU</div>
+<div class="name" id="footerName">TRƯỜNG THCS NGÔ VĂN SỞ</div>
 <div><b>Địa chỉ:</b> <span id="footerAddress">123 Đường Ước Mơ, P. Bình Thạnh, TP.HCM</span></div>
-<div><b>Điện thoại:</b> <span id="footerPhone">(028) 1234 5678</span> — <b>Email:</b> <span id="footerEmail">info\@chaodau.edu.vn</span></div>
+<div><b>Điện thoại:</b> <span id="footerPhone">(028) 1234 5678</span> — <b>Email:</b> <span id="footerEmail">info@chaodau.edu.vn</span></div>
 <div><b>Chịu trách nhiệm nội dung:</b> <span id="footerResp">Ban Giám hiệu</span></div>
-<div style="margin-top:5px;font-size:10.5px;opacity:.85">© 2025 Trường THCS Chao Đâu — Bảo lưu mọi quyền.</div>
+<div style="margin-top:5px;font-size:10.5px;opacity:.85">© 2025 Trường THCS Ngô Văn Sở — Bảo lưu mọi quyền.</div>
 </div>
 </div>
 <!-- LOGIN -->
@@ -474,7 +431,7 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 <div class="ava">👤</div>
 <div>
 <h3>Bảng điều khiển quản trị</h3>
-<p>Xin chào, <b id="adminName">Quản trị viên</b> — mọi thay đổi sẽ hiển thị cho tất cả mọi người.</p>
+<p>Xin chào, <b id="adminName">Quản trị viên</b> — mọi thay đổi sẽ hiển thị tức thì cho tất cả mọi người.</p>
 </div>
 </div>
 <div class="btns">
@@ -488,12 +445,12 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 <button data-tab="docs"><i class="fas fa-file-pdf"></i> Văn bản PDF</button>
 <button data-tab="settings"><i class="fas fa-cog"></i> Cài đặt trang</button>
 </div>
-<!-- ===== TAB BÀI VIẾT ===== -->
+<!-- TAB BÀI VIẾT -->
 <div class="ad-panel active" id="tab-posts">
 <div class="ad-body">
 <div class="fcol">
 <div class="box">
-<div class="head"><span><i class="fas fa-plus-circle"></i> Đăng bài viết</span></div>
+<div class="head"><span><i class="fas fa-plus-circle"></i> Đăng bài viết (siêu tốc)</span></div>
 <div style="padding:12px">
 <form id="postForm">
 <div class="f"><label>Tiêu đề <span class="r">*</span></label><input type="text" id="pTitle" required></div>
@@ -507,7 +464,7 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 <label class="file-upload" for="pImage">
 <input type="file" id="pImage" accept="image/*">
 <div class="ico"><i class="fas fa-cloud-upload-alt"></i></div>
-<div class="txt">Bấm để chọn ảnh (JPG, PNG, GIF)</div>
+<div class="txt">Bấm để chọn ảnh (tự động nén siêu tốc)</div>
 <div class="fname" id="pImageName"></div>
 </label>
 <img id="pImagePreview" class="img-preview hidden">
@@ -535,7 +492,7 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 </div>
 </div>
 </div>
-<!-- ===== TAB THÔNG BÁO ===== -->
+<!-- TAB THÔNG BÁO -->
 <div class="ad-panel" id="tab-notices">
 <div class="ad-body">
 <div class="fcol">
@@ -558,7 +515,7 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 </div>
 </div>
 </div>
-<!-- ===== TAB VĂN BẢN PDF ===== -->
+<!-- TAB VĂN BẢN PDF -->
 <div class="ad-panel" id="tab-docs">
 <div class="ad-body">
 <div class="fcol">
@@ -593,7 +550,7 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 </div>
 </div>
 </div>
-<!-- ===== TAB CÀI ĐẶT ===== -->
+<!-- TAB CÀI ĐẶT -->
 <div class="ad-panel" id="tab-settings">
 <form id="settingsForm">
 <div class="settings-section">
@@ -610,7 +567,6 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 <div class="txt">Chọn ảnh logo</div>
 <div class="fname" id="sLogoName"></div>
 </label>
-<div class="hint">Nếu không chọn, logo sẽ hiển thị chữ "CĐ"</div>
 </div>
 <div class="f"><label>Ảnh nền banner (tùy chọn)</label>
 <label class="file-upload" for="sBgFile">
@@ -627,7 +583,6 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 <div class="txt">Chọn icon website (PNG, JPG, SVG, ICO)</div>
 <div class="fname" id="sIconName"></div>
 </label>
-<div class="hint">Icon này hiển thị trên tab trình duyệt. Có thể thay bất cứ lúc nào.</div>
 </div>
 </div>
 </div>
@@ -658,14 +613,15 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 </div>
 </div>
 <div class="settings-section">
-<div class="sh"><i class="fas fa-chart-bar"></i> Thống kê truy cập</div>
+<div class="sh"><i class="fas fa-chart-bar"></i> Thống kê truy cập (để trống = hiển thị số thật từ Firebase)</div>
 <div class="sb">
 <div class="row3">
-<div class="f"><label>Đang online</label><input type="text" id="sStatOnline"></div>
-<div class="f"><label>Hôm nay</label><input type="text" id="sStatToday"></div>
-<div class="f"><label>Trong tuần</label><input type="text" id="sStatWeek"></div>
+<div class="f"><label>Đang online (ghi đè)</label><input type="text" id="sStatOnline"></div>
+<div class="f"><label>Hôm nay (ghi đè)</label><input type="text" id="sStatToday"></div>
+<div class="f"><label>Trong tuần (ghi đè)</label><input type="text" id="sStatWeek"></div>
 </div>
-<div class="f"><label>Tất cả</label><input type="text" id="sStatTotal"></div>
+<div class="f"><label>Tất cả (ghi đè)</label><input type="text" id="sStatTotal"></div>
+<div class="hint">Nếu để trống, hệ thống sẽ tự đếm số thật từ Firebase.</div>
 </div>
 </div>
 <div class="settings-section">
@@ -692,7 +648,7 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 <div class="sh"><i class="fas fa-globe"></i> Liên kết website (dropdown)</div>
 <div class="sb">
 <div id="webLinksEdit"></div>
-<button type="button" class="btn-add" onclick="addLinkRow('webLinksEdit')"><i class="fas fa-plus"></i> Thêm liên kết</button>
+<button type="button" class="btn-add" onclick="addWebLinkRow('webLinksEdit')"><i class="fas fa-plus"></i> Thêm liên kết</button>
 </div>
 </div>
 <div class="settings-section">
@@ -710,8 +666,12 @@ body{background:#dfe6ee;color:#222;font-family:Arial,Tahoma,Verdana,sans-serif;f
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, collection, addDoc, deleteDoc, doc, getDoc, setDoc, updateDoc, getDocs, query, orderBy, limit, startAfter, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-/* ⚠️ DÁN firebaseConfig CỦA PROJECT CỦA BẠN VÀO ĐÂY */
+import { getFirestore, collection, addDoc, deleteDoc, doc, getDoc, setDoc, onSnapshot, query, orderBy, serverTimestamp, increment, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+/* =========================================================
+   FIREBASE CONFIG — đã gắn sẵn config của bạn
+   ========================================================= */
 const firebaseConfig = {
   apiKey: "AIzaSyCDQsJ_NrGK5ouRLS7vFr55OBZQ0nKhHSk",
   authDomain: "vietnam-life-game.firebaseapp.com",
@@ -722,6 +682,7 @@ const firebaseConfig = {
   appId: "1:134954120781:web:d7f762adb80bfce3140e04",
   measurementId: "G-39VPPE1F9T"
 };
+
 const FB_READY = Object.values(firebaseConfig).every(v => typeof v === "string" && v.trim() && !v.startsWith("PASTE_"));
 const ADMIN_NAME = "Quản trị viên";
 const ADMIN_USERNAME = "admin";
@@ -729,398 +690,430 @@ const ADMIN_PASSWORD = "Phuc2012@";
 const ADMIN_EMAIL = "admin@vietnam-life-game.com";
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 const MAX_PDF_BYTES = 30 * 1024 * 1024;
+const IMG_MAX_WIDTH = 1280;
+const IMG_QUALITY = 0.82;
+
 const $  = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 const esc = str => String(str ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[m]);
 const fmtDate = iso => { if(!iso) return ""; const d = new Date(iso+"T00:00:00"); return isNaN(d)?iso:d.toLocaleDateString("vi-VN",{day:"2-digit",month:"2-digit",year:"numeric"}); };
-function makePostCode(){ const d=new Date(); const pad=n=>String(n).padStart(2,"0"); const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; const a=new Uint32Array(5); crypto.getRandomValues(a); let r=""; for(const n of a) r+=chars[n%chars.length]; return `BV-${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}-${r}`; }
+const fmtNum = n => (Number(n)||0).toLocaleString("vi-VN");
 const showToast = (msg,type="ok") => { const t=$("#Toast"); t.innerHTML=(type==="ok"?"✅ ":"⚠️ ")+esc(msg); t.className=type; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),3200); };
+
 let allPosts = [], allNotices = [], allDocs = [], settings = null;
-let db, auth, storage, postsCol, noticesCol, docsCol;
+let db, auth, storage, postsCol, noticesCol, docsCol, visitsRef, presenceCol;
 let currentAdmin = null;
-let firebaseAuthPromise = null;
-let storageApiPromise = null;
+let realStats = { online: null, today: null, week: null, total: null };
+
 const DEFAULT_SETTINGS = {
-bannerTitle: "THCS Ngô Văn Sở",
-bannerSubtitle: "Cổng thông tin điện tử",
-bannerLogo: "https://storage-vnportal.vnpt.vn/edu-lci/8428/DUY/logo-2024.png",
-bannerBg: "https://storage-edu.vnpt.vn/edu-lci/8428/DUY/banner%20moi.gif",
-siteIcon: "",
-marquee: "Chào mừng bạn đến với cổng thông tin điện tử Trường THCS Chao Đâu — Tuyển sinh lớp 6 năm học 2026–2027 đang mở!",
-address: "123 Đường Ước Mơ, P. Bình Thạnh, TP. Hồ Chí Minh",
-phone: "(028) 1234 5678",
-email: "info\@chaodau.edu.vn",
-workMorning: "7:00 – 11:30",
-workAfternoon: "13:30 – 17:00",
-workNote: "(Từ thứ 2 đến thứ 6)",
-statOnline: "12", statToday: "248", statWeek: "1.456", statTotal: "52.891",
-youtubeUrl: "https://www.youtube.com/embed/5QeuPIu3y3Q",
-quickLinks: [
-{icon:"fas fa-search", text:"Tra cứu điểm thi", url:"#"},
-{icon:"fas fa-graduation-cap", text:"Kết quả học tập", url:"#"},
-{icon:"fas fa-book", text:"Hệ thống vnEdu", url:"#"},
-{icon:"fas fa-laptop", text:"Hệ thống Elearning", url:"#"}
-],
-docyhocLinks: [
-{icon:"fas fa-chart-line", text:"Tra cứu Kết quả học tập", url:"#"},
-{icon:"fas fa-poll", text:"Tra cứu điểm thi", url:"#"},
-{icon:"fas fa-cloud", text:"Liên kết vnEdu", url:"#"},
-{icon:"fas fa-play-circle", text:"Liên kết eLearning", url:"#"},
-{icon:"fas fa-folder-open", text:"Hệ thống QLVB & HSCV", url:"#"}
-],
-webLinks: [
-{text:"Hệ thống vnEdu", url:"https://vnedu.vn"},
-{text:"Hệ thống eLearning", url:"https://lms.vnedu.vn"},
-{text:"Bộ Giáo dục & Đào tạo", url:"https://moet.gov.vn"},
-{text:"Sở GD&ĐT TP.HCM", url:"https://hcm.edu.vn"}
-],
-footerName: "TRƯỜNG THCS CHAO ĐÂU",
-footerResp: "Ban Giám hiệu Trường THCS Chao Đâu"
+  bannerTitle: "THCS Ngô Văn Sở",
+  bannerSubtitle: "Cổng thông tin điện tử",
+  bannerLogo: "https://storage-vnportal.vnpt.vn/edu-lci/8428/DUY/logo-2024.png",
+  bannerBg: "https://storage-edu.vnpt.vn/edu-lci/8428/DUY/banner%20moi.gif",
+  siteIcon: "",
+  marquee: "Chào mừng bạn đến với cổng thông tin điện tử Trường THCS Ngô Văn Sở — Tuyển sinh lớp 6 năm học 2026–2027 đang mở!",
+  address: "123 Đường Ước Mơ, P. Bình Thạnh, TP. Hồ Chí Minh",
+  phone: "(028) 1234 5678",
+  email: "info@chaodau.edu.vn",
+  workMorning: "7:00 – 11:30",
+  workAfternoon: "13:30 – 17:00",
+  workNote: "(Từ thứ 2 đến thứ 6)",
+  statOnline: "", statToday: "", statWeek: "", statTotal: "",
+  youtubeUrl: "https://www.youtube.com/embed/5QeuPIu3y3Q",
+  quickLinks: [
+    {icon:"fas fa-search", text:"Tra cứu điểm thi", url:"#"},
+    {icon:"fas fa-graduation-cap", text:"Kết quả học tập", url:"#"},
+    {icon:"fas fa-book", text:"Hệ thống vnEdu", url:"#"},
+    {icon:"fas fa-laptop", text:"Hệ thống Elearning", url:"#"}
+  ],
+  docyhocLinks: [
+    {icon:"fas fa-chart-line", text:"Tra cứu Kết quả học tập", url:"#"},
+    {icon:"fas fa-poll", text:"Tra cứu điểm thi", url:"#"},
+    {icon:"fas fa-cloud", text:"Liên kết vnEdu", url:"#"},
+    {icon:"fas fa-play-circle", text:"Liên kết eLearning", url:"#"},
+    {icon:"fas fa-folder-open", text:"Hệ thống QLVB & HSCV", url:"#"}
+  ],
+  webLinks: [
+    {text:"Hệ thống vnEdu", url:"https://vnedu.vn"},
+    {text:"Hệ thống eLearning", url:"https://lms.vnedu.vn"},
+    {text:"Bộ Giáo dục & Đào tạo", url:"https://moet.gov.vn"},
+    {text:"Sở GD&ĐT TP.HCM", url:"https://hcm.edu.vn"}
+  ],
+  footerName: "TRƯỜNG THCS NGÔ VĂN SỞ",
+  footerResp: "Ban Giám hiệu Trường THCS Ngô Văn Sở"
 };
+
 if(!FB_READY){
-const w = document.createElement("div");
-w.id = "fbWarn";
-w.innerHTML = `<b>⚠️ Chưa cấu hình Firebase!</b><br>Dán <code>firebaseConfig</code> của project Firebase vào phần cấu hình trong mã nguồn.`;
-document.getElementById("wrap").insertBefore(w, document.querySelector(".main"));
+  const w = document.createElement("div");
+  w.id = "fbWarn";
+  w.innerHTML = `<b>⚠️ Chưa cấu hình Firebase!</b><br>Dán <code>firebaseConfig</code> của project Firebase vào phần cấu hình trong mã nguồn.`;
+  document.getElementById("wrap").insertBefore(w, document.querySelector(".main"));
 } else {
-const app = initializeApp(firebaseConfig);
-auth = getAuth(app);
-db = getFirestore(app);
-postsCol = collection(db, "posts");
-noticesCol = collection(db, "notices");
-docsCol = collection(db, "documents");
-const FIREBASE_CHUNK_SIZE = 8;
-const firebaseChunks = {
-  posts: { cursor:null, hasMore:true, loading:false },
-  notices: { cursor:null, hasMore:true, loading:false },
-  docs: { cursor:null, hasMore:true, loading:false }
-};
-let firebaseInitialReady = false;
+  const app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+  storage = getStorage(app);
+  postsCol = collection(db, "posts");
+  noticesCol = collection(db, "notices");
+  docsCol = collection(db, "documents");
+  visitsRef = doc(db, "stats", "visits");
+  presenceCol = collection(db, "presence");
 
-async function loadFirebaseChunk(kind, reset=false){
-  const meta = firebaseChunks[kind];
-  if(!meta || meta.loading || (!meta.hasMore && !reset)) return;
-  meta.loading = true;
-  if(reset){ meta.cursor=null; meta.hasMore=true; }
-  try{
-    let q;
-    if(kind === 'posts'){
-      q = meta.cursor
-        ? query(postsCol, orderBy('createdAt','desc'), startAfter(meta.cursor), limit(FIREBASE_CHUNK_SIZE))
-        : query(postsCol, orderBy('createdAt','desc'), limit(FIREBASE_CHUNK_SIZE));
-    } else if(kind === 'notices'){
-      q = meta.cursor
-        ? query(noticesCol, orderBy('order','asc'), startAfter(meta.cursor), limit(FIREBASE_CHUNK_SIZE))
-        : query(noticesCol, orderBy('order','asc'), limit(FIREBASE_CHUNK_SIZE));
-    } else {
-      q = meta.cursor
-        ? query(docsCol, orderBy('createdAt','desc'), startAfter(meta.cursor), limit(FIREBASE_CHUNK_SIZE))
-        : query(docsCol, orderBy('createdAt','desc'), limit(FIREBASE_CHUNK_SIZE));
-    }
-
-    const snap = await getDocs(q);
-    const rows = snap.docs.map(d=>({id:d.id,...d.data()}));
-    meta.cursor = snap.docs.length ? snap.docs[snap.docs.length-1] : meta.cursor;
-    meta.hasMore = snap.docs.length === FIREBASE_CHUNK_SIZE;
-
-    if(kind === 'posts') allPosts = reset ? rows : [...allPosts, ...rows];
-    if(kind === 'notices') allNotices = reset ? rows : [...allNotices, ...rows];
-    if(kind === 'docs') allDocs = reset ? rows : [...allDocs, ...rows];
-
-    saveCachedData();
+  /* ===== REALTIME: bài viết ===== */
+  onSnapshot(query(postsCol, orderBy("createdAt","desc")), snap => {
+    allPosts = snap.docs.map(d => ({id: d.id, ...d.data()}));
     renderAll();
-    if(document.getElementById('AdminPanel')?.classList.contains('show')){
-      renderAdminPosts(); renderAdminNotices(); renderAdminDocs();
-    }
-  }catch(err){
-    console.warn('Firebase chunk error ['+kind+']:', err);
-  }finally{
-    meta.loading = false;
-  }
-}
+    if($("#AdminPanel").classList.contains("show")) renderAdminPosts();
+  }, err => console.warn("posts:", err));
 
-async function loadInitialFirebaseChunks(){
-  loadCachedData();
-  if(settings) applySettings(settings);
-  renderAll();
-  const results = await Promise.allSettled([
-    loadFirebaseChunk('posts', true),
-    loadFirebaseChunk('notices', true),
-    loadFirebaseChunk('docs', true),
-    getDoc(doc(db,'settings','site'))
-  ]);
-  const s = results[3];
-  if(s?.status === 'fulfilled'){
-    settings = s.value.exists() ? {...DEFAULT_SETTINGS,...s.value.data()} : {...DEFAULT_SETTINGS};
-    saveCachedData();
+  /* ===== REALTIME: thông báo ===== */
+  onSnapshot(query(noticesCol, orderBy("order","asc")), snap => {
+    allNotices = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    renderNotices();
+    if($("#AdminPanel").classList.contains("show")) renderAdminNotices();
+  }, err => console.warn("notices:", err));
+
+  /* ===== REALTIME: văn bản ===== */
+  onSnapshot(query(docsCol, orderBy("createdAt","desc")), snap => {
+    allDocs = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    renderDocs();
+    if($("#AdminPanel").classList.contains("show")) renderAdminDocs();
+  }, err => console.warn("docs:", err));
+
+  /* ===== REALTIME: cài đặt ===== */
+  onSnapshot(doc(db, "settings", "site"), snap => {
+    settings = snap.exists() ? {...DEFAULT_SETTINGS, ...snap.data()} : {...DEFAULT_SETTINGS};
     applySettings(settings);
+    if($("#AdminPanel").classList.contains("show")) fillSettingsForm();
+  }, err => console.warn("settings:", err));
+
+  /* ===== REALTIME: thống kê ===== */
+  onSnapshot(visitsRef, snap => {
+    if(!snap.exists()) return;
+    const d = snap.data() || {};
+    const todayKey = todayKeyStr();
+    const weekKey = weekKeyStr(new Date());
+    realStats.total = d.total || 0;
+    realStats.today = (d.daily && d.daily[todayKey]) || 0;
+    realStats.week  = (d.weekly && d.weekly[weekKey]) || 0;
+    renderStats();
+  }, err => console.warn("visits:", err));
+
+  /* ===== REALTIME: số người đang online ===== */
+  const presenceQuery = query(presenceCol, where("ts", ">", Date.now() - 60000));
+  onSnapshot(presenceQuery, snap => {
+    realStats.online = snap.size;
+    renderStats();
+  }, err => console.warn("presence:", err));
+
+  /* ===== AUTH ===== */
+  onAuthStateChanged(auth, async user => {
+    if(!user){ currentAdmin = null; setAdmin(false); return; }
+    try {
+      const adminDoc = await getDoc(doc(db, "admins", user.uid));
+      if(user.email === ADMIN_EMAIL){
+        if(!adminDoc.exists()){ try{ await setDoc(doc(db, "admins", user.uid), {name: ADMIN_NAME, username: ADMIN_USERNAME, email: ADMIN_EMAIL, role:"admin", createdAt: serverTimestamp()}, {merge:true}); }catch{} }
+        currentAdmin = {uid:user.uid, email:user.email || ADMIN_EMAIL, name: ADMIN_NAME, role:"admin", ...(adminDoc.exists()?adminDoc.data():{})};
+      } else {
+        if(!adminDoc.exists()){
+          currentAdmin = null;
+          await signOut(auth);
+          setAdmin(false);
+          showToast("Tài khoản này chưa được cấp quyền quản trị.", "err");
+          return;
+        }
+        currentAdmin = {uid:user.uid, email:user.email || "", ...adminDoc.data()};
+      }
+      $("#adminName").textContent = currentAdmin.name || user.email || ADMIN_NAME;
+      setAdmin(true);
+    } catch(err){
+      currentAdmin = null;
+      try{ await signOut(auth); }catch{}
+      setAdmin(false);
+      showToast("Không kiểm tra được quyền admin: " + err.message, "err");
+    }
+  });
+
+  /* ===== TRACK VISIT + PRESENCE ===== */
+  initVisitTracking();
+}
+
+/* ===== HELPERS CHO NGÀY/TUẦN ===== */
+function todayKeyStr(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function weekKeyStr(d){
+  const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  const day = t.getUTCDay() || 7;
+  t.setUTCDate(t.getUTCDate() + 4 - day);
+  const yearStart = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+  const weekNo = Math.ceil((((t - yearStart) / 86400000) + 1) / 7);
+  return `${t.getUTCFullYear()}-W${String(weekNo).padStart(2,"0")}`;
+}
+function getSessionId(){
+  let id = sessionStorage.getItem("nv_session_id");
+  if(!id){
+    id = "s_" + Date.now() + "_" + Math.random().toString(36).slice(2, 9);
+    sessionStorage.setItem("nv_session_id", id);
   }
-  firebaseInitialReady = true;
-  updateChunkStatus();
-  maybeShowChunkButton();
+  return id;
+}
+async function initVisitTracking(){
+  if(!FB_READY || !db) return;
+  const todayKey = todayKeyStr();
+  const weekKey  = weekKeyStr(new Date());
+  const sessionId = getSessionId();
+
+  /* Đếm lượt truy cập (total, hôm nay, tuần này) */
+  try {
+    const payload = { updatedAt: serverTimestamp() };
+    payload.total = increment(1);
+    payload[`daily.${todayKey}`] = increment(1);
+    payload[`weekly.${weekKey}`] = increment(1);
+    await setDoc(visitsRef, payload, {merge:true});
+  } catch(e){ console.warn("visit increment:", e); }
+
+  /* Presence: heartbeat để đếm online real-time */
+  try {
+    const myPresence = doc(db, "presence", sessionId);
+    const beat = async () => {
+      try { await setDoc(myPresence, { ts: Date.now(), ua: navigator.userAgent.slice(0,120) }, {merge:true}); } catch(e){}
+    };
+    beat();
+    const interval = setInterval(beat, 25000);
+    window.addEventListener("beforeunload", () => { try{ deleteDoc(myPresence); }catch(e){} clearInterval(interval); });
+    // Khi quay lại tab thì beat lại ngay
+    document.addEventListener("visibilitychange", () => { if(document.visibilityState === "visible") beat(); });
+  } catch(e){ console.warn("presence:", e); }
 }
 
-async function loadNextFirebaseChunks(){
-  const btn=document.getElementById('loadMoreChunks');
-  if(btn){ btn.disabled=true; btn.textContent='Đang tải…'; }
-  await Promise.all([
-    loadFirebaseChunk('posts'),
-    loadFirebaseChunk('notices'),
-    loadFirebaseChunk('docs')
-  ]);
-  if(btn){ btn.disabled=false; btn.textContent='Tải thêm dữ liệu'; }
-  updateChunkStatus();
-  maybeShowChunkButton();
-}
-
-function updateChunkStatus(){
-  const el=document.getElementById('chunkStatus');
-  if(!el) return;
-  const more = firebaseChunks.posts.hasMore || firebaseChunks.notices.hasMore || firebaseChunks.docs.hasMore;
-  el.textContent = more ? `Firebase: đã tải ${allPosts.length} bài • ${allNotices.length} thông báo • ${allDocs.length} văn bản` : 'Firebase: đã tải hết dữ liệu';
-}
-
-function maybeShowChunkButton(){
-  const btn=document.getElementById('loadMoreChunks');
-  if(!btn) return;
-  const more = firebaseChunks.posts.hasMore || firebaseChunks.notices.hasMore || firebaseChunks.docs.hasMore;
-  btn.style.display = (firebaseInitialReady && more) ? 'inline-block' : 'none';
-}
-
-
-function loadCachedData(){
-  try{
-    const c = JSON.parse(localStorage.getItem("chaodau_fast_cache") || "null");
-    if(!c) return;
-    allPosts = Array.isArray(c.posts) ? c.posts : [];
-    allNotices = Array.isArray(c.notices) ? c.notices : [];
-    allDocs = Array.isArray(c.docs) ? c.docs : [];
-    settings = c.settings ? {...DEFAULT_SETTINGS,...c.settings} : null;
-  }catch{}
-}
-function saveCachedData(){
-  try{ localStorage.setItem("chaodau_fast_cache", JSON.stringify({posts:allPosts.slice(0,12), notices:allNotices.slice(0,12), docs:allDocs.slice(0,12), settings})); }catch{}
-}
-
-async function getStorageApi(){
-  if(!storageApiPromise) storageApiPromise=import("https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js");
-  return storageApiPromise;
-}
-async function getStorageFast(){
-  const api=await getStorageApi();
-  if(!storage) storage=api.getStorage(app);
-  return {api,storage};
-}
-
-loadInitialFirebaseChunks();
-const chunkBtn=document.getElementById("loadMoreChunks");
-if(chunkBtn) chunkBtn.addEventListener("click", loadNextFirebaseChunks);
-const chunkLoader=document.getElementById("firebaseChunkLoader");
-if(chunkLoader && "IntersectionObserver" in window){
-  const io=new IntersectionObserver(entries=>{ if(entries.some(e=>e.isIntersecting) && firebaseInitialReady){ const more=firebaseChunks.posts.hasMore || firebaseChunks.notices.hasMore || firebaseChunks.docs.hasMore; if(more) loadNextFirebaseChunks(); } },{rootMargin:"500px"});
-  io.observe(chunkLoader);
-}
-onAuthStateChanged(auth, user => {
-  if(user && user.email === ADMIN_EMAIL){
-    currentAdmin = {uid:user.uid, email:ADMIN_EMAIL, name:ADMIN_NAME, role:"admin"};
-    $("#adminName").textContent = ADMIN_NAME;
-  }
-});
-}
+/* ===== ĐỒNG HỒ ===== */
 function tickClock(){
-const d = new Date();
-const days = ["Chủ nhật","Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7"];
-const pad = n => String(n).padStart(2,"0");
-$("#topClock").textContent = `${days[d.getDay()]}, ${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} - ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  const d = new Date();
+  const days = ["Chủ nhật","Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7"];
+  const pad = n => String(n).padStart(2,"0");
+  const el = $("#topClock");
+  if(el) el.textContent = `${days[d.getDay()]}, ${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} - ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 tickClock(); setInterval(tickClock, 1000);
+
+/* ===== RENDER STATS ===== */
+function renderStats(){
+  const s = settings || {};
+  const online = realStats.online != null ? realStats.online : (s.statOnline || 0);
+  const today  = realStats.today  != null ? realStats.today  : (s.statToday || 0);
+  const week   = realStats.week   != null ? realStats.week   : (s.statWeek || 0);
+  const total  = realStats.total  != null ? realStats.total  : (s.statTotal || 0);
+  const set = (id, v) => { const el = $(id); if(el) el.textContent = fmtNum(v); };
+  set("#stOnline", online);
+  set("#stToday", today);
+  set("#stWeek", week);
+  set("#stTotal", total);
+}
+
 /* ===== APPLY SETTINGS ===== */
 function applySettings(s){
-$("#bannerTitle").textContent = s.bannerTitle;
-$("#bannerSubtitle").textContent = s.bannerSubtitle;
-$("#bannerLogo").innerHTML = s.bannerLogo ? `<img src="${esc(s.bannerLogo)}" alt="logo">` : "CĐ";
-const fav = $("#siteFavicon"); if(fav) fav.href = s.siteIcon || fav.dataset.defaultIcon || fav.href;
-const banner = $("#banner");
-const bannerImage = $("#bannerImage");
-if(bannerImage) bannerImage.src = s.bannerBg || "https://storage-edu.vnpt.vn/edu-lci/8428/DUY/banner%20moi.gif";
-banner.style.backgroundImage = "";
-banner.classList.remove("bg-img");
-$("#marqueeText").innerHTML = `<i class="fas fa-bullhorn" style="color:#0b4ea2"></i> ${esc(s.marquee)}`;
-$("#workTime").innerHTML = `<p><b>Sáng:</b> ${esc(s.workMorning)}</p><p><b>Chiều:</b> ${esc(s.workAfternoon)}</p><p class="note">${esc(s.workNote)}</p>`;
-$("#footerName").textContent = s.footerName;
-$("#footerAddress").textContent = s.address;
-$("#footerPhone").textContent = s.phone;
-$("#footerEmail").textContent = s.email;
-$("#footerResp").textContent = s.footerResp;
-$("#statsList").innerHTML = `<li><span>Đang online:</span><span>${esc(s.statOnline)}</span></li><li><span>Hôm nay:</span><span>${esc(s.statToday)}</span></li><li><span>Trong tuần:</span><span>${esc(s.statWeek)}</span></li><li><span>Tất cả:</span><span>${esc(s.statTotal)}</span></li>`;
-const yt = s.youtubeUrl;
-const yid = yt.includes("/embed/") ? yt.split("/embed/")[1].split(/[?&]/)[0] : yt.split("v=")[1]?.split("&")[0] || "";
-if(yid) $("#ytFrame").src = `https://www.youtube.com/embed/${yid}`;
-$("#quickList").innerHTML = (s.quickLinks||[]).map(l => `<a href="${esc(l.url)}" target="_blank"><i class="${esc(l.icon)}"></i> ${esc(l.text)}</a>`).join("");
-$("#docyhocList").innerHTML = (s.docyhocLinks||[]).map(l => `<a href="${esc(l.url)}" target="_blank"><i class="${esc(l.icon)}"></i> ${esc(l.text)}</a>`).join("");
-$("#webLinks").innerHTML = `<option value="">-- Chọn liên kết website --</option>` + (s.webLinks||[]).map(l => `<option value="${esc(l.url)}">${esc(l.text)}</option>`).join("");
+  $("#bannerTitle").textContent = s.bannerTitle;
+  $("#bannerSubtitle").textContent = s.bannerSubtitle;
+  $("#bannerLogo").innerHTML = s.bannerLogo ? `<img src="${esc(s.bannerLogo)}" alt="logo">` : "CĐ";
+  const fav = $("#siteFavicon"); if(fav) fav.href = s.siteIcon || fav.dataset.defaultIcon || fav.href;
+  const banner = $("#banner");
+  const bannerImage = $("#bannerImage");
+  if(bannerImage) bannerImage.src = s.bannerBg || "https://storage-edu.vnpt.vn/edu-lci/8428/DUY/banner%20moi.gif";
+  banner.style.backgroundImage = "";
+  banner.classList.remove("bg-img");
+  $("#marqueeText").innerHTML = `<i class="fas fa-bullhorn" style="color:#0b4ea2"></i> ${esc(s.marquee)}`;
+  $("#workTime").innerHTML = `<p><b>Sáng:</b> ${esc(s.workMorning)}</p><p><b>Chiều:</b> ${esc(s.workAfternoon)}</p><p class="note">${esc(s.workNote)}</p>`;
+  $("#footerName").textContent = s.footerName;
+  $("#footerAddress").textContent = s.address;
+  $("#footerPhone").textContent = s.phone;
+  $("#footerEmail").textContent = s.email;
+  $("#footerResp").textContent = s.footerResp;
+  const yt = s.youtubeUrl || "";
+  const yid = yt.includes("/embed/") ? yt.split("/embed/")[1].split(/[?&]/)[0] : (yt.split("v=")[1]?.split("&")[0] || "");
+  if(yid) $("#ytFrame").src = `https://www.youtube.com/embed/${yid}`;
+  $("#quickList").innerHTML = (s.quickLinks||[]).map(l => `<a href="${esc(l.url)}" target="_blank"><i class="${esc(l.icon)}"></i> ${esc(l.text)}</a>`).join("");
+  $("#docyhocList").innerHTML = (s.docyhocLinks||[]).map(l => `<a href="${esc(l.url)}" target="_blank"><i class="${esc(l.icon)}"></i> ${esc(l.text)}</a>`).join("");
+  $("#webLinks").innerHTML = `<option value="">-- Chọn liên kết website --</option>` + (s.webLinks||[]).map(l => `<option value="${esc(l.url)}">${esc(l.text)}</option>`).join("");
+  renderStats();
 }
+
 /* ===== RENDER PUBLIC ===== */
 function renderNotices(){
-const box = $("#noticeList");
-if(!allNotices.length){ box.innerHTML = '<p>Chưa có thông báo.</p>'; return; }
-box.innerHTML = allNotices.map(n => `<p>${esc(n.text)}</p>`).join("");
+  const box = $("#noticeList");
+  if(!box) return;
+  if(!allNotices.length){ box.innerHTML = '<p>Chưa có thông báo.</p>'; return; }
+  box.innerHTML = allNotices.map(n => `<p>${esc(n.text)}</p>`).join("");
 }
 function imgOrEmoji(p, cls){
-if(p.imageUrl) return `<img src="${esc(p.imageUrl)}" alt="">`;
-return `<div class="${cls} bg${Number(p.color)||0}">${esc(p.icon||"📰")}</div>`;
+  if(p.imageUrl) return `<img src="${esc(p.imageUrl)}" alt="">`;
+  return `<div class="${cls} bg${Number(p.color)||0}">${esc(p.icon||"📰")}</div>`;
 }
 function renderFeatured(){
-const box = $("#featGrid");
-const top3 = allPosts.slice(0,3);
-if(!top3.length){ box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;grid-column:1/-1">Chưa có bài viết.</div>'; return; }
-box.innerHTML = top3.map(p => `
-<div class="feat">
-<div class="imgwrap">${imgOrEmoji(p,"ph")}</div>
-<a href="#" class="t" data-id="${esc(p.id)}">${esc(p.title)}</a>
-<div class="meta"><i class="far fa-calendar"></i> ${esc(fmtDate(p.date))}</div>
-</div>`).join("");
-box.querySelectorAll(".t").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showPostDetail(a.dataset.id);}));
+  const box = $("#featGrid");
+  const top3 = allPosts.slice(0,3);
+  if(!top3.length){ box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;grid-column:1/-1">Chưa có bài viết.</div>'; return; }
+  box.innerHTML = top3.map(p => `
+    <div class="feat">
+      <div class="imgwrap">${imgOrEmoji(p,"ph")}</div>
+      <a href="#" class="t" data-id="${esc(p.id)}">${esc(p.title)}</a>
+      <div class="meta"><i class="far fa-calendar"></i> ${esc(fmtDate(p.date))}</div>
+    </div>`).join("");
+  box.querySelectorAll(".t").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showPostDetail(a.dataset.id);}));
 }
 function renderTab(cat, id){
-const box = $(id);
-const list = allPosts.filter(p => p.cat === cat);
-if(!list.length){ box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;font-style:italic">Chưa có bài viết.</div>'; return; }
-const first = list[0], rest = list.slice(1,5);
-box.innerHTML = `
-<div class="lead">
-<div class="imgwrap">${imgOrEmoji(first,"ph")}</div>
-<div><a href="#" class="tt" data-id="${esc(first.id)}">${esc(first.title)}</a><p>${esc(first.excerpt)}</p></div>
-</div>
-<ul class="li">${rest.map(p=>`<li><a href="#" data-id="${esc(p.id)}">${esc(p.title)}</a></li>`).join("")}</ul>`;
-box.querySelectorAll("a[data-id]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showPostDetail(a.dataset.id);}));
+  const box = $(id); if(!box) return;
+  const list = allPosts.filter(p => p.cat === cat);
+  if(!list.length){ box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;font-style:italic">Chưa có bài viết.</div>'; return; }
+  const first = list[0], rest = list.slice(1,5);
+  box.innerHTML = `
+    <div class="lead">
+      <div class="imgwrap">${imgOrEmoji(first,"ph")}</div>
+      <div><a href="#" class="tt" data-id="${esc(first.id)}">${esc(first.title)}</a><p>${esc(first.excerpt)}</p></div>
+    </div>
+    <ul class="li">${rest.map(p=>`<li><a href="#" data-id="${esc(p.id)}">${esc(p.title)}</a></li>`).join("")}</ul>`;
+  box.querySelectorAll("a[data-id]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showPostDetail(a.dataset.id);}));
 }
 function showPostDetail(id){
-const p = allPosts.find(x => x.id === id); if(!p) return;
-alert("📰 " + p.title + "\n\nDanh mục: " + p.cat + "\nNgày: " + fmtDate(p.date) + "\n\n" + (p.content || p.excerpt));
+  const p = allPosts.find(x => x.id === id); if(!p) return;
+  alert("📰 " + p.title + "\n\nDanh mục: " + p.cat + "\nNgày: " + fmtDate(p.date) + "\n\n" + (p.content || p.excerpt));
 }
 function renderDocs(){
-const box = $("#docList");
-const visibleDocs = allDocs.filter(d => d.status !== "error" && d.fileUrl);
-if(!visibleDocs.length){ box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;font-style:italic">Chưa có văn bản.</div>'; return; }
-box.innerHTML = visibleDocs.slice(0,5).map(d => `
-<div class="vb-item">
-<span class="code">${esc(d.code)}</span>
-<a href="${esc(d.fileUrl)}" target="_blank" class="tt">${esc(d.title)}</a>
-${d.date ? `<span class="dt"><i class="far fa-calendar"></i> Ngày ban hành: ${esc(fmtDate(d.date))}</span>` : ""}
-${d.desc ? `<div style="color:#555;font-size:11.5px;margin:3px 0">${esc(d.desc)}</div>` : ""}
-<div class="acts">
-<a href="${esc(d.fileUrl)}" target="_blank"><i class="far fa-eye"></i> Xem chi tiết</a>
-<a href="${esc(d.fileUrl)}" download><i class="fas fa-download"></i> Tải về</a>
-</div>
-</div>`).join("");
+  const box = $("#docList"); if(!box) return;
+  if(!allDocs.length){ box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;font-style:italic">Chưa có văn bản.</div>'; return; }
+  box.innerHTML = allDocs.slice(0,5).map(d => `
+    <div class="vb-item">
+      <span class="code">${esc(d.code)}</span>
+      <a href="${esc(d.fileUrl)}" target="_blank" class="tt">${esc(d.title)}</a>
+      ${d.date ? `<span class="dt"><i class="far fa-calendar"></i> Ngày ban hành: ${esc(fmtDate(d.date))}</span>` : ""}
+      ${d.desc ? `<div style="color:#555;font-size:11.5px;margin:3px 0">${esc(d.desc)}</div>` : ""}
+      <div class="acts">
+        <a href="${esc(d.fileUrl)}" target="_blank"><i class="far fa-eye"></i> Xem chi tiết</a>
+        <a href="${esc(d.fileUrl)}" download><i class="fas fa-download"></i> Tải về</a>
+      </div>
+    </div>`).join("");
 }
 function renderAll(){
-renderFeatured();
-renderTab("Tin tức","#tabNews");
-renderTab("Sự kiện","#tabEvents");
-renderTab("Thông báo","#tabNotice");
-renderTab("Tuyển sinh","#tabAdmissions");
+  renderFeatured();
+  renderTab("Tin tức","#tabNews");
+  renderTab("Sự kiện","#tabEvents");
+  renderTab("Thông báo","#tabNotice");
+  renderTab("Tuyển sinh","#tabAdmissions");
 }
-/* ===== RENDER ADMIN LISTS ===== */
+
+/* ===== RENDER ADMIN ===== */
 function renderAdminPosts(){
-const box = $("#adminPostList");
-$("#postCount").textContent = allPosts.length;
-if(!allPosts.length){ box.innerHTML='<div style="padding:20px;text-align:center;color:#888">Chưa có bài viết.</div>'; return; }
-box.innerHTML = allPosts.map(p => `
-<div class="ad-item">
-<div class="th">${imgOrEmoji(p,"ph")}</div>
-<div class="m"><b>${esc(p.title)}</b><small><span style="color:#0b4ea2;font-weight:bold">${esc(p.code || p.id || "")}</span> • 📁 ${esc(p.cat)} • 📅 ${esc(fmtDate(p.date))}</small></div>
-<button class="btn-del" data-del="${esc(p.id)}"><i class="fas fa-trash"></i></button>
-</div>`).join("");
-box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => {
-const id = b.dataset.del;
-if(!confirm("Xóa bài viết này cho TẤT CẢ mọi người?")) return;
-b.disabled = true; b.innerHTML = '<span class="loading-mini"></span>';
-try {
-const p = allPosts.find(x => x.id === id);
-// Xóa bản ghi trước để UI phản hồi nhanh; file ảnh cũ được xóa nền.
-try{ await deleteDoc(doc(db, "posts", id)); }
-catch(firstErr){
-  if(firstErr.code !== "permission-denied" && firstErr.code !== "unauthenticated") throw firstErr;
-  await ensureFirebaseAdmin();
-  await deleteDoc(doc(db, "posts", id));
-}
-allPosts=allPosts.filter(x=>x.id!==id); saveCachedData(); renderAll(); renderAdminPosts();
-showToast("Đã xóa bài viết!");
-if(p?.imagePath) removeStorageFile(p.imagePath).catch(()=>{});
-} catch(e){ showToast("Lỗi xóa: " + (e.code||e.message), "err"); }
-}));
+  const box = $("#adminPostList"); if(!box) return;
+  $("#postCount").textContent = allPosts.length;
+  if(!allPosts.length){ box.innerHTML='<div style="padding:20px;text-align:center;color:#888">Chưa có bài viết.</div>'; return; }
+  box.innerHTML = allPosts.map(p => `
+    <div class="ad-item">
+      <div class="th">${imgOrEmoji(p,"ph")}</div>
+      <div class="m"><b>${esc(p.title)}</b><small>📁 ${esc(p.cat)} • 📅 ${esc(fmtDate(p.date))}</small></div>
+      <button class="btn-del" data-del="${esc(p.id)}"><i class="fas fa-trash"></i></button>
+    </div>`).join("");
+  box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => {
+    const id = b.dataset.del;
+    if(!confirm("Xóa bài viết này cho TẤT CẢ mọi người?")) return;
+    b.disabled = true; b.innerHTML = '<span class="loading-mini"></span>';
+    try {
+      const p = allPosts.find(x => x.id === id);
+      if(p?.imagePath) await removeStorageFile(p.imagePath);
+      await deleteDoc(doc(db, "posts", id));
+      showToast("Đã xóa!");
+    } catch(e){ showToast("Lỗi: " + e.message, "err"); }
+  }));
 }
 function renderAdminNotices(){
-const box = $("#adminNoticeList");
-$("#noticeCount").textContent = allNotices.length;
-if(!allNotices.length){ box.innerHTML='<div style="padding:20px;text-align:center;color:#888">Chưa có thông báo.</div>'; return; }
-box.innerHTML = allNotices.map(n => `
-<div class="ad-item">
-<div class="m"><b>${esc(n.text)}</b><small>Thứ tự: ${n.order||0}</small></div>
-<button class="btn-del" data-del="${esc(n.id)}"><i class="fas fa-trash"></i></button>
-</div>`).join("");
-box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => {
-if(!confirm("Xóa thông báo này?")) return;
-b.disabled = true;
-try { await deleteDoc(doc(db, "notices", b.dataset.del)); allNotices=allNotices.filter(x=>x.id!==b.dataset.del); saveCachedData(); renderNotices(); renderAdminNotices(); showToast("Đã xóa!"); }
-catch(e){ showToast("Lỗi: " + e.message, "err"); }
-}));
+  const box = $("#adminNoticeList"); if(!box) return;
+  $("#noticeCount").textContent = allNotices.length;
+  if(!allNotices.length){ box.innerHTML='<div style="padding:20px;text-align:center;color:#888">Chưa có thông báo.</div>'; return; }
+  box.innerHTML = allNotices.map(n => `
+    <div class="ad-item">
+      <div class="m"><b>${esc(n.text)}</b><small>Thứ tự: ${n.order||0}</small></div>
+      <button class="btn-del" data-del="${esc(n.id)}"><i class="fas fa-trash"></i></button>
+    </div>`).join("");
+  box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => {
+    if(!confirm("Xóa thông báo này?")) return;
+    b.disabled = true;
+    try { await deleteDoc(doc(db, "notices", b.dataset.del)); showToast("Đã xóa!"); }
+    catch(e){ showToast("Lỗi: " + e.message, "err"); }
+  }));
 }
 function renderAdminDocs(){
-const box = $("#adminDocList");
-$("#docCount").textContent = allDocs.length;
-if(!allDocs.length){ box.innerHTML='<div style="padding:20px;text-align:center;color:#888">Chưa có văn bản.</div>'; return; }
-box.innerHTML = allDocs.map(d => `
-<div class="ad-item">
-<div class="th bg4"><i class="fas fa-file-pdf" style="font-size:20px"></i></div>
-<div class="m"><b>${esc(d.code)} — ${esc(d.title)}</b><small>📅 ${esc(fmtDate(d.date))}</small></div>
-<a href="${esc(d.fileUrl)}" target="_blank" style="padding:4px 8px;background:#0b4ea2;color:#fff;font-size:11px;text-decoration:none;flex:0 0 auto;display:${d.fileUrl?"inline-block":"none"}">Xem</a><span style="font-size:10.5px;color:${d.status==="uploading"?"#a66":"#c00"};padding:0 4px">${d.status==="uploading"?"Đang tải PDF…":(d.status==="error"?"Lỗi tải PDF":"")}</span>
-<button class="btn-del" data-del="${esc(d.id)}"><i class="fas fa-trash"></i></button>
-</div>`).join("");
-box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => {
-if(!confirm("Xóa văn bản này?")) return;
-b.disabled = true;
-try {
-const d = allDocs.find(x => x.id === b.dataset.del);
-if(d?.filePath) await removeStorageFile(d.filePath);
-await deleteDoc(doc(db, "documents", b.dataset.del));
-allDocs=allDocs.filter(x=>x.id!==b.dataset.del); saveCachedData(); renderDocs(); renderAdminDocs();
-showToast("Đã xóa!");
-} catch(e){ showToast("Lỗi: " + e.message, "err"); }
-}));
+  const box = $("#adminDocList"); if(!box) return;
+  $("#docCount").textContent = allDocs.length;
+  if(!allDocs.length){ box.innerHTML='<div style="padding:20px;text-align:center;color:#888">Chưa có văn bản.</div>'; return; }
+  box.innerHTML = allDocs.map(d => `
+    <div class="ad-item">
+      <div class="th bg4"><i class="fas fa-file-pdf" style="font-size:20px"></i></div>
+      <div class="m"><b>${esc(d.code)} — ${esc(d.title)}</b><small>📅 ${esc(fmtDate(d.date))}</small></div>
+      <a href="${esc(d.fileUrl)}" target="_blank" style="padding:4px 8px;background:#0b4ea2;color:#fff;font-size:11px;text-decoration:none;flex:0 0 auto">Xem</a>
+      <button class="btn-del" data-del="${esc(d.id)}"><i class="fas fa-trash"></i></button>
+    </div>`).join("");
+  box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => {
+    if(!confirm("Xóa văn bản này?")) return;
+    b.disabled = true;
+    try {
+      const d = allDocs.find(x => x.id === b.dataset.del);
+      if(d?.filePath) await removeStorageFile(d.filePath);
+      await deleteDoc(doc(db, "documents", b.dataset.del));
+      showToast("Đã xóa!");
+    } catch(e){ showToast("Lỗi: " + e.message, "err"); }
+  }));
 }
-/* ===== TABS ===== */
+
+/* ===== TABS ADMIN ===== */
 $$(".ad-tabs button").forEach(btn => btn.addEventListener("click", () => {
-$$(".ad-tabs button").forEach(b => b.classList.remove("active"));
-$$(".ad-panel").forEach(p => p.classList.remove("active"));
-btn.classList.add("active");
-$("#tab-" + btn.dataset.tab).classList.add("active");
+  $$(".ad-tabs button").forEach(b => b.classList.remove("active"));
+  $$(".ad-panel").forEach(p => p.classList.remove("active"));
+  btn.classList.add("active");
+  $("#tab-" + btn.dataset.tab).classList.add("active");
 }));
+
 /* ===== LOGIN ===== */
 const overlay = $("#LoginOverlay");
 $("#btnOpenLogin").addEventListener("click", e => { e.preventDefault(); overlay.classList.add("show"); $("#loginErr").classList.remove("show"); $("#loginForm").reset(); });
 $("#btnCloseLogin").addEventListener("click", () => overlay.classList.remove("show"));
 overlay.addEventListener("click", e => { if(e.target === overlay) overlay.classList.remove("show"); });
 $("#toggleEye").addEventListener("click", () => { const i=$("#lPass"); i.type = i.type === "password" ? "text" : "password"; $("#toggleEye").textContent = i.type === "text" ? "🙈" : "👁"; });
+
 $("#loginForm").addEventListener("submit", async e => {
   e.preventDefault();
   const username = $("#lUser").value.trim();
   const password = $("#lPass").value;
   const b = $("#btnLogin");
-  b.disabled = true; b.innerHTML = '<span class="loading-mini"></span> Đang đăng nhập...';
+  b.disabled = true; b.innerHTML = '<span class="loading-mini"></span> Đang kiểm tra...';
   $("#loginErr").classList.remove("show");
   try {
-    if(username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) throw new Error("BAD_ADMIN_LOGIN");
-    // Mở giao diện ngay: không chờ Firebase/Firestore.
-    currentAdmin = {uid:"local-admin", email:ADMIN_EMAIL, name:ADMIN_NAME, role:"admin"};
+    if(username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD){
+      throw new Error("BAD_ADMIN_LOGIN");
+    }
+    if(!FB_READY || !auth){
+      setAdmin(true);
+      overlay.classList.remove("show");
+      showToast("Đăng nhập admin cục bộ thành công. Firebase chưa sẵn sàng.", "err");
+      return;
+    }
+    let cred;
+    try {
+      cred = await signInWithEmailAndPassword(auth, ADMIN_EMAIL, ADMIN_PASSWORD);
+    } catch(err){
+      if(err.code === "auth/user-not-found" || err.code === "auth/invalid-credential"){
+        cred = await createUserWithEmailAndPassword(auth, ADMIN_EMAIL, ADMIN_PASSWORD);
+      } else {
+        throw err;
+      }
+    }
+    try {
+      await setDoc(doc(db, "admins", cred.user.uid), {name: ADMIN_NAME, username: ADMIN_USERNAME, email: ADMIN_EMAIL, role: "admin", updatedAt: serverTimestamp()}, {merge:true});
+    } catch(err){ console.warn("Không ghi được admins/: ", err); }
+    currentAdmin = {uid: cred.user.uid, email: ADMIN_EMAIL, name: ADMIN_NAME, role: "admin"};
     $("#adminName").textContent = ADMIN_NAME;
     setAdmin(true);
     overlay.classList.remove("show");
     showToast("Đăng nhập admin thành công!");
-    // Đồng bộ Firebase ở nền để lần sau vẫn có phiên đăng nhập.
-    if(FB_READY && auth) startFirebaseAuth().catch(err=>console.warn("Firebase admin auth nền:",err));
   } catch(err){
     $("#loginErr span").textContent = err.message === "BAD_ADMIN_LOGIN" ? "Sai tên đăng nhập hoặc mật khẩu!" : (err.message || "Không thể đăng nhập.");
     $("#loginErr").classList.add("show");
@@ -1129,337 +1122,353 @@ $("#loginForm").addEventListener("submit", async e => {
     b.disabled = false; b.innerHTML = '<i class="fas fa-sign-in-alt"></i> Đăng nhập';
   }
 });
+
 function setAdmin(state){
-if(state){
-$("#AdminPanel").classList.add("show");
-document.getElementById("wrap").style.display = "none";
-document.getElementById("LoginOverlay").style.display = "none";
-renderAdminPosts(); renderAdminNotices(); renderAdminDocs();
-if(settings) fillSettingsForm(); else setTimeout(fillSettingsForm, 800);
-} else {
-$("#AdminPanel").classList.remove("show");
-document.getElementById("wrap").style.display = "";
-document.getElementById("LoginOverlay").style.display = "";
-}
+  if(state){
+    $("#AdminPanel").classList.add("show");
+    document.getElementById("wrap").style.display = "none";
+    document.getElementById("LoginOverlay").style.display = "none";
+    renderAdminPosts(); renderAdminNotices(); renderAdminDocs();
+    if(settings) fillSettingsForm(); else setTimeout(fillSettingsForm, 800);
+  } else {
+    $("#AdminPanel").classList.remove("show");
+    document.getElementById("wrap").style.display = "";
+    document.getElementById("LoginOverlay").style.display = "";
+  }
 }
 $("#btnLogout").addEventListener("click", async () => {
-try{ if(auth) await signOut(auth); }catch(err){ showToast("Lỗi đăng xuất: " + err.message, "err"); return; }
-currentAdmin = null; setAdmin(false); showToast("Đã đăng xuất.");
+  try{ if(auth) await signOut(auth); }catch(err){ showToast("Lỗi đăng xuất: " + err.message, "err"); return; }
+  currentAdmin = null; setAdmin(false); showToast("Đã đăng xuất.");
 });
 $("#btnViewSite").addEventListener("click", () => { setAdmin(false); window.scrollTo({top:0,behavior:"smooth"}); });
-function startFirebaseAuth(){
-  if(firebaseAuthPromise) return firebaseAuthPromise;
-  firebaseAuthPromise=(async()=>{
-    if(!auth) throw new Error("Firebase Auth chưa sẵn sàng");
-    let cred;
-    try{
-      cred=await signInWithEmailAndPassword(auth,ADMIN_EMAIL,ADMIN_PASSWORD);
-    } catch(err){
-      if(err.code === "auth/user-not-found" || err.code === "auth/invalid-credential" || err.code === "auth/invalid-login-credentials") {
-        cred=await createUserWithEmailAndPassword(auth,ADMIN_EMAIL,ADMIN_PASSWORD);
-      } else { throw err; }
-    }
-    currentAdmin=currentAdmin || {uid:cred.user.uid,email:ADMIN_EMAIL,name:ADMIN_NAME,role:"admin"};
-    currentAdmin.uid=cred.user.uid;
-    try{
-      await setDoc(doc(db,"admins",cred.user.uid),{name:ADMIN_NAME,username:ADMIN_USERNAME,email:ADMIN_EMAIL,role:"admin",updatedAt:serverTimestamp()},{merge:true});
-    }catch(err){ console.warn("Không ghi hồ sơ admin:",err); }
-    return true;
-  })().catch(err=>{ firebaseAuthPromise=null; throw err; });
-  return firebaseAuthPromise;
-}
-
-// Làm nóng Firebase Auth ngay khi trang mở để lần bấm Đăng bài/Thông báo không phải chờ tạo phiên.
-setTimeout(()=>{ startFirebaseAuth().catch(err=>console.warn("Firebase Auth prewarm:",err.code||err.message)); },0);
-
-async function ensureFirebaseAdmin(timeoutMs=3500){
-  if(!FB_READY || !auth || !db) return false;
-  if(auth.currentUser?.email === ADMIN_EMAIL) return true;
-  const p=startFirebaseAuth();
-  await Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej(new Error("Firebase Auth chưa sẵn sàng. Hãy thử lại sau khi trang đã tải xong.")),timeoutMs))]);
-  return true;
-}
 
 /* ===== UPLOAD HELPERS ===== */
 function sanitizeFileName(name){
-return String(name || "file").normalize("NFKD").replace(/[^\w.\-]+/g,"_").replace(/^_+|_+$/g,"").slice(0,120) || "file";
+  return String(name || "file").normalize("NFKD").replace(/[^\w.\-]+/g,"_").replace(/^_+|_+$/g,"").slice(0,120) || "file";
 }
 function setUploadProgress(progressId, percentId, value){
-const bar = $(progressId), txt = $(percentId);
-if(!bar || !txt) return;
-bar.classList.add("show"); txt.classList.add("show");
-bar.querySelector("i").style.width = `${Math.max(0, Math.min(100, value))}%`;
-txt.textContent = `${Math.round(value)}%`;
+  const bar = $(progressId), txt = $(percentId);
+  if(!bar || !txt) return;
+  bar.classList.add("show"); txt.classList.add("show");
+  bar.querySelector("i").style.width = `${Math.max(0, Math.min(100, value))}%`;
+  txt.textContent = `${Math.round(value)}%`;
 }
 function clearUploadProgress(progressId, percentId){
-const bar = $(progressId), txt = $(percentId);
-if(!bar || !txt) return;
-bar.classList.remove("show"); txt.classList.remove("show");
-bar.querySelector("i").style.width = "0%"; txt.textContent = "0%";
+  const bar = $(progressId), txt = $(percentId);
+  if(!bar || !txt) return;
+  bar.classList.remove("show"); txt.classList.remove("show");
+  bar.querySelector("i").style.width = "0%"; txt.textContent = "0%";
 }
 function validateFile(file, kind){
-if(!file) throw new Error("Chưa chọn file.");
-if(kind === "pdf"){
-if(file.type !== "application/pdf" && !/\.pdf$/i.test(file.name)) throw new Error("Chỉ được tải file PDF.");
-if(file.size > MAX_PDF_BYTES) throw new Error("PDF vượt quá 30 MB.");
-} else {
-if(!file.type.startsWith("image/")) throw new Error("Chỉ được tải file ảnh.");
-if(file.size > MAX_IMAGE_BYTES) throw new Error("Ảnh vượt quá 8 MB.");
+  if(!file) throw new Error("Chưa chọn file.");
+  if(kind === "pdf"){
+    if(file.type !== "application/pdf" && !/\.pdf$/i.test(file.name)) throw new Error("Chỉ được tải file PDF.");
+    if(file.size > MAX_PDF_BYTES) throw new Error("PDF vượt quá 30 MB.");
+  } else {
+    if(!file.type.startsWith("image/")) throw new Error("Chỉ được tải file ảnh.");
+    if(file.size > MAX_IMAGE_BYTES) throw new Error("Ảnh vượt quá 8 MB.");
+  }
 }
-}
-async function optimizeImageFile(file){
-  if(!file || !file.type.startsWith("image/") || /gif|svg/i.test(file.type)) return file;
-  try{
-    const bitmap=await createImageBitmap(file); const max=1600; const scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height));
-    if(scale>=1 && file.size<700*1024) {bitmap.close(); return file;}
-    const canvas=document.createElement("canvas"); canvas.width=Math.max(1,Math.round(bitmap.width*scale)); canvas.height=Math.max(1,Math.round(bitmap.height*scale));
-    canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height); bitmap.close();
-    const blob=await new Promise(r=>canvas.toBlob(r,"image/webp",0.82));
-    if(!blob) return file; return new File([blob], file.name.replace(/\.[^.]+$/,".webp"), {type:"image/webp",lastModified:Date.now()});
-  }catch{return file;}
+
+/* ===== NÉN ẢNH SIÊU TỐC (giữ GIF nguyên bản) ===== */
+async function compressImage(file, maxWidth = IMG_MAX_WIDTH, quality = IMG_QUALITY){
+  if(!file || !file.type.startsWith("image/")) return file;
+  if(file.type === "image/gif" || file.type === "image/svg+xml") return file;
+  return new Promise(resolve => {
+    try {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        try {
+          URL.revokeObjectURL(url);
+          let { width, height } = img;
+          if(width > maxWidth){
+            height = Math.round(height * maxWidth / width);
+            width = maxWidth;
+          }
+          const canvas = document.createElement("canvas");
+          canvas.width = width; canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+          canvas.toBlob(blob => {
+            if(!blob) return resolve(file);
+            const newName = file.name.replace(/\.[^.]+$/, "") + ".jpg";
+            resolve(new File([blob], newName, {type:"image/jpeg", lastModified: Date.now()}));
+          }, "image/jpeg", quality);
+        } catch(e){ resolve(file); }
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+      img.src = url;
+    } catch(e){ resolve(file); }
+  });
 }
 
 function uploadFile(file, folder, kind="image", progressIds=null){
-return new Promise(async (resolve,reject)=>{
-try{
-validateFile(file,kind);
-const {api,storage:st}=await getStorageFast();
-const path=`${folder}/${Date.now()}_${Math.random().toString(36).slice(2,8)}_${sanitizeFileName(file.name)}`;
-const r=api.ref(st,path);
-const metadata={contentType:file.type||(kind==="pdf"?"application/pdf":"application/octet-stream")};
-const task=api.uploadBytesResumable(r,file,metadata);
-task.on("state_changed",snapshot=>{const pct=(snapshot.bytesTransferred/snapshot.totalBytes)*100;if(progressIds)setUploadProgress(progressIds[0],progressIds[1],pct);},reject,async()=>{try{resolve({url:await api.getDownloadURL(r),path});}catch(err){reject(err);}});
-}catch(err){reject(err);}
-});
+  return new Promise((resolve,reject)=>{
+    try {
+      validateFile(file, kind);
+      const path = `${folder}/${Date.now()}_${Math.random().toString(36).slice(2,8)}_${sanitizeFileName(file.name)}`;
+      const r = sRef(storage, path);
+      const metadata = {contentType: file.type || (kind === "pdf" ? "application/pdf" : "application/octet-stream"), cacheControl: "public, max-age=31536000"};
+      const task = uploadBytesResumable(r, file, metadata);
+      task.on("state_changed", snapshot => {
+        const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        if(progressIds) setUploadProgress(progressIds[0], progressIds[1], pct);
+      }, reject, async () => {
+        try{ resolve({url: await getDownloadURL(r), path}); }catch(err){ reject(err); }
+      });
+    } catch(err){ reject(err); }
+  });
 }
 async function removeStorageFile(path){
-if(!path || !FB_READY) return;
-try{const {api,storage:st}=await getStorageFast(); await api.deleteObject(api.ref(st,path));}catch(err){console.warn("Không xóa được file cũ:",err);}
+  if(!path || !storage) return;
+  try{ await deleteObject(sRef(storage, path)); }catch(err){ console.warn("Không xóa được file cũ:", err); }
 }
-/* ===== POST FORM ===== */
+
+/* ===== POST FORM (SIÊU TỐC + OPTIMISTIC UI) ===== */
 let pImageFile = null;
 $("#pImage").addEventListener("change", e => {
-const f = e.target.files[0]; pImageFile = f || null;
-$("#pImageName").textContent = f ? f.name : "";
-const prev = $("#pImagePreview");
-if(f){ prev.src = URL.createObjectURL(f); prev.classList.remove("hidden"); }
-else prev.classList.add("hidden");
+  const f = e.target.files[0]; pImageFile = f || null;
+  $("#pImageName").textContent = f ? f.name : "";
+  const prev = $("#pImagePreview");
+  if(f){ prev.src = URL.createObjectURL(f); prev.classList.remove("hidden"); }
+  else prev.classList.add("hidden");
 });
+
 $("#postForm").addEventListener("submit", async e => {
   e.preventDefault();
   if(!FB_READY){ showToast("Chưa cấu hình Firebase!", "err"); return; }
-  const btn = $("#btnPost");
-  if(btn.disabled) return;
-  btn.disabled = true; btn.innerHTML = '<span class="loading-mini"></span> Đang đăng...';
+  const btn = $("#btnPost"); btn.disabled = true; btn.innerHTML = '<span class="loading-mini"></span> Đang đăng...';
   try {
-    const imageFile = pImageFile;
-    await ensureFirebaseAdmin();
-    const postCode=makePostCode();
-    const postId=postCode;
+    let imageUrl = "", imagePath = "";
+    if(pImageFile){
+      // Nén ảnh siêu tốc trước khi upload
+      const compressed = await compressImage(pImageFile);
+      const up = await uploadFile(compressed, "posts", "image", ["#pUploadProgress","#pUploadPercent"]);
+      imageUrl = up.url; imagePath = up.path;
+    }
     const payload = {
-      code:postCode, ownerUid:auth.currentUser?.uid||currentAdmin?.uid||"",
-      title:$("#pTitle").value.trim(), cat:$("#pCat").value, date:$("#pDate").value,
-      icon:$("#pIcon").value.trim()||"📰", color:Number($("#pColor").value),
-      excerpt:$("#pExcerpt").value.trim(), content:$("#pContent").value.trim()||$("#pExcerpt").value.trim(),
-      imageUrl:"", imagePath:"", createdAt:serverTimestamp()
+      title: $("#pTitle").value.trim(),
+      cat: $("#pCat").value,
+      date: $("#pDate").value,
+      icon: $("#pIcon").value.trim() || "📰",
+      color: Number($("#pColor").value),
+      excerpt: $("#pExcerpt").value.trim(),
+      content: $("#pContent").value.trim() || $("#pExcerpt").value.trim(),
+      imageUrl, imagePath,
+      createdAt: serverTimestamp()
     };
-    if(!payload.title || !payload.excerpt){ throw new Error("Vui lòng nhập tiêu đề và nội dung ngắn."); }
-    try{
-      // Nếu Firestore rules cho phép ghi trực tiếp, đăng ngay không cần chờ Auth.
-      await setDoc(doc(db,"posts",postId),payload);
-    }catch(firstErr){
-      // Nếu rules yêu cầu đăng nhập, mới bật Auth và thử lại đúng một lần.
-      const needsAuth=["permission-denied","failed-precondition","unauthenticated"].includes(firstErr.code);
-      if(!needsAuth) throw firstErr;
-      await ensureFirebaseAdmin();
-      await setDoc(doc(db,"posts",postId),payload);
-    }
-    const localPost={...payload,id:postId,createdAt:Date.now()};
-    allPosts=[localPost,...allPosts].slice(0,12); saveCachedData(); renderAll(); renderAdminPosts();
-    e.target.reset(); pImageFile=null; $("#pIcon").value="📰"; $("#pColor").value="0"; $("#pDate").value=new Date().toISOString().split("T")[0]; $("#pImageName").textContent=""; $("#pImagePreview").classList.add("hidden"); clearUploadProgress("#pUploadProgress","#pUploadPercent");
-    showToast(`Đã đăng! Mã ${postCode}`);
-    if(imageFile){
-      (async()=>{
-        try{
-          const optimized=await optimizeImageFile(imageFile);
-          const up=await uploadFile(optimized,"posts","image",["#pUploadProgress","#pUploadPercent"]);
-          await updateDoc(doc(db,"posts",postId),{imageUrl:up.url,imagePath:up.path});
-          const local=allPosts.find(x=>x.id===postId); if(local){local.imageUrl=up.url;local.imagePath=up.path;saveCachedData();renderAll();renderAdminPosts();}
-          clearUploadProgress("#pUploadProgress","#pUploadPercent");
-        }catch(err){ console.warn("Ảnh tải nền lỗi:",err); showToast("Bài đã đăng, ảnh chưa tải được.","err"); }
-      })();
-    }
-  } catch(err){ showToast("Lỗi đăng bài: "+(err.code||err.message),"err"); }
-  finally{ btn.disabled=false; btn.innerHTML='<i class="fas fa-paper-plane"></i> Đăng bài viết'; }
+    // Optimistic: chèn ngay vào danh sách local để thấy kết quả lập tức
+    const tempId = "local_" + Date.now();
+    allPosts.unshift({ id: tempId, ...payload, createdAt: { seconds: Date.now()/1000 } });
+    renderAll();
+    if($("#AdminPanel").classList.contains("show")) renderAdminPosts();
+
+    await addDoc(postsCol, payload);
+    e.target.reset(); pImageFile = null; clearUploadProgress("#pUploadProgress","#pUploadPercent");
+    $("#pIcon").value = "📰"; $("#pColor").value = "0";
+    $("#pDate").value = new Date().toISOString().split("T")[0];
+    $("#pImageName").textContent = ""; $("#pImagePreview").classList.add("hidden");
+    showToast("Đăng bài thành công! Mọi người đều thấy ngay.");
+  } catch(err){
+    showToast("Lỗi: " + err.message, "err");
+    // rollback optimistic nếu lỗi
+    allPosts = allPosts.filter(p => !String(p.id).startsWith("local_"));
+    renderAll();
+  }
+  finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Đăng bài viết'; }
 });
+
 /* ===== NOTICE FORM ===== */
 $("#noticeForm").addEventListener("submit", async e => {
- e.preventDefault(); if(!FB_READY){showToast("Chưa cấu hình Firebase!","err");return;}
- const textVal=$("#nText").value.trim(), orderVal=Number($("#nOrder").value)||0; const btn=$("#btnNotice"); btn.disabled=true; btn.innerHTML='<span class="loading-mini"></span> Đang lưu...';
- try{ await ensureFirebaseAdmin(); const added=await addDoc(noticesCol,{text:textVal,order:orderVal,createdAt:serverTimestamp()}); allNotices=[...allNotices,{id:added.id,text:textVal,order:orderVal,createdAt:Date.now()}].sort((a,b)=>(a.order||0)-(b.order||0)).slice(0,12); saveCachedData(); renderNotices(); renderAdminNotices(); e.target.reset(); $("#nOrder").value="0"; showToast("Đã thêm thông báo!"); }
- catch(err){showToast("Lỗi: "+err.message,"err");}
- finally{btn.disabled=false;btn.innerHTML='<i class="fas fa-plus-circle"></i> Thêm thông báo';}
+  e.preventDefault();
+  if(!FB_READY){ showToast("Chưa cấu hình Firebase!", "err"); return; }
+  const btn = $("#btnNotice"); btn.disabled = true;
+  try {
+    await addDoc(noticesCol, {
+      text: $("#nText").value.trim(),
+      order: Number($("#nOrder").value) || 0,
+      createdAt: serverTimestamp()
+    });
+    e.target.reset(); $("#nOrder").value = "0";
+    showToast("Đã thêm thông báo!");
+  } catch(err){ showToast("Lỗi: " + err.message, "err"); }
+  finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-plus-circle"></i> Thêm thông báo'; }
 });
+
 /* ===== DOC FORM ===== */
 let dFile = null;
 $("#dFile").addEventListener("change", e => { dFile = e.target.files[0] || null; $("#dFileName").textContent = dFile ? dFile.name : ""; });
 $("#docForm").addEventListener("submit", async e => {
- e.preventDefault(); if(!FB_READY){showToast("Chưa cấu hình Firebase!","err");return;} if(!dFile){showToast("Vui lòng chọn file PDF!","err");return;}
- const file=dFile, code=$("#dCode").value.trim(), title=$("#dTitle").value.trim(), date=$("#dDate").value||"", desc=$("#dDesc").value.trim(); const btn=$("#btnDoc"); btn.disabled=true; btn.innerHTML='<span class="loading-mini"></span> Đang tạo...';
- try{
-   await ensureFirebaseAdmin();
-   const added=await addDoc(docsCol,{code,title,date,desc,fileUrl:"",filePath:"",fileName:file.name,status:"uploading",createdAt:serverTimestamp()});
-   allDocs=[{id:added.id,code,title,date,desc,fileUrl:"",filePath:"",fileName:file.name,status:"uploading",createdAt:Date.now()},...allDocs].slice(0,12); saveCachedData(); renderDocs(); renderAdminDocs();
-   e.target.reset(); dFile=null; $("#dFileName").textContent=""; clearUploadProgress("#dUploadProgress","#dUploadPercent"); showToast("Đã tạo văn bản, PDF đang tải nền!");
-   (async()=>{
-     try{ const up=await uploadFile(file,"documents","pdf",["#dUploadProgress","#dUploadPercent"]); await updateDoc(doc(db,"documents",added.id),{fileUrl:up.url,filePath:up.path,status:"ready"}); const local=allDocs.find(x=>x.id===added.id); if(local){local.fileUrl=up.url;local.filePath=up.path;local.status="ready";saveCachedData();renderDocs();renderAdminDocs();} clearUploadProgress("#dUploadProgress","#dUploadPercent"); showToast("PDF đã tải xong!"); }
-     catch(err){ console.warn("PDF tải nền lỗi:",err); try{await updateDoc(doc(db,"documents",added.id),{status:"error"});}catch{} showToast("Văn bản đã tạo nhưng PDF chưa tải được.","err"); }
-   })();
- }catch(err){showToast("Lỗi: "+err.message,"err");}
- finally{btn.disabled=false;btn.innerHTML='<i class="fas fa-cloud-upload-alt"></i> Đăng văn bản';}
+  e.preventDefault();
+  if(!FB_READY){ showToast("Chưa cấu hình Firebase!", "err"); return; }
+  if(!dFile){ showToast("Vui lòng chọn file PDF!", "err"); return; }
+  const btn = $("#btnDoc"); btn.disabled = true; btn.innerHTML = '<span class="loading-mini"></span> Đang tải lên...';
+  try {
+    const up = await uploadFile(dFile, "documents", "pdf", ["#dUploadProgress","#dUploadPercent"]);
+    await addDoc(docsCol, {
+      code: $("#dCode").value.trim(),
+      title: $("#dTitle").value.trim(),
+      date: $("#dDate").value || "",
+      desc: $("#dDesc").value.trim(),
+      fileUrl: up.url,
+      filePath: up.path,
+      fileName: dFile.name,
+      createdAt: serverTimestamp()
+    });
+    e.target.reset(); dFile = null; $("#dFileName").textContent = ""; clearUploadProgress("#dUploadProgress","#dUploadPercent");
+    showToast("Đăng văn bản thành công!");
+  } catch(err){ showToast("Lỗi: " + err.message, "err"); }
+  finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Đăng văn bản'; }
 });
+
 /* ===== SETTINGS FORM ===== */
 function fillSettingsForm(){
-if(!settings) return;
-const s = settings;
-$("#sBannerTitle").value = s.bannerTitle || "";
-$("#sBannerSubtitle").value = s.bannerSubtitle || "";
-$("#sIconName").textContent = s.siteIcon ? "Đã có icon website trên Firebase" : "";
-$("#sMarquee").value = s.marquee || "";
-$("#sAddress").value = s.address || "";
-$("#sPhone").value = s.phone || "";
-$("#sEmail").value = s.email || "";
-$("#sWorkMorning").value = s.workMorning || "";
-$("#sWorkAfternoon").value = s.workAfternoon || "";
-$("#sWorkNote").value = s.workNote || "";
-$("#sStatOnline").value = s.statOnline || "";
-$("#sStatToday").value = s.statToday || "";
-$("#sStatWeek").value = s.statWeek || "";
-$("#sStatTotal").value = s.statTotal || "";
-$("#sYoutubeUrl").value = s.youtubeUrl || "";
-$("#sFooterName").value = s.footerName || "";
-$("#sFooterResp").value = s.footerResp || "";
-fillLinks("quickLinksEdit", s.quickLinks || []);
-fillLinks("docyhocLinksEdit", s.docyhocLinks || []);
-fillWebLinks("webLinksEdit", s.webLinks || []);
+  if(!settings) return;
+  const s = settings;
+  $("#sBannerTitle").value = s.bannerTitle || "";
+  $("#sBannerSubtitle").value = s.bannerSubtitle || "";
+  $("#sIconName").textContent = s.siteIcon ? "Đã có icon website trên Firebase" : "";
+  $("#sMarquee").value = s.marquee || "";
+  $("#sAddress").value = s.address || "";
+  $("#sPhone").value = s.phone || "";
+  $("#sEmail").value = s.email || "";
+  $("#sWorkMorning").value = s.workMorning || "";
+  $("#sWorkAfternoon").value = s.workAfternoon || "";
+  $("#sWorkNote").value = s.workNote || "";
+  $("#sStatOnline").value = s.statOnline || "";
+  $("#sStatToday").value = s.statToday || "";
+  $("#sStatWeek").value = s.statWeek || "";
+  $("#sStatTotal").value = s.statTotal || "";
+  $("#sYoutubeUrl").value = s.youtubeUrl || "";
+  $("#sFooterName").value = s.footerName || "";
+  $("#sFooterResp").value = s.footerResp || "";
+  fillLinks("quickLinksEdit", s.quickLinks || []);
+  fillLinks("docyhocLinksEdit", s.docyhocLinks || []);
+  fillWebLinks("webLinksEdit", s.webLinks || []);
 }
 function fillLinks(containerId, arr){
-const box = document.getElementById(containerId);
-box.innerHTML = "";
-arr.forEach(l => addLinkRow(containerId, l.icon, l.text, l.url));
+  const box = document.getElementById(containerId);
+  box.innerHTML = "";
+  arr.forEach(l => addLinkRow(containerId, l.icon, l.text, l.url));
 }
 function addLinkRow(containerId, icon="fas fa-link", text="", url=""){
-const box = document.getElementById(containerId);
-const row = document.createElement("div");
-row.className = "link-row";
-row.innerHTML = `
-<input class="l-icon" type="text" value="${esc(icon)}" placeholder="fas fa-link">
-<input class="l-text" type="text" value="${esc(text)}" placeholder="Tên hiển thị">
-<input class="l-url" type="text" value="${esc(url)}" placeholder="https://...">
-<button type="button" class="rm"><i class="fas fa-times"></i></button>`;
-row.querySelector(".rm").addEventListener("click", () => row.remove());
-box.appendChild(row);
+  const box = document.getElementById(containerId);
+  const row = document.createElement("div");
+  row.className = "link-row";
+  row.innerHTML = `
+    <input class="l-icon" type="text" value="${esc(icon)}" placeholder="fas fa-link">
+    <input class="l-text" type="text" value="${esc(text)}" placeholder="Tên hiển thị">
+    <input class="l-url" type="text" value="${esc(url)}" placeholder="https://...">
+    <button type="button" class="rm"><i class="fas fa-times"></i></button>`;
+  row.querySelector(".rm").addEventListener("click", () => row.remove());
+  box.appendChild(row);
 }
 function getLinks(containerId){
-return [...document.getElementById(containerId).querySelectorAll(".link-row")].map(r => ({
-icon: r.querySelector(".l-icon").value.trim(),
-text: r.querySelector(".l-text").value.trim(),
-url: r.querySelector(".l-url").value.trim()
-})).filter(l => l.text);
+  return [...document.getElementById(containerId).querySelectorAll(".link-row")].map(r => ({
+    icon: r.querySelector(".l-icon").value.trim(),
+    text: r.querySelector(".l-text").value.trim(),
+    url: r.querySelector(".l-url").value.trim()
+  })).filter(l => l.text);
 }
 function fillWebLinks(containerId, arr){
-const box = document.getElementById(containerId);
-box.innerHTML = "";
-arr.forEach(l => addWebLinkRow(containerId, l.text, l.url));
+  const box = document.getElementById(containerId);
+  box.innerHTML = "";
+  arr.forEach(l => addWebLinkRow(containerId, l.text, l.url));
 }
 function addWebLinkRow(containerId, text="", url=""){
-const box = document.getElementById(containerId);
-const row = document.createElement("div");
-row.className = "link-row";
-row.style.gridTemplateColumns = "1fr 2fr 40px";
-row.innerHTML = `
-<input class="l-text" type="text" value="${esc(text)}" placeholder="Tên hiển thị">
-<input class="l-url" type="text" value="${esc(url)}" placeholder="https://...">
-<button type="button" class="rm"><i class="fas fa-times"></i></button>`;
-row.querySelector(".rm").addEventListener("click", () => row.remove());
-box.appendChild(row);
+  const box = document.getElementById(containerId);
+  const row = document.createElement("div");
+  row.className = "link-row";
+  row.style.gridTemplateColumns = "1fr 2fr 40px";
+  row.innerHTML = `
+    <input class="l-text" type="text" value="${esc(text)}" placeholder="Tên hiển thị">
+    <input class="l-url" type="text" value="${esc(url)}" placeholder="https://...">
+    <button type="button" class="rm"><i class="fas fa-times"></i></button>`;
+  row.querySelector(".rm").addEventListener("click", () => row.remove());
+  box.appendChild(row);
 }
 function getWebLinks(containerId){
-return [...document.getElementById(containerId).querySelectorAll(".link-row")].map(r => ({
-text: r.querySelector(".l-text").value.trim(),
-url: r.querySelector(".l-url").value.trim()
-})).filter(l => l.text);
+  return [...document.getElementById(containerId).querySelectorAll(".link-row")].map(r => ({
+    text: r.querySelector(".l-text").value.trim(),
+    url: r.querySelector(".l-url").value.trim()
+  })).filter(l => l.text);
 }
 window.addLinkRow = addLinkRow;
 window.addWebLinkRow = addWebLinkRow;
+
 let sLogoFile = null, sBgFile = null, sIconFile = null;
 $("#sLogoFile").addEventListener("change", e => { sLogoFile = e.target.files[0] || null; $("#sLogoName").textContent = sLogoFile ? sLogoFile.name : ""; });
 $("#sBgFile").addEventListener("change", e => { sBgFile = e.target.files[0] || null; $("#sBgName").textContent = sBgFile ? sBgFile.name : ""; });
 $("#sIconFile").addEventListener("change", e => { sIconFile = e.target.files[0] || null; $("#sIconName").textContent = sIconFile ? sIconFile.name : (settings?.siteIcon ? "Đã có icon website trên Firebase" : ""); });
+
 $("#settingsForm").addEventListener("submit", async e => {
-e.preventDefault();
-if(!FB_READY){ showToast("Chưa cấu hình Firebase!", "err"); return; }
-const btn = $("#btnSettings"); btn.disabled = true; btn.innerHTML = '<span class="loading-mini"></span> Đang lưu...';
-try {
-let bannerLogo = settings?.bannerLogo || "";
-let bannerBg = settings?.bannerBg || "";
-let siteIcon = settings?.siteIcon || "";
-let newLogoPath = settings?.bannerLogoPath || "";
-let newBgPath = settings?.bannerBgPath || "";
-let newIconPath = settings?.siteIconPath || "";
-if(sLogoFile){
-const up = await uploadFile(sLogoFile, "banner", "image");
-bannerLogo = up.url;
-if(settings?.bannerLogoPath && settings.bannerLogoPath !== up.path) await removeStorageFile(settings.bannerLogoPath);
-newLogoPath = up.path;
-sLogoFile = null; $("#sLogoName").textContent = "";
-}
-if(sBgFile){
-const up = await uploadFile(sBgFile, "banner", "image");
-bannerBg = up.url;
-if(settings?.bannerBgPath && settings.bannerBgPath !== up.path) await removeStorageFile(settings.bannerBgPath);
-newBgPath = up.path;
-sBgFile = null; $("#sBgName").textContent = "";
-}
-if(sIconFile){
-const up = await uploadFile(sIconFile, "favicon", "image");
-siteIcon = up.url;
-if(settings?.siteIconPath && settings.siteIconPath !== up.path) await removeStorageFile(settings.siteIconPath);
-newIconPath = up.path;
-sIconFile = null; $("#sIconName").textContent = "Đã lưu icon website";
-}
-await setDoc(doc(db, "settings", "site"), {
-bannerTitle: $("#sBannerTitle").value.trim(),
-bannerSubtitle: $("#sBannerSubtitle").value.trim(),
-bannerLogo, bannerBg, siteIcon,
-bannerLogoPath: newLogoPath, bannerBgPath: newBgPath, siteIconPath: newIconPath,
-marquee: $("#sMarquee").value.trim(),
-address: $("#sAddress").value.trim(),
-phone: $("#sPhone").value.trim(),
-email: $("#sEmail").value.trim(),
-workMorning: $("#sWorkMorning").value.trim(),
-workAfternoon: $("#sWorkAfternoon").value.trim(),
-workNote: $("#sWorkNote").value.trim(),
-statOnline: $("#sStatOnline").value.trim(),
-statToday: $("#sStatToday").value.trim(),
-statWeek: $("#sStatWeek").value.trim(),
-statTotal: $("#sStatTotal").value.trim(),
-youtubeUrl: $("#sYoutubeUrl").value.trim(),
-quickLinks: getLinks("quickLinksEdit"),
-docyhocLinks: getLinks("docyhocLinksEdit"),
-webLinks: getWebLinks("webLinksEdit"),
-footerName: $("#sFooterName").value.trim(),
-footerResp: $("#sFooterResp").value.trim(),
-updatedAt: serverTimestamp()
-}, {merge: true});
-showToast("Đã lưu tất cả cài đặt! Mọi người đều thấy thay đổi.");
-} catch(err){ showToast("Lỗi: " + err.message, "err"); }
-finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Lưu tất cả cài đặt'; }
+  e.preventDefault();
+  if(!FB_READY){ showToast("Chưa cấu hình Firebase!", "err"); return; }
+  const btn = $("#btnSettings"); btn.disabled = true; btn.innerHTML = '<span class="loading-mini"></span> Đang lưu...';
+  try {
+    let bannerLogo = settings?.bannerLogo || "";
+    let bannerBg = settings?.bannerBg || "";
+    let siteIcon = settings?.siteIcon || "";
+    let newLogoPath = settings?.bannerLogoPath || "";
+    let newBgPath = settings?.bannerBgPath || "";
+    let newIconPath = settings?.siteIconPath || "";
+    if(sLogoFile){
+      const up = await uploadFile(await compressImage(sLogoFile), "banner", "image");
+      bannerLogo = up.url;
+      if(settings?.bannerLogoPath && settings.bannerLogoPath !== up.path) await removeStorageFile(settings.bannerLogoPath);
+      newLogoPath = up.path;
+      sLogoFile = null; $("#sLogoName").textContent = "";
+    }
+    if(sBgFile){
+      const up = await uploadFile(await compressImage(sBgFile, 1600, 0.85), "banner", "image");
+      bannerBg = up.url;
+      if(settings?.bannerBgPath && settings.bannerBgPath !== up.path) await removeStorageFile(settings.bannerBgPath);
+      newBgPath = up.path;
+      sBgFile = null; $("#sBgName").textContent = "";
+    }
+    if(sIconFile){
+      const up = await uploadFile(sIconFile, "favicon", "image");
+      siteIcon = up.url;
+      if(settings?.siteIconPath && settings.siteIconPath !== up.path) await removeStorageFile(settings.siteIconPath);
+      newIconPath = up.path;
+      sIconFile = null; $("#sIconName").textContent = "Đã lưu icon website";
+    }
+    await setDoc(doc(db, "settings", "site"), {
+      bannerTitle: $("#sBannerTitle").value.trim(),
+      bannerSubtitle: $("#sBannerSubtitle").value.trim(),
+      bannerLogo, bannerBg, siteIcon,
+      bannerLogoPath: newLogoPath, bannerBgPath: newBgPath, siteIconPath: newIconPath,
+      marquee: $("#sMarquee").value.trim(),
+      address: $("#sAddress").value.trim(),
+      phone: $("#sPhone").value.trim(),
+      email: $("#sEmail").value.trim(),
+      workMorning: $("#sWorkMorning").value.trim(),
+      workAfternoon: $("#sWorkAfternoon").value.trim(),
+      workNote: $("#sWorkNote").value.trim(),
+      statOnline: $("#sStatOnline").value.trim(),
+      statToday: $("#sStatToday").value.trim(),
+      statWeek: $("#sStatWeek").value.trim(),
+      statTotal: $("#sStatTotal").value.trim(),
+      youtubeUrl: $("#sYoutubeUrl").value.trim(),
+      quickLinks: getLinks("quickLinksEdit"),
+      docyhocLinks: getLinks("docyhocLinksEdit"),
+      webLinks: getWebLinks("webLinksEdit"),
+      footerName: $("#sFooterName").value.trim(),
+      footerResp: $("#sFooterResp").value.trim(),
+      updatedAt: serverTimestamp()
+    }, {merge: true});
+    showToast("Đã lưu tất cả cài đặt! Mọi người đều thấy thay đổi.");
+  } catch(err){ showToast("Lỗi: " + err.message, "err"); }
+  finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Lưu tất cả cài đặt'; }
 });
+
 /* ===== INIT ===== */
 (function(){
-$("#pDate").value = new Date().toISOString().split("T")[0];
-$("#dDate").value = new Date().toISOString().split("T")[0];
+  const today = new Date().toISOString().split("T")[0];
+  if($("#pDate")) $("#pDate").value = today;
+  if($("#dDate")) $("#dDate").value = today;
+  renderStats();
 })();
 </script>
 </body>
