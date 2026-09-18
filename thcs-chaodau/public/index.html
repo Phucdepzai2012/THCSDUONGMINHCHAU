@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>THCS Chao Đâu</title>
+<link rel="icon" id="siteFavicon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230b4ea2'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='42' fill='white' font-family='Arial' font-weight='700'%3EC%C4%90%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Tahoma,Verdana,sans-serif;font-size:12px;line-height:1.45;color:#222;background:#dfe6ee}
+a{color:#00519e;text-decoration:none}
+a:hover{color:#c00;text-decoration:underline}
+img{border:0;display:block;max-width:100%}
+ul{list-style:none}
+input,select,textarea,button{font-family:Arial,Tahoma,sans-serif;font-size:12px}
+.hidden{display:none!important}
+#wrap{width:1263px;max-width:calc(100vw - 18px);margin:8px auto 18px;background:#fff;border:1px solid #aebdce;border-top:0;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.topbar{height:31px;padding:0 10px;background:#f2f5f8;border-bottom:1px solid #c5d1df;display:flex;justify-content:flex-end;font-size:11px;align-items:center}
+.topbar a{height:30px;padding:0 11px;color:#0754a0;font-size:11px;border-right:1px solid #c5d1df;display:inline-flex;align-items:center;gap:5px}
+.topbar a:hover{background:#e4edf7;color:#c00;text-decoration:none}
+.code2-banner{height:auto;min-height:0;padding:0;display:block;position:relative;overflow:hidden;background:#fff;border-bottom:3px solid #f2ca16}
+.code2-banner-image{display:block;width:100%;height:112px;object-fit:cover;object-position:center center;max-width:none}
+.code2-banner .badge,.code2-banner .title{display:none!important}
+.menu{background:linear-gradient(180deg,#176bbd 0%,#0d55a4 62%,#084481 100%);border-bottom:1px solid #06396d;display:flex;flex-wrap:wrap;position:relative;z-index:100}
+.menu>li{position:relative}
+.menu>li>a{padding:9px 12px;color:#fff;font-size:11px;font-weight:bold;display:block;border-right:1px solid rgba(0,0,0,.18);border-left:1px solid rgba(255,255,255,.12);text-shadow:1px 1px 0 rgba(0,0,0,.25);text-transform:uppercase}
+.menu>li:first-child>a{border-left:0}
+.menu>li>a:hover,.menu>li.on>a{background:linear-gradient(180deg,#ffe15a,#ffcc2b 58%,#eeb108 100%);color:#073e7a;text-shadow:none}
+.menu>li>ul{display:none;position:absolute;top:100%;left:0;min-width:220px;background:#fff;border:1px solid #0b4e98;border-top:0;box-shadow:2px 3px 0 rgba(7,61,117,.18);z-index:900}
+.menu>li:hover>ul{display:block}
+.menu>li>ul>li>a{padding:7px 11px;font-size:11px;background:#fff;color:#333;display:block;border-bottom:1px dotted #c9d3df}
+.menu>li>ul>li>a:hover{background:#e3f2fd;color:#c00;padding-left:18px}
+.strip{display:flex;background:#fff;border-bottom:1px solid #c5d1df;height:34px;overflow:hidden}
+.strip .clock{width:216px;flex:0 0 auto;background:#0b58a9;color:#fff;display:flex;align-items:center;padding:0 12px;gap:6px;font-size:11px;font-weight:bold;border-right:3px solid #f3cf28}
+.strip .marquee{flex:1;overflow:hidden;display:flex;align-items:center;color:#c00;font-weight:bold;font-size:12px}
+.strip .marquee span{white-space:nowrap;padding-left:100%;animation:mq 30s linear infinite;display:inline-block}
+@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+.strip .search{width:258px;flex:0 0 auto;display:flex;align-items:center;border-left:1px solid #c5d1df;padding:0 6px;gap:4px;background:#eef3f7}
+.strip .search input{flex:1;border:1px solid #bac9d9;padding:5px 8px;font-size:11px;outline:none}
+.strip .search button{background:linear-gradient(180deg,#2b79c8,#0b58a9 60%,#083f7b);color:#fff;border:1px solid #06396d;cursor:pointer;padding:5px 10px}
+.main{display:flex;padding:8px;gap:8px;background:#dfe6ee}
+.col-left{width:220px;flex:0 0 220px}
+.col-mid{flex:1;min-width:0}
+.col-right{width:270px;flex:0 0 270px}
+.box{background:#fff;border:1px solid #bcc9d7;margin-bottom:8px}
+.box>.head{background:linear-gradient(180deg,#2777c4,#0d58a9 56%,#083f7b);border-bottom:2px solid #f3cf28;padding:7px 9px;color:#fff;font-size:11px;font-weight:bold;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;text-shadow:1px 1px 0 rgba(0,0,0,.28)}
+.box>.head.red{background:linear-gradient(180deg,#df403b,#c82c28 55%,#961e1b)}
+.box>.head .count{background:#ffce25;color:#063f7c;border:1px solid #b99600;padding:1px 7px;font-size:10.5px}
+.mq-vertical{height:112px;overflow:hidden;position:relative;padding:7px 9px;font-size:11px;line-height:1.55}
+.mq-vertical .list{animation:mqv 15s linear infinite}
+@keyframes mqv{0%{transform:translateY(100%)}100%{transform:translateY(-100%)}}
+.mq-vertical p{padding:3px 0 3px 14px;position:relative}
+.mq-vertical p:before{content:"◆";color:#c62828;font-size:9px;position:absolute;left:0;top:4px}
+.worktime{padding:9px 12px;font-size:11px}
+.worktime p{padding:2px 0}
+.worktime p.note{color:#888;font-style:italic;padding-top:5px}
+.quicklist a{display:flex;align-items:center;gap:7px;padding:7px 9px;border-bottom:1px dotted #c9d3dc;font-size:11px;color:#00519e;font-weight:bold}
+.quicklist a:last-child{border-bottom:0}
+.quicklist a:hover{background:#e8f2fc;color:#c00}
+.quicklist a i{color:#0b4ea2;font-size:13px;width:16px;text-align:center}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:#c1ccd8}
+.feat{background:#fff;padding:7px;display:flex;flex-direction:column}
+.feat .imgwrap{border:1px solid #bdc9d6;padding:2px;margin-bottom:5px;background:#f6f7f8;height:112px;overflow:hidden}
+.feat .imgwrap .ph{height:100%;display:flex;align-items:center;justify-content:center;font-size:38px;color:#fff}
+.feat .imgwrap img{width:100%;height:100%;object-fit:cover}
+.feat a.t{font-size:11px;color:#00519e;font-weight:bold;line-height:1.35;padding:2px 0}
+.feat a.t:hover{color:#c00}
+.feat .meta{font-size:10.5px;color:#888;font-style:italic;margin-top:5px;padding-top:4px;border-top:1px dotted #eee}
+.tab{margin-bottom:8px;border:1px solid #bcc9d7;background:#fff}
+.tab>.head{background:linear-gradient(180deg,#2777c4,#0d58a9 56%,#083f7b);border-bottom:2px solid #f3cf28;color:#fff;padding:7px 9px;font-size:11px;display:flex;align-items:center;justify-content:space-between}
+.tab>.head a{color:#fff;font-weight:bold;text-transform:uppercase}
+.tab>.head a:hover{color:#ffc107;text-decoration:none}
+.tab>.head .more{font-size:10px;font-weight:normal;text-transform:none;padding:2px 7px;border:1px solid rgba(255,255,255,.48)}
+.tab>.head .more:hover{background:#ffc107;color:#0b4ea2}
+.tab>.body{padding:9px}
+.tab .lead{display:flex;gap:10px;padding-bottom:8px;border-bottom:1px dotted #ccc;margin-bottom:6px}
+.tab .lead .imgwrap{border:1px solid #b9c9dc;padding:2px;background:#f5f5f5;flex:0 0 auto;width:129px;height:89px;overflow:hidden}
+.tab .lead .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff}
+.tab .lead img{width:100%;height:100%;object-fit:cover}
+.tab .lead .tt{font-size:12.5px;font-weight:bold;color:#00519e;line-height:1.35;display:block;margin-bottom:5px}
+.tab .lead .tt:hover{color:#c00}
+.tab .lead p{font-size:11.5px;color:#555}
+.tab ul.li li{padding:6px 0;border-bottom:1px dotted #ddd;font-size:11.5px}
+.tab ul.li li a{color:#222;font-weight:600}
+.tab ul.li li a:hover{color:#c00}
+.tab ul.li li:before{content:"▶";color:#c62828;font-size:8px;margin-right:5px;display:inline-block;vertical-align:1px}
+.vb-item{padding:8px 9px;border-bottom:1px dotted #c9d3dc}
+.vb-item:last-child{border-bottom:0}
+.vb-item .code{display:inline-block;background:#c62828;color:#fff;font-size:10px;font-weight:bold;padding:1px 6px;border-radius:2px;margin-bottom:4px}
+.vb-item .tt{display:block;color:#00519e;font-weight:bold;font-size:11px;line-height:1.4;margin-bottom:3px}
+.vb-item .tt:hover{color:#c00}
+.vb-item .dt{color:#888;font-size:10.5px;font-style:italic;display:block;margin-bottom:3px}
+.vb-item .acts{display:flex;gap:14px;font-size:11px}
+.vb-item .acts a{color:#00519e}
+.vb-item .acts a:hover{color:#c00}
+.srv{padding:6px}
+.srv a{display:flex;align-items:center;gap:8px;padding:7px 8px;margin-bottom:1px;border:1px solid #dae4ef;background:#f8fbff;font-size:11px;color:#00519e;font-weight:bold}
+.srv a:last-child{margin-bottom:0}
+.srv a:hover{background:#e3f2fd;border-color:#0b4ea2;color:#c00}
+.srv a i{width:20px;text-align:center;color:#0b4ea2;font-size:14px}
+.yt{padding:8px}
+.yt iframe{width:100%;height:150px;display:block;border:1px solid #b9c9dc}
+.wl{padding:8px}
+.wl select{width:100%;padding:6px 8px;border:1px solid #b9c9dc;background:#fff;outline:none}
+.stats{padding:6px 10px}
+.stats li{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dotted #ddd}
+.stats li:last-child{border-bottom:0}
+.stats li span:first-child{color:#333;padding-left:14px;position:relative}
+.stats li span:first-child:before{content:"▪";color:#0b4ea2;position:absolute;left:0}
+.stats li span:last-child{background:#ffc107;color:#0b4ea2;font-weight:bold;padding:1px 8px;border:1px solid #b28100}
+.footer{background:linear-gradient(180deg,#0b58a9,#073f7b);border-top:3px solid #f3cf28;color:#fff;padding:14px 18px;text-align:center;font-size:11.5px;line-height:1.9}
+.footer .name{font-family:'Times New Roman',serif;font-size:14.5px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.footer b{color:#ffc107}
+#LoginOverlay{position:fixed;inset:0;background:rgba(5,57,110,.78);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+#LoginOverlay.show{display:flex}
+.login-card{background:#fff;width:100%;max-width:380px;border:1px solid #06396d;box-shadow:4px 5px 0 rgba(0,0,0,.24)}
+.login-card .h{background:linear-gradient(180deg,#2777c4,#0d58a9 56%,#083f7b);padding:14px 16px;color:#fff;position:relative;border-bottom:3px solid #f3cf28;text-align:center}
+.login-card .h .x{position:absolute;top:6px;right:8px;color:#fff;background:transparent;border:0;font-size:16px;cursor:pointer;padding:3px 8px}
+.login-card .h .crest{width:52px;height:52px;margin:0 auto 8px;background:#fff;border:2px solid #ffc107;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Times New Roman',serif;font-size:18px;font-weight:bold;color:#0b4ea2}
+.login-card .h h2{font-size:16px;text-transform:uppercase;margin-bottom:3px}
+.login-card .h p{font-size:10.5px;font-style:italic;color:#dbe8f7}
+.login-card .b{padding:18px}
+.login-card .f{margin-bottom:12px}
+.login-card .f label{display:block;font-size:11px;font-weight:bold;margin-bottom:4px}
+.login-card .f input{width:100%;padding:7px 9px;border:1px solid #b9c9dc;font-size:12.5px;outline:none}
+.login-card .f input:focus{border-color:#0b4ea2}
+.login-card .pw{position:relative}
+.login-card .pw .eye{position:absolute;right:5px;top:50%;transform:translateY(-50%);background:transparent;border:0;cursor:pointer;padding:4px 6px;color:#888}
+.login-card .err{background:#fdecea;border:1px solid #f5c2c0;color:#b71c1c;padding:8px 10px;margin-bottom:12px;display:none;gap:6px;font-size:11.5px;line-height:1.5}
+.login-card .err.show{display:flex}
+.login-card .btn{width:100%;padding:10px;cursor:pointer;background:linear-gradient(180deg,#2777c4,#0d58a9 56%,#083f7b);color:#fff;border:1px solid #06396d;font-size:12px;font-weight:bold;text-transform:uppercase}
+.login-card .btn:hover{background:linear-gradient(180deg,#3b8ee0,#1565c0)}
+.login-card .btn:disabled{opacity:.7}
+#AdminPanel{display:none}
+#AdminPanel.show{display:block}
+.ad-bar{background:linear-gradient(180deg,#176bbd,#0d55a4 60%,#084481);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:3px solid #f3cf28}
+.ad-bar .info{display:flex;align-items:center;gap:10px}
+.ad-bar .ava{width:40px;height:40px;background:#ffc107;color:#0b4ea2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid #fff}
+.ad-bar h3{font-size:14px;margin-bottom:2px}
+.ad-bar p{font-size:11px;color:#dbe8f7}
+.ad-bar .btns{display:flex;gap:6px}
+.ad-bar button{padding:6px 12px;cursor:pointer;font-size:11.5px;font-weight:bold;border:1px solid #052a5a}
+.ad-bar .v{background:#fff;color:#0b4ea2}
+.ad-bar .v:hover{background:#ffc107}
+.ad-bar .o{background:#c62828;color:#fff;border-color:#8e1a1a}
+.ad-bar .o:hover{background:#8e1a1a}
+.ad-tabs{background:#073f7b;display:flex;flex-wrap:wrap;border-bottom:2px solid #f3cf28}
+.ad-tabs button{padding:10px 15px;background:transparent;color:#c9dcf5;border:0;cursor:pointer;font-size:11px;font-weight:bold;text-transform:uppercase;border-right:1px solid #0b4ea2;border-top:3px solid transparent}
+.ad-tabs button:hover{background:#0b4ea2;color:#fff}
+.ad-tabs button.active{background:#fff;color:#0b58a9;border-top-color:#f3cf28}
+.ad-panel{display:none;padding:14px;background:#dfe6ee}
+.ad-panel.active{display:block}
+.ad-body{display:flex;gap:8px}
+.ad-body .fcol{flex:0 0 380px}
+.ad-body .lcol{flex:1;min-width:0}
+.f{margin-bottom:10px}
+.f label{display:block;font-size:11.5px;font-weight:bold;margin-bottom:4px}
+.f label .r{color:#c00}
+.f input[type=text],.f input[type=date],.f input[type=number],.f input[type=url],.f select,.f textarea{width:100%;padding:6px 8px;border:1px solid #b9c9dc;font-size:12px;outline:none;background:#fcfdfe}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:#0b4ea2;background:#fff}
+.f textarea{resize:vertical;min-height:65px}
+.f .hint{font-size:10.5px;color:#888;font-style:italic;margin-top:3px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.btn-post{width:100%;padding:10px;cursor:pointer;background:linear-gradient(180deg,#43a047,#2e7d32 55%,#1b5e20);color:#fff;border:1px solid #145214;font-size:12px;font-weight:bold;text-transform:uppercase}
+.btn-post:hover{background:linear-gradient(180deg,#4caf50,#388e3c)}
+.btn-post:disabled{opacity:.6;cursor:not-allowed}
+.file-upload{border:2px dashed #b9c9dc;padding:12px;text-align:center;background:#f8fbff;cursor:pointer;transition:.15s;display:block}
+.file-upload:hover{border-color:#0b4ea2;background:#e8f2fc}
+.file-upload input{display:none}
+.file-upload .ico{font-size:22px;color:#0b4ea2;margin-bottom:4px}
+.file-upload .txt{font-size:11.5px;color:#555}
+.file-upload .fname{font-size:11px;color:#c00;font-weight:bold;margin-top:4px}
+.img-preview{margin-top:6px;max-width:100%;border:1px solid #b9c9dc;max-height:120px;width:auto}
+.upload-progress{height:7px;background:#e5edf6;border:1px solid #b9c9dc;margin-top:6px;overflow:hidden;display:none}
+.upload-progress.show{display:block}
+.upload-progress i{display:block;width:0;height:100%;background:linear-gradient(90deg,#43a047,#2e7d32);transition:width .15s}
+.upload-percent{font-size:10.5px;color:#2e7d32;font-weight:bold;margin-top:3px;display:none}
+.upload-percent.show{display:block}
+.ad-item{display:flex;gap:10px;align-items:center;padding:9px 10px;border-bottom:1px dotted #c9d3dc}
+.ad-item:last-child{border-bottom:0}
+.ad-item .th{width:44px;height:44px;border:1px solid #999;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;overflow:hidden}
+.ad-item .th img{width:100%;height:100%;object-fit:cover}
+.ad-item .m{flex:1;min-width:0}
+.ad-item .m b{display:block;color:#00519e;font-size:11.5px;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ad-item .m small{color:#888;font-size:10.5px}
+.btn-del{background:#fdecea;color:#b71c1c;border:1px solid #f5c2c0;padding:4px 10px;font-size:11px;font-weight:bold;cursor:pointer;flex:0 0 auto}
+.btn-del:hover{background:#c62828;color:#fff}
+.bg0{background:linear-gradient(180deg,#2a7ed0,#0b4ea2)}
+.bg1{background:linear-gradient(180deg,#26a69a,#00695c)}
+.bg2{background:linear-gradient(180deg,#ab47bc,#6a1b9a)}
+.bg3{background:linear-gradient(180deg,#fb8c00,#e65100)}
+.bg4{background:linear-gradient(180deg,#e53935,#b71c1c)}
+.bg5{background:linear-gradient(180deg,#29b6f6,#0277bd)}
+.link-row{display:grid;grid-template-columns:40px 1fr 2fr 40px;gap:6px;margin-bottom:6px;align-items:center}
+.link-row input{padding:5px 7px;border:1px solid #b9c9dc;font-size:11.5px;outline:none}
+.link-row .rm{background:#c62828;color:#fff;border:0;padding:5px;cursor:pointer;font-size:11px}
+.btn-add{background:#0b4ea2;color:#fff;border:0;padding:5px 12px;cursor:pointer;font-size:11.5px;font-weight:bold;margin-top:4px}
+.settings-section{border:1px solid #b9c9dc;background:#fff;margin-bottom:10px}
+.settings-section .sh{background:#eef3f8;padding:7px 12px;font-weight:bold;color:#0b4ea2;font-size:12px;border-bottom:1px solid #b9c9dc;text-transform:uppercase}
+.settings-section .sb{padding:12px}
+#Toast{position:fixed;bottom:18px;right:18px;z-index:9999;background:#2e7d32;color:#fff;padding:10px 16px;border:1px solid #1b5e20;font-size:12px;font-weight:bold;box-shadow:3px 3px 0 rgba(0,0,0,.3);transform:translateY(120%);opacity:0;transition:.28s;display:flex;align-items:center;gap:7px;max-width:360px;line-height:1.4}
+#Toast.show{transform:translateY(0);opacity:1}
+#Toast.err{background:#c62828}
+.loading-mini{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
+@keyframes sp{to{transform:rotate(360deg)}}
+#diagBar{background:#1b5e20;color:#fff;padding:4px 10px;font-size:10.5px;font-family:Consolas,monospace;display:flex;gap:14px;flex-wrap:wrap;border-bottom:1px solid #000}
+#diagBar.err{background:#b71c1c}
+#diagBar span.ok:before{content:"● ";color:#7cff7c}
+#diagBar span.ko:before{content:"● ";color:#ff8a8a}
+@media(max-width:900px){#wrap{max-width:100vw;width:100%;margin:0;border-left:0;border-right:0}.code2-banner-image{height:auto;min-height:90px}.main{display:block}.col-left,.col-right,.col-mid{width:auto;flex-basis:auto}.menu>li{width:50%}.strip{height:auto;min-height:34px;flex-wrap:wrap}.strip .clock{width:185px}.strip .search{width:100%;order:3}.feat-grid{grid-template-columns:1fr 1fr}.ad-body{flex-wrap:wrap}.ad-body .fcol,.ad-body .lcol{flex:1 1 100%}.row2,.row3{grid-template-columns:1fr}.tab .lead{flex-direction:column}.link-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="diagBar">
+  <span id="dgApi">API: đang kiểm tra…</span>
+  <span id="dgAuth">Auth: —</span>
+  <span id="dgStat">Stats: —</span>
+</div>
+
+<div id="wrap">
+<div class="topbar">
+  <a href="#" id="btnOpenLogin"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+  <a href="#"><i class="far fa-comment"></i> Góp ý</a>
+  <a href="#"><i class="fas fa-sitemap"></i> Sơ đồ trang</a>
+</div>
+
+<div class="banner code2-banner" id="banner">
+  <img id="bannerImage" class="code2-banner-image" src="https://storage-edu.vnpt.vn/edu-lci/8428/DUY/banner%20moi.gif" alt="Banner">
+  <div class="badge" id="bannerLogo">CĐ</div>
+  <div class="title">
+    <h1 id="bannerTitle">THCS Chao Đâu</h1>
+    <p id="bannerSubtitle">Cổng thông tin điện tử</p>
+  </div>
+</div>
+
+<ul class="menu">
+  <li class="on"><a href="#"><i class="fas fa-home"></i> Trang chủ</a></li>
+  <li><a href="#">Giới thiệu ▾</a><ul><li><a href="#">Ban giám hiệu</a></li><li><a href="#">Các đoàn thể</a></li><li><a href="#">Cơ cấu tổ chức</a></li></ul></li>
+  <li><a href="#">Nội quy, quy định</a></li>
+  <li><a href="#">Nội dung công khai ▾</a><ul><li><a href="#">Điều kiện đảm bảo chất lượng</a></li><li><a href="#">Kế hoạch – kết quả</a></li><li><a href="#">Thu chi tài chính</a></li></ul></li>
+  <li><a href="#">Văn bản chỉ đạo ▾</a><ul><li><a href="#">Văn bản các cấp</a></li><li><a href="#">Văn bản trường</a></li></ul></li>
+  <li><a href="#">Hoạt động giáo dục ▾</a><ul><li><a href="#">Tin tức</a></li><li><a href="#">Sự kiện</a></li><li><a href="#">Tư vấn học đường</a></li></ul></li>
+  <li><a href="#">Tài nguyên ▾</a><ul><li><a href="#">Tài nguyên dạy – học</a></li><li><a href="#">Hệ thống vnEdu</a></li><li><a href="#">Elearning</a></li></ul></li>
+  <li><a href="#">Phòng truyền thống</a></li>
+</ul>
+
+<div class="strip">
+  <div class="clock"><i class="far fa-clock"></i> <span id="topClock">Đang tải...</span></div>
+  <div class="marquee"><span id="marqueeText"><i class="fas fa-bullhorn" style="color:#0b4ea2"></i> Chào mừng bạn đến với cổng thông tin điện tử Trường THCS Chao Đâu!</span></div>
+  <div class="search"><input type="text" placeholder="Từ khóa..."><button><i class="fas fa-search"></i></button></div>
+</div>
+
+<div class="main">
+  <div class="col-left">
+    <div class="box"><div class="head"><span><i class="fas fa-bullhorn"></i> Thông báo</span></div><div class="mq-vertical"><div class="list" id="noticeList"></div></div></div>
+    <div class="box"><div class="head"><span><i class="far fa-clock"></i> Giờ làm việc</span></div><div class="worktime" id="workTime"></div></div>
+    <div class="box"><div class="head"><span><i class="fas fa-link"></i> Liên kết nhanh</span></div><div class="quicklist" id="quickList"></div></div>
+  </div>
+
+  <div class="col-mid">
+    <div class="box"><div class="head red"><span><i class="fas fa-star"></i> Tin nổi bật</span></div><div class="feat-grid" id="featGrid"></div></div>
+    <div class="tab"><div class="head"><a href="#"><i class="far fa-newspaper"></i> Tin tức</a><a href="#" class="more">Xem tất cả »</a></div><div class="body" id="tabNews"></div></div>
+    <div class="tab"><div class="head" style="background:linear-gradient(180deg,#e53935,#c62828 55%,#8e1a1a)"><a href="#"><i class="far fa-calendar-alt"></i> Sự kiện</a><a href="#" class="more">Xem tất cả »</a></div><div class="body" id="tabEvents"></div></div>
+    <div class="tab"><div class="head" style="background:linear-gradient(180deg,#fb8c00,#ef6c00 55%,#b45309)"><a href="#"><i class="far fa-bell"></i> Thông báo</a><a href="#" class="more">Xem tất cả »</a></div><div class="body" id="tabNotice"></div></div>
+    <div class="tab"><div class="head" style="background:linear-gradient(180deg,#00897b,#00695c 55%,#004d40)"><a href="#"><i class="fas fa-user-plus"></i> Tuyển sinh</a><a href="#" class="more">Xem tất cả »</a></div><div class="body" id="tabAdmissions"></div></div>
+  </div>
+
+  <div class="col-right">
+    <div class="box"><div class="head"><span><i class="fas fa-file-alt"></i> Văn bản mới</span></div><div id="docList"></div></div>
+    <div class="box"><div class="head"><span><i class="fas fa-graduation-cap"></i> Thông tin Dạy – Học</span></div><div class="srv" id="docyhocList"></div></div>
+    <div class="box"><div class="head"><span><i class="fab fa-youtube"></i> Video</span></div><div class="yt"><iframe id="ytFrame" src="https://www.youtube.com/embed/5QeuPIu3y3Q" allowfullscreen></iframe></div></div>
+    <div class="box"><div class="head"><span><i class="fas fa-globe"></i> Liên kết website</span></div><div class="wl"><select id="webLinks" onchange="if(this.value) window.open(this.value,'_blank')"></select></div></div>
+    <div class="box"><div class="head"><span><i class="fas fa-chart-bar"></i> Thống kê truy cập</span></div>
+      <ul class="stats" id="statsList">
+        <li><span>Đang online:</span><span id="stOnline">…</span></li>
+        <li><span>Hôm nay:</span><span id="stToday">…</span></li>
+        <li><span>Trong tuần:</span><span id="stWeek">…</span></li>
+        <li><span>Tất cả:</span><span id="stTotal">…</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="footer">
+  <div class="name" id="footerName">TRƯỜNG THCS CHAO ĐÂU</div>
+  <div><b>Địa chỉ:</b> <span id="footerAddress">123 Đường Ước Mơ, P. Bình Thạnh, TP.HCM</span></div>
+  <div><b>Điện thoại:</b> <span id="footerPhone">(028) 1234 5678</span> — <b>Email:</b> <span id="footerEmail">info@chaodau.edu.vn</span></div>
+  <div><b>Chịu trách nhiệm nội dung:</b> <span id="footerResp">Ban Giám hiệu</span></div>
+  <div style="margin-top:5px;font-size:10.5px;opacity:.85">© 2025 Trường THCS Chao Đâu — Bảo lưu mọi quyền.</div>
+</div>
+
+<!-- LOGIN -->
+<div id="LoginOverlay">
+<div class="login-card">
+  <div class="h">
+    <button class="x" id="btnCloseLogin">✕</button>
+    <div class="crest">CĐ</div>
+    <h2>Đăng nhập quản trị</h2>
+    <p>Dành riêng cho Ban giám hiệu</p>
+  </div>
+  <div class="b">
+    <div class="err" id="loginErr"><i class="fas fa-exclamation-triangle"></i><span>Lỗi đăng nhập.</span></div>
+    <form id="loginForm">
+      <div class="f"><label><i class="fas fa-user"></i> Tên đăng nhập</label><input type="text" id="lUser" placeholder="admin" autocomplete="username" required></div>
+      <div class="f"><label><i class="fas fa-lock"></i> Mật khẩu</label>
+        <div class="pw"><input type="password" id="lPass" placeholder="Nhập mật khẩu..." autocomplete="current-password" required><button type="button" class="eye" id="toggleEye">👁</button></div>
+      </div>
+      <button type="submit" class="btn" id="btnLogin"><i class="fas fa-sign-in-alt"></i> Đăng nhập</button>
+    </form>
+  </div>
+</div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="AdminPanel">
+<div class="ad-bar">
+  <div class="info">
+    <div class="ava">👤</div>
+    <div><h3>Bảng điều khiển quản trị</h3><p>Xin chào, <b id="adminName">Quản trị viên</b> — mọi thay đổi hiển thị realtime (polling 3s).</p></div>
+  </div>
+  <div class="btns">
+    <button class="v" id="btnViewSite"><i class="fas fa-eye"></i> Xem trang</button>
+    <button class="o" id="btnLogout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+  </div>
+</div>
+<div class="ad-tabs">
+  <button class="active" data-tab="posts"><i class="far fa-newspaper"></i> Bài viết</button>
+  <button data-tab="notices"><i class="fas fa-bullhorn"></i> Thông báo</button>
+  <button data-tab="docs"><i class="fas fa-file-pdf"></i> Văn bản PDF</button>
+  <button data-tab="settings"><i class="fas fa-cog"></i> Cài đặt trang</button>
+</div>
+
+<div class="ad-panel active" id="tab-posts">
+  <div class="ad-body">
+    <div class="fcol">
+      <div class="box"><div class="head"><span><i class="fas fa-plus-circle"></i> Đăng bài viết</span></div>
+        <div style="padding:12px">
+          <form id="postForm">
+            <div class="f"><label>Tiêu đề <span class="r">*</span></label><input type="text" id="pTitle" required></div>
+            <div class="row2">
+              <div class="f"><label>Danh mục <span class="r">*</span></label>
+                <select id="pCat"><option>Tin tức</option><option>Sự kiện</option><option>Thông báo</option><option>Tuyển sinh</option></select></div>
+              <div class="f"><label>Ngày đăng <span class="r">*</span></label><input type="date" id="pDate" required></div>
+            </div>
+            <div class="f"><label>Hình ảnh</label>
+              <label class="file-upload" for="pImage">
+                <input type="file" id="pImage" accept="image/*">
+                <div class="ico"><i class="fas fa-cloud-upload-alt"></i></div>
+                <div class="txt">Bấm chọn ảnh (tự nén siêu tốc)</div>
+                <div class="fname" id="pImageName"></div>
+              </label>
+              <img id="pImagePreview" class="img-preview hidden">
+              <div class="upload-progress" id="pUploadProgress"><i></i></div>
+              <div class="upload-percent" id="pUploadPercent">0%</div>
+            </div>
+            <div class="row2">
+              <div class="f"><label>Icon emoji</label><input type="text" id="pIcon" value="📰" maxlength="6"></div>
+              <div class="f"><label>Màu nền</label><select id="pColor"><option value="0">Xanh dương</option><option value="1">Xanh ngọc</option><option value="2">Tím</option><option value="3">Cam</option><option value="4">Đỏ</option><option value="5">Cyan</option></select></div>
+            </div>
+            <div class="f"><label>Mô tả ngắn <span class="r">*</span></label><textarea id="pExcerpt" required></textarea></div>
+            <div class="f"><label>Nội dung chi tiết</label><textarea id="pContent"></textarea></div>
+            <button type="submit" class="btn-post" id="btnPost"><i class="fas fa-paper-plane"></i> Đăng bài viết</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="lcol">
+      <div class="box"><div class="head"><span><i class="fas fa-list"></i> Danh sách bài viết</span><span class="count" id="postCount">0</span></div><div id="adminPostList"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="ad-panel" id="tab-notices">
+  <div class="ad-body">
+    <div class="fcol">
+      <div class="box"><div class="head"><span><i class="fas fa-plus"></i> Thêm thông báo</span></div>
+        <div style="padding:12px">
+          <form id="noticeForm">
+            <div class="f"><label>Nội dung <span class="r">*</span></label><textarea id="nText" required></textarea></div>
+            <div class="f"><label>Thứ tự</label><input type="number" id="nOrder" value="0"></div>
+            <button type="submit" class="btn-post" id="btnNotice"><i class="fas fa-plus-circle"></i> Thêm thông báo</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="lcol"><div class="box"><div class="head"><span><i class="fas fa-list"></i> Danh sách</span><span class="count" id="noticeCount">0</span></div><div id="adminNoticeList"></div></div></div>
+  </div>
+</div>
+
+<div class="ad-panel" id="tab-docs">
+  <div class="ad-body">
+    <div class="fcol">
+      <div class="box"><div class="head"><span><i class="fas fa-upload"></i> Đăng văn bản PDF</span></div>
+        <div style="padding:12px">
+          <form id="docForm">
+            <div class="f"><label>File PDF <span class="r">*</span></label>
+              <label class="file-upload" for="dFile"><input type="file" id="dFile" accept=".pdf,application/pdf">
+                <div class="ico"><i class="fas fa-file-pdf"></i></div>
+                <div class="txt">Bấm chọn PDF</div>
+                <div class="fname" id="dFileName"></div></label>
+              <div class="upload-progress" id="dUploadProgress"><i></i></div>
+              <div class="upload-percent" id="dUploadPercent">0%</div>
+            </div>
+            <div class="f"><label>Số/ký hiệu <span class="r">*</span></label><input type="text" id="dCode" required></div>
+            <div class="f"><label>Tiêu đề <span class="r">*</span></label><input type="text" id="dTitle" required></div>
+            <div class="f"><label>Ngày ban hành</label><input type="date" id="dDate"></div>
+            <div class="f"><label>Mô tả</label><textarea id="dDesc" style="min-height:50px"></textarea></div>
+            <button type="submit" class="btn-post" id="btnDoc"><i class="fas fa-cloud-upload-alt"></i> Đăng văn bản</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="lcol"><div class="box"><div class="head"><span><i class="fas fa-list"></i> Danh sách</span><span class="count" id="docCount">0</span></div><div id="adminDocList"></div></div></div>
+  </div>
+</div>
+
+<div class="ad-panel" id="tab-settings">
+  <form id="settingsForm">
+    <div class="settings-section"><div class="sh"><i class="fas fa-image"></i> Banner & Logo</div>
+      <div class="sb">
+        <div class="row2">
+          <div class="f"><label>Tiêu đề trường</label><input type="text" id="sBannerTitle"></div>
+          <div class="f"><label>Phụ đề</label><input type="text" id="sBannerSubtitle"></div>
+        </div>
+        <div class="f"><label>Logo</label>
+          <label class="file-upload" for="sLogoFile"><input type="file" id="sLogoFile" accept="image/*"><div class="ico"><i class="fas fa-image"></i></div><div class="txt">Chọn ảnh logo</div><div class="fname" id="sLogoName"></div></label>
+        </div>
+        <div class="f"><label>Ảnh nền banner</label>
+          <label class="file-upload" for="sBgFile"><input type="file" id="sBgFile" accept="image/*"><div class="ico"><i class="fas fa-image"></i></div><div class="txt">Chọn ảnh nền</div><div class="fname" id="sBgName"></div></label>
+        </div>
+        <div class="f"><label>Favicon</label>
+          <label class="file-upload" for="sIconFile"><input type="file" id="sIconFile" accept="image/*,.ico,image/svg+xml"><div class="ico"><i class="fas fa-star"></i></div><div class="txt">Chọn icon</div><div class="fname" id="sIconName"></div></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section"><div class="sh"><i class="fas fa-bullhorn"></i> Marquee</div>
+      <div class="sb"><div class="f"><label>Nội dung chạy ngang</label><textarea id="sMarquee"></textarea></div></div>
+    </div>
+
+    <div class="settings-section"><div class="sh"><i class="fas fa-address-card"></i> Liên hệ</div>
+      <div class="sb">
+        <div class="f"><label>Địa chỉ</label><input type="text" id="sAddress"></div>
+        <div class="row2">
+          <div class="f"><label>Điện thoại</label><input type="text" id="sPhone"></div>
+          <div class="f"><label>Email</label><input type="text" id="sEmail"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section"><div class="sh"><i class="fas fa-clock"></i> Giờ làm việc</div>
+      <div class="sb">
+        <div class="row3">
+          <div class="f"><label>Sáng</label><input type="text" id="sWorkMorning"></div>
+          <div class="f"><label>Chiều</label><input type="text" id="sWorkAfternoon"></div>
+          <div class="f"><label>Ghi chú</label><input type="text" id="sWorkNote"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section"><div class="sh"><i class="fas fa-chart-bar"></i> Thống kê (để trống = số thật)</div>
+      <div class="sb">
+        <div class="row3">
+          <div class="f"><label>Online</label><input type="text" id="sStatOnline"></div>
+          <div class="f"><label>Hôm nay</label><input type="text" id="sStatToday"></div>
+          <div class="f"><label>Tuần</label><input type="text" id="sStatWeek"></div>
+        </div>
+        <div class="f"><label>Tất cả</label><input type="text" id="sStatTotal"></div>
+        <div class="hint">Để trống → dùng số thật từ Firestore/DB.</div>
+      </div>
+    </div>
+
+    <div class="settings-section"><div class="sh"><i class="fab fa-youtube"></i> YouTube</div>
+      <div class="sb"><div class="f"><label>Link video</label><input type="text" id="sYoutubeUrl"></div></div>
+    </div>
+
+    <div class="settings-section"><div class="sh"><i class="fas fa-link"></i> Liên kết nhanh (cột trái)</div>
+      <div class="sb"><div id="quickLinksEdit"></div><button type="button" class="btn-add" onclick="addLinkRow('quickLinksEdit')"><i class="fas fa-plus"></i> Thêm</button></div>
+    </div>
+
+    <div class="settings-section"><div class="sh"><i class="fas fa-graduation-cap"></i> Dạy – Học (cột phải)</div>
+      <div class="sb"><div id="docyhocLinksEdit"></div><button type="button" class="btn-add" onclick="addLinkRow('docyhocLinksEdit')"><i class="fas fa-plus"></i> Thêm</button></div>
+    </div>
+
+    <div class="settings-section"><div class="sh"><i class="fas fa-globe"></i> Liên kết website</div>
+      <div class="sb"><div id="webLinksEdit"></div><button type="button" class="btn-add" onclick="addWebLinkRow('webLinksEdit')"><i class="fas fa-plus"></i> Thêm</button></div>
+    </div>
+
+    <div class="settings-section"><div class="sh"><i class="fas fa-shoe-prints"></i> Footer</div>
+      <div class="sb">
+        <div class="f"><label>Tên trường</label><input type="text" id="sFooterName"></div>
+        <div class="f"><label>Người chịu trách nhiệm</label><input type="text" id="sFooterResp"></div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-post" id="btnSettings"><i class="fas fa-save"></i> Lưu tất cả cài đặt</button>
+  </form>
+</div>
+</div>
+
+<div id="Toast"></div>
+
+<script>
+/* =========================================================
+   ⚠️  THAY URL WORKER CLOUDFLARE CỦA BẠN VÀO ĐÂY
+   Ví dụ: const API_BASE = "https://thcsduongminhchau.thcschaodau.workers.dev/#";
+   Để trống "" nếu Worker và HTML cùng domain.
+   ========================================================= */
+const API_BASE = "";
+
+const $  = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const esc = str => String(str ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[m]);
+const fmtDate = iso => { if(!iso) return ""; const d = new Date(iso+"T00:00:00"); return isNaN(d)?iso:d.toLocaleDateString("vi-VN",{day:"2-digit",month:"2-digit",year:"numeric"}); };
+const fmtNum = n => (Number(n)||0).toLocaleString("vi-VN");
+const showToast = (msg,type="ok") => {
+  const t = $("#Toast");
+  t.innerHTML = (type==="ok"?"✅ ":"⚠️ ") + esc(msg);
+  t.className = type; t.classList.add("show");
+  clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove("show"), 4000);
+};
+const diag = (id, ok, txt) => {
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.className = ok ? "ok" : "ko";
+  el.textContent = txt;
+  const bar = document.getElementById("diagBar");
+  if(bar) bar.classList.toggle("err", Array.from(bar.children).some(c => c.className === "ko"));
+};
+
+let TOKEN = localStorage.getItem("chaodau_token") || "";
+
+async function api(path, options = {}){
+  const headers = { ...(options.headers || {}) };
+  if(TOKEN) headers["Authorization"] = "Bearer " + TOKEN;
+  const isForm = options.body instanceof FormData;
+  if(options.body && !isForm) headers["Content-Type"] = "application/json";
+  const res = await fetch(API_BASE + "/api" + path, { ...options, headers });
+  const data = await res.json().catch(() => ({}));
+  if(!res.ok) throw new Error(data.error || ("HTTP " + res.status));
+  return data;
+}
+
+let allPosts = [], allNotices = [], allDocs = [], settings = {};
+let currentAdmin = false;
+let realStats = { online:0, today:0, week:0, total:0 };
+let pollTimers = {};
+
+function tickClock(){
+  const d = new Date();
+  const days = ["Chủ nhật","Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7"];
+  const pad = n => String(n).padStart(2,"0");
+  $("#topClock").textContent = `${days[d.getDay()]}, ${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} - ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
+tickClock(); setInterval(tickClock, 1000);
+
+function renderStats(){
+  const use = (v) => v !== "" && v != null && !isNaN(Number(String(v).replace(/\./g,"").replace(/,/g,"")));
+  const toN = (v) => Number(String(v).replace(/\./g,"").replace(/,/g,"")) || 0;
+  const online = use(settings.statOnline) ? toN(settings.statOnline) : realStats.online;
+  const today  = use(settings.statToday)  ? toN(settings.statToday)  : realStats.today;
+  const week   = use(settings.statWeek)   ? toN(settings.statWeek)   : realStats.week;
+  const total  = use(settings.statTotal)  ? toN(settings.statTotal)  : realStats.total;
+  $("#stOnline").textContent = fmtNum(online);
+  $("#stToday").textContent  = fmtNum(today);
+  $("#stWeek").textContent   = fmtNum(week);
+  $("#stTotal").textContent   = fmtNum(total);
+}
+
+function applySettings(s){
+  if(!s) return;
+  const D = {
+    bannerTitle: "THCS Chao Đâu",
+    bannerSubtitle: "Cổng thông tin điện tử",
+    bannerLogo: "", bannerBg: "",
+    siteIcon: "",
+    marquee: "Chào mừng bạn đến với cổng thông tin điện tử Trường THCS Chao Đâu!",
+    address: "123 Đường Ước Mơ, P. Bình Thạnh, TP.HCM",
+    phone: "(028) 1234 5678",
+    email: "info@chaodau.edu.vn",
+    workMorning: "7:00 – 11:30",
+    workAfternoon: "13:30 – 17:00",
+    workNote: "(Từ thứ 2 đến thứ 6)",
+    statOnline: "", statToday: "", statWeek: "", statTotal: "",
+    youtubeUrl: "",
+    quickLinks: [], docyhocLinks: [], webLinks: [],
+    footerName: "TRƯỜNG THCS CHAO ĐÂU",
+    footerResp: "Ban Giám hiệu Trường THCS Chao Đâu"
+  };
+  const cfg = { ...D, ...s };
+  if(cfg.bannerTitle) $("#bannerTitle").textContent = cfg.bannerTitle;
+  if(cfg.bannerSubtitle) $("#bannerSubtitle").textContent = cfg.bannerSubtitle;
+  if(cfg.bannerBg) $("#bannerImage").src = cfg.bannerBg;
+  if(cfg.bannerLogo) $("#bannerLogo").innerHTML = `<img src="${esc(cfg.bannerLogo)}" alt="logo">`;
+  if(cfg.siteIcon) $("#siteFavicon").href = cfg.siteIcon;
+  if(cfg.marquee) $("#marqueeText").innerHTML = `<i class="fas fa-bullhorn" style="color:#0b4ea2"></i> ${esc(cfg.marquee)}`;
+  $("#workTime").innerHTML = `<p><b>Sáng:</b> ${esc(cfg.workMorning)}</p><p><b>Chiều:</b> ${esc(cfg.workAfternoon)}</p><p class="note">${esc(cfg.workNote)}</p>`;
+  $("#footerName").textContent = cfg.footerName;
+  $("#footerAddress").textContent = cfg.address;
+  $("#footerPhone").textContent = cfg.phone;
+  $("#footerEmail").textContent = cfg.email;
+  $("#footerResp").textContent = cfg.footerResp;
+  const yt = cfg.youtubeUrl || "";
+  const yid = yt.includes("/embed/") ? yt.split("/embed/")[1].split(/[?&]/)[0] : (yt.split("v=")[1]?.split("&")[0] || "");
+  if(yid) $("#ytFrame").src = `https://www.youtube.com/embed/${yid}`;
+  $("#quickList").innerHTML = (cfg.quickLinks||[]).map(l => `<a href="${esc(l.url)}" target="_blank"><i class="${esc(l.icon)}"></i> ${esc(l.text)}</a>`).join("");
+  $("#docyhocList").innerHTML = (cfg.docyhocLinks||[]).map(l => `<a href="${esc(l.url)}" target="_blank"><i class="${esc(l.icon)}"></i> ${esc(l.text)}</a>`).join("");
+  $("#webLinks").innerHTML = `<option value="">-- Chọn liên kết website --</option>` + (cfg.webLinks||[]).map(l => `<option value="${esc(l.url)}">${esc(l.text)}</option>`).join("");
+  renderStats();
+}
+
+function renderNotices(){
+  const box = $("#noticeList");
+  if(!allNotices.length){ box.innerHTML = '<p style="color:#888;font-style:italic">Chưa có thông báo.</p>'; return; }
+  box.innerHTML = allNotices.map(n => `<p>${esc(n.text)}</p>`).join("");
+}
+function imgOrEmoji(p, cls){
+  const img = p.image_url || p.imageUrl;
+  if(img){
+    const url = img.startsWith("http") ? img : (API_BASE + img);
+    return `<img src="${esc(url)}" alt="">`;
+  }
+  return `<div class="${cls} bg${Number(p.color)||0}">${esc(p.icon||"📰")}</div>`;
+}
+function renderFeatured(){
+  const box = $("#featGrid");
+  const top3 = allPosts.slice(0,3);
+  if(!top3.length){ box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;grid-column:1/-1">Chưa có bài viết.</div>'; return; }
+  box.innerHTML = top3.map(p => `
+    <div class="feat">
+      <div class="imgwrap">${imgOrEmoji(p,"ph")}</div>
+      <a href="#" class="t" data-id="${esc(p.id)}">${esc(p.title)}</a>
+      <div class="meta"><i class="far fa-calendar"></i> ${esc(fmtDate(p.date))}</div>
+    </div>`).join("");
+  box.querySelectorAll(".t").forEach(a => a.addEventListener("click", e => { e.preventDefault(); showPostDetail(a.dataset.id); }));
+}
+function renderTab(cat, id){
+  const box = $(id);
+  const list = allPosts.filter(p => p.cat === cat);
+  if(!list.length){ box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;font-style:italic">Chưa có bài viết.</div>'; return; }
+  const first = list[0], rest = list.slice(1,5);
+  box.innerHTML = `
+    <div class="lead">
+      <div class="imgwrap">${imgOrEmoji(first,"ph")}</div>
+      <div><a href="#" class="tt" data-id="${esc(first.id)}">${esc(first.title)}</a><p>${esc(first.excerpt)}</p></div>
+    </div>
+    <ul class="li">${rest.map(p=>`<li><a href="#" data-id="${esc(p.id)}">${esc(p.title)}</a></li>`).join("")}</ul>`;
+  box.querySelectorAll("a[data-id]").forEach(a => a.addEventListener("click", e => { e.preventDefault(); showPostDetail(a.dataset.id); }));
+}
+function showPostDetail(id){
+  const p = allPosts.find(x => String(x.id) === String(id)); if(!p) return;
+  alert("📰 " + p.title + "\n\nDanh mục: " + p.cat + "\nNgày: " + fmtDate(p.date) + "\n\n" + (p.content || p.excerpt));
+}
+function renderDocs(){
+  const box = $("#docList");
+  if(!allDocs.length){ box.innerHTML = '<div style="padding:14px;text-align:center;color:#888;font-style:italic">Chưa có văn bản.</div>'; return; }
+  box.innerHTML = allDocs.slice(0,5).map(d => {
+    const raw = d.file_url || d.fileUrl || "";
+    const fileUrl = raw.startsWith("http") ? raw : (API_BASE + raw);
+    return `
+    <div class="vb-item">
+      <span class="code">${esc(d.code)}</span>
+      <a href="${esc(fileUrl)}" target="_blank" class="tt">${esc(d.title)}</a>
+      ${d.date ? `<span class="dt"><i class="far fa-calendar"></i> Ngày ban hành: ${esc(fmtDate(d.date))}</span>` : ""}
+      ${(d.description || d.desc) ? `<div style="color:#555;font-size:11.5px;margin:3px 0">${esc(d.description || d.desc)}</div>` : ""}
+      <div class="acts">
+        <a href="${esc(fileUrl)}" target="_blank"><i class="far fa-eye"></i> Xem</a>
+        <a href="${esc(fileUrl)}" download><i class="fas fa-download"></i> Tải</a>
+      </div>
+    </div>`;
+  }).join("");
+}
+function renderAll(){
+  renderFeatured();
+  renderTab("Tin tức","#tabNews");
+  renderTab("Sự kiện","#tabEvents");
+  renderTab("Thông báo","#tabNotice");
+  renderTab("Tuyển sinh","#tabAdmissions");
+}
+
+function renderAdminPosts(){
+  const box = $("#adminPostList"); if(!box) return;
+  $("#postCount").textContent = allPosts.length;
+  if(!allPosts.length){ box.innerHTML = '<div style="padding:20px;text-align:center;color:#888">Chưa có bài viết.</div>'; return; }
+  box.innerHTML = allPosts.map(p => `
+    <div class="ad-item">
+      <div class="th">${imgOrEmoji(p,"ph")}</div>
+      <div class="m"><b>${esc(p.title)}</b><small>📁 ${esc(p.cat)} • 📅 ${esc(fmtDate(p.date))}</small></div>
+      <button class="btn-del" data-del="${esc(p.id)}"><i class="fas fa-trash"></i></button>
+    </div>`).join("");
+  box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => {
+    const id = b.dataset.del;
+    if(!confirm("Xóa bài viết này?")) return;
+    b.disabled = true; b.innerHTML = '<span class="loading-mini"></span>';
+    try {
+      await api("/posts/" + encodeURIComponent(id), { method: "DELETE" });
+      showToast("Đã xóa!"); pollPosts();
+    } catch(e){ showToast("Lỗi: " + e.message, "err"); b.disabled=false; b.innerHTML='<i class="fas fa-trash"></i>'; }
+  }));
+}
+function renderAdminNotices(){
+  const box = $("#adminNoticeList"); if(!box) return;
+  $("#noticeCount").textContent = allNotices.length;
+  if(!allNotices.length){ box.innerHTML = '<div style="padding:20px;text-align:center;color:#888">Chưa có thông báo.</div>'; return; }
+  box.innerHTML = allNotices.map(n => `
+    <div class="ad-item">
+      <div class="m"><b>${esc(n.text)}</b><small>Thứ tự: ${n.sort_order||0}</small></div>
+      <button class="btn-del" data-del="${esc(n.id)}"><i class="fas fa-trash"></i></button>
+    </div>`).join("");
+  box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => {
+    if(!confirm("Xóa thông báo này?")) return;
+    b.disabled = true;
+    try { await api("/notices/" + encodeURIComponent(b.dataset.del), {method:"DELETE"}); showToast("Đã xóa!"); pollNotices(); }
+    catch(e){ showToast("Lỗi: " + e.message, "err"); b.disabled=false; }
+  }));
+}
+function renderAdminDocs(){
+  const box = $("#adminDocList"); if(!box) return;
+  $("#docCount").textContent = allDocs.length;
+  if(!allDocs.length){ box.innerHTML = '<div style="padding:20px;text-align:center;color:#888">Chưa có văn bản.</div>'; return; }
+  box.innerHTML = allDocs.map(d => {
+    const raw = d.file_url || "";
+    const fileUrl = raw.startsWith("http") ? raw : (API_BASE + raw);
+    return `
+    <div class="ad-item">
+      <div class="th bg4"><i class="fas fa-file-pdf" style="font-size:20px"></i></div>
+      <div class="m"><b>${esc(d.code)} — ${esc(d.title)}</b><small>📅 ${esc(fmtDate(d.date))}</small></div>
+      <a href="${esc(fileUrl)}" target="_blank" style="padding:4px 8px;background:#0b4ea2;color:#fff;font-size:11px;text-decoration:none;flex:0 0 auto">Xem</a>
+      <button class="btn-del" data-del="${esc(d.id)}"><i class="fas fa-trash"></i></button>
+    </div>`;
+  }).join("");
+  box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => {
+    if(!confirm("Xóa văn bản này?")) return;
+    b.disabled = true;
+    try { await api("/documents/" + encodeURIComponent(b.dataset.del), {method:"DELETE"}); showToast("Đã xóa!"); pollDocs(); }
+    catch(e){ showToast("Lỗi: " + e.message, "err"); b.disabled=false; }
+  }));
+}
+
+$$(".ad-tabs button").forEach(btn => btn.addEventListener("click", () => {
+  $$(".ad-tabs button").forEach(b => b.classList.remove("active"));
+  $$(".ad-panel").forEach(p => p.classList.remove("active"));
+  btn.classList.add("active");
+  $("#tab-" + btn.dataset.tab).classList.add("active");
+}));
+
+const overlay = $("#LoginOverlay");
+$("#btnOpenLogin").addEventListener("click", e => {
+  e.preventDefault();
+  overlay.classList.add("show");
+  $("#loginErr").classList.remove("show");
+  $("#loginForm").reset();
+});
+$("#btnCloseLogin").addEventListener("click", () => overlay.classList.remove("show"));
+overlay.addEventListener("click", e => { if(e.target === overlay) overlay.classList.remove("show"); });
+$("#toggleEye").addEventListener("click", () => {
+  const i = $("#lPass");
+  i.type = i.type === "password" ? "text" : "password";
+  $("#toggleEye").textContent = i.type === "text" ? "🙈" : "👁";
+});
+$("#loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const b = $("#btnLogin");
+  b.disabled = true; b.innerHTML = '<span class="loading-mini"></span> Đang kiểm tra...';
+  $("#loginErr").classList.remove("show");
+  try {
+    const { token } = await api("/login", {
+      method: "POST",
+      body: JSON.stringify({
+        username: $("#lUser").value.trim(),
+        password: $("#lPass").value
+      })
+    });
+    TOKEN = token;
+    localStorage.setItem("chaodau_token", token);
+    currentAdmin = true;
+    setAdmin(true);
+    overlay.classList.remove("show");
+    showToast("Đăng nhập thành công!");
+    diag("dgAuth", true, "Auth: admin");
+  } catch(err){
+    $("#loginErr span").textContent = err.message;
+    $("#loginErr").classList.add("show");
+    $("#lPass").value = ""; $("#lPass").focus();
+  } finally {
+    b.disabled = false; b.innerHTML = '<i class="fas fa-sign-in-alt"></i> Đăng nhập';
+  }
+});
+function setAdmin(state){
+  currentAdmin = state;
+  if(state){
+    $("#AdminPanel").classList.add("show");
+    document.getElementById("wrap").style.display = "none";
+    document.getElementById("LoginOverlay").style.display = "none";
+    renderAdminPosts(); renderAdminNotices(); renderAdminDocs();
+    fillSettingsForm();
+  } else {
+    $("#AdminPanel").classList.remove("show");
+    document.getElementById("wrap").style.display = "";
+    document.getElementById("LoginOverlay").style.display = "";
+  }
+}
+$("#btnLogout").addEventListener("click", async () => {
+  try { await api("/logout", { method: "POST" }); } catch(e){}
+  TOKEN = ""; localStorage.removeItem("chaodau_token");
+  currentAdmin = false;
+  setAdmin(false);
+  showToast("Đã đăng xuất.");
+  diag("dgAuth", true, "Auth: chưa đăng nhập");
+});
+$("#btnViewSite").addEventListener("click", () => { setAdmin(false); window.scrollTo({top:0,behavior:"smooth"}); });
+
+async function compressImage(file, maxWidth = 1280, quality = 0.82){
+  if(!file || !file.type.startsWith("image/")) return file;
+  if(file.type === "image/gif" || file.type === "image/svg+xml") return file;
+  return new Promise(resolve => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      try {
+        URL.revokeObjectURL(url);
+        let { width, height } = img;
+        if(width > maxWidth){ height = Math.round(height * maxWidth / width); width = maxWidth; }
+        const c = document.createElement("canvas");
+        c.width = width; c.height = height;
+        c.getContext("2d").drawImage(img, 0, 0, width, height);
+        c.toBlob(blob => {
+          if(!blob) return resolve(file);
+          const newName = file.name.replace(/\.[^.]+$/, "") + ".jpg";
+          resolve(new File([blob], newName, {type:"image/jpeg", lastModified: Date.now()}));
+        }, "image/jpeg", quality);
+      } catch(e){ resolve(file); }
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+    img.src = url;
+  });
+}
+
+function uploadFile(file, folder, progressIds){
+  return new Promise((resolve, reject) => {
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("folder", folder);
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", API_BASE + "/api/upload");
+    if(TOKEN) xhr.setRequestHeader("Authorization", "Bearer " + TOKEN);
+    xhr.upload.onprogress = e => {
+      if(e.lengthComputable && progressIds){
+        const pct = (e.loaded / e.total) * 100;
+        const bar = $(progressIds[0]), txt = $(progressIds[1]);
+        if(bar && txt){
+          bar.classList.add("show"); txt.classList.add("show");
+          bar.querySelector("i").style.width = pct + "%";
+          txt.textContent = Math.round(pct) + "%";
+        }
+      }
+    };
+    xhr.onload = () => {
+      try {
+        const res = JSON.parse(xhr.responseText);
+        if(xhr.status >= 200 && xhr.status < 300) resolve(res);
+        else reject(new Error(res.error || "Upload lỗi"));
+      } catch(e){ reject(new Error("Upload response lỗi")); }
+    };
+    xhr.onerror = () => reject(new Error("Network error"));
+    xhr.send(fd);
+  });
+}
+
+let pImageFile = null;
+$("#pImage").addEventListener("change", e => {
+  const f = e.target.files[0]; pImageFile = f || null;
+  $("#pImageName").textContent = f ? f.name : "";
+  const prev = $("#pImagePreview");
+  if(f){ prev.src = URL.createObjectURL(f); prev.classList.remove("hidden"); }
+  else prev.classList.add("hidden");
+});
+$("#postForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  if(!TOKEN){ showToast("Bạn chưa đăng nhập admin!", "err"); return; }
+  const btn = $("#btnPost");
+  btn.disabled = true; btn.innerHTML = '<span class="loading-mini"></span> Đang đăng...';
+  try {
+    let imageUrl = "", imagePath = "";
+    if(pImageFile){
+      const compressed = await compressImage(pImageFile);
+      const up = await uploadFile(compressed, "posts", ["#pUploadProgress","#pUploadPercent"]);
+      imageUrl = up.url; imagePath = up.path;
+    }
+    const payload = {
+      title: $("#pTitle").value.trim(),
+      cat: $("#pCat").value,
+      date: $("#pDate").value,
+      icon: $("#pIcon").value.trim() || "📰",
+      color: Number($("#pColor").value),
+      excerpt: $("#pExcerpt").value.trim(),
+      content: $("#pContent").value.trim() || $("#pExcerpt").value.trim(),
+      imageUrl, imagePath
+    };
+    await api("/posts", { method: "POST", body: JSON.stringify(payload) });
+    e.target.reset(); pImageFile = null;
+    $("#pIcon").value = "📰"; $("#pColor").value = "0";
+    $("#pDate").value = new Date().toISOString().split("T")[0];
+    $("#pImageName").textContent = ""; $("#pImagePreview").classList.add("hidden");
+    $("#pUploadProgress").classList.remove("show");
+    $("#pUploadPercent").classList.remove("show");
+    showToast("Đăng bài thành công!");
+    pollPosts();
+  } catch(err){
+    console.error(err);
+    showToast("Lỗi: " + err.message, "err");
+  } finally {
+    btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Đăng bài viết';
+  }
+});
+
+$("#noticeForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  if(!TOKEN){ showToast("Chưa đăng nhập!", "err"); return; }
+  const btn = $("#btnNotice"); btn.disabled = true;
+  try {
+    await api("/notices", {
+      method: "POST",
+      body: JSON.stringify({
+        text: $("#nText").value.trim(),
+        order: Number($("#nOrder").value) || 0
+      })
+    });
+    e.target.reset(); $("#nOrder").value = "0";
+    showToast("Đã thêm thông báo!");
+    pollNotices();
+  } catch(err){ showToast("Lỗi: " + err.message, "err"); }
+  finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-plus-circle"></i> Thêm thông báo'; }
+});
+
+let dFile = null;
+$("#dFile").addEventListener("change", e => {
+  dFile = e.target.files[0] || null;
+  $("#dFileName").textContent = dFile ? dFile.name : "";
+});
+$("#docForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  if(!TOKEN){ showToast("Chưa đăng nhập!", "err"); return; }
+  if(!dFile){ showToast("Vui lòng chọn file PDF!", "err"); return; }
+  const btn = $("#btnDoc"); btn.disabled = true; btn.innerHTML = '<span class="loading-mini"></span> Đang tải lên...';
+  try {
+    const up = await uploadFile(dFile, "documents", ["#dUploadProgress","#dUploadPercent"]);
+    await api("/documents", {
+      method: "POST",
+      body: JSON.stringify({
+        code: $("#dCode").value.trim(),
+        title: $("#dTitle").value.trim(),
+        date: $("#dDate").value || "",
+        desc: $("#dDesc").value.trim(),
+        fileUrl: up.url,
+        filePath: up.path,
+        fileName: dFile.name
+      })
+    });
+    e.target.reset(); dFile = null; $("#dFileName").textContent = "";
+    $("#dUploadProgress").classList.remove("show");
+    $("#dUploadPercent").classList.remove("show");
+    showToast("Đăng văn bản thành công!");
+    pollDocs();
+  } catch(err){ showToast("Lỗi: " + err.message, "err"); }
+  finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Đăng văn bản'; }
+});
+
+function fillSettingsForm(){
+  const s = settings;
+  $("#sBannerTitle").value = s.bannerTitle || "";
+  $("#sBannerSubtitle").value = s.bannerSubtitle || "";
+  $("#sMarquee").value = s.marquee || "";
+  $("#sAddress").value = s.address || "";
+  $("#sPhone").value = s.phone || "";
+  $("#sEmail").value = s.email || "";
+  $("#sWorkMorning").value = s.workMorning || "";
+  $("#sWorkAfternoon").value = s.workAfternoon || "";
+  $("#sWorkNote").value = s.workNote || "";
+  $("#sStatOnline").value = s.statOnline || "";
+  $("#sStatToday").value = s.statToday || "";
+  $("#sStatWeek").value = s.statWeek || "";
+  $("#sStatTotal").value = s.statTotal || "";
+  $("#sYoutubeUrl").value = s.youtubeUrl || "";
+  $("#sFooterName").value = s.footerName || "";
+  $("#sFooterResp").value = s.footerResp || "";
+  fillLinks("quickLinksEdit", s.quickLinks || []);
+  fillLinks("docyhocLinksEdit", s.docyhocLinks || []);
+  fillWebLinks("webLinksEdit", s.webLinks || []);
+}
+function fillLinks(id, arr){
+  const box = document.getElementById(id); box.innerHTML = "";
+  arr.forEach(l => addLinkRow(id, l.icon, l.text, l.url));
+}
+function addLinkRow(id, icon="fas fa-link", text="", url=""){
+  const box = document.getElementById(id);
+  const row = document.createElement("div");
+  row.className = "link-row";
+  row.innerHTML = `
+    <input class="l-icon" type="text" value="${esc(icon)}" placeholder="fas fa-link">
+    <input class="l-text" type="text" value="${esc(text)}" placeholder="Tên hiển thị">
+    <input class="l-url" type="text" value="${esc(url)}" placeholder="https://...">
+    <button type="button" class="rm"><i class="fas fa-times"></i></button>`;
+  row.querySelector(".rm").addEventListener("click", () => row.remove());
+  box.appendChild(row);
+}
+function getLinks(id){
+  return [...document.getElementById(id).querySelectorAll(".link-row")].map(r => ({
+    icon: r.querySelector(".l-icon").value.trim(),
+    text: r.querySelector(".l-text").value.trim(),
+    url: r.querySelector(".l-url").value.trim()
+  })).filter(l => l.text);
+}
+function fillWebLinks(id, arr){
+  const box = document.getElementById(id); box.innerHTML = "";
+  arr.forEach(l => addWebLinkRow(id, l.text, l.url));
+}
+function addWebLinkRow(id, text="", url=""){
+  const box = document.getElementById(id);
+  const row = document.createElement("div");
+  row.className = "link-row";
+  row.style.gridTemplateColumns = "1fr 2fr 40px";
+  row.innerHTML = `
+    <input class="l-text" type="text" value="${esc(text)}" placeholder="Tên hiển thị">
+    <input class="l-url" type="text" value="${esc(url)}" placeholder="https://...">
+    <button type="button" class="rm"><i class="fas fa-times"></i></button>`;
+  row.querySelector(".rm").addEventListener("click", () => row.remove());
+  box.appendChild(row);
+}
+function getWebLinks(id){
+  return [...document.getElementById(id).querySelectorAll(".link-row")].map(r => ({
+    text: r.querySelector(".l-text").value.trim(),
+    url: r.querySelector(".l-url").value.trim()
+  })).filter(l => l.text);
+}
+window.addLinkRow = addLinkRow;
+window.addWebLinkRow = addWebLinkRow;
+
+let sLogoFile = null, sBgFile = null, sIconFile = null;
+$("#sLogoFile").addEventListener("change", e => { sLogoFile = e.target.files[0] || null; $("#sLogoName").textContent = sLogoFile ? sLogoFile.name : ""; });
+$("#sBgFile").addEventListener("change", e => { sBgFile = e.target.files[0] || null; $("#sBgName").textContent = sBgFile ? sBgFile.name : ""; });
+$("#sIconFile").addEventListener("change", e => { sIconFile = e.target.files[0] || null; $("#sIconName").textContent = sIconFile ? sIconFile.name : ""; });
+
+$("#settingsForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  if(!TOKEN){ showToast("Chưa đăng nhập!", "err"); return; }
+  const btn = $("#btnSettings"); btn.disabled = true; btn.innerHTML = '<span class="loading-mini"></span> Đang lưu...';
+  try {
+    let bannerLogo = settings.bannerLogo || "";
+    let bannerBg   = settings.bannerBg || "";
+    let siteIcon   = settings.siteIcon || "";
+    if(sLogoFile){ const up = await uploadFile(await compressImage(sLogoFile), "banner"); bannerLogo = up.url; sLogoFile = null; $("#sLogoName").textContent = ""; }
+    if(sBgFile){ const up = await uploadFile(await compressImage(sBgFile, 1600, 0.85), "banner"); bannerBg = up.url; sBgFile = null; $("#sBgName").textContent = ""; }
+    if(sIconFile){ const up = await uploadFile(sIconFile, "favicon"); siteIcon = up.url; sIconFile = null; $("#sIconName").textContent = "Đã lưu"; }
+
+    const payload = {
+      bannerTitle: $("#sBannerTitle").value.trim(),
+      bannerSubtitle: $("#sBannerSubtitle").value.trim(),
+      bannerLogo, bannerBg, siteIcon,
+      marquee: $("#sMarquee").value.trim(),
+      address: $("#sAddress").value.trim(),
+      phone: $("#sPhone").value.trim(),
+      email: $("#sEmail").value.trim(),
+      workMorning: $("#sWorkMorning").value.trim(),
+      workAfternoon: $("#sWorkAfternoon").value.trim(),
+      workNote: $("#sWorkNote").value.trim(),
+      statOnline: $("#sStatOnline").value.trim(),
+      statToday: $("#sStatToday").value.trim(),
+      statWeek: $("#sStatWeek").value.trim(),
+      statTotal: $("#sStatTotal").value.trim(),
+      youtubeUrl: $("#sYoutubeUrl").value.trim(),
+      quickLinks: getLinks("quickLinksEdit"),
+      docyhocLinks: getLinks("docyhocLinksEdit"),
+      webLinks: getWebLinks("webLinksEdit"),
+      footerName: $("#sFooterName").value.trim(),
+      footerResp: $("#sFooterResp").value.trim()
+    };
+    await api("/settings", { method: "POST", body: JSON.stringify(payload) });
+    showToast("Đã lưu cài đặt!");
+    pollSettings();
+  } catch(err){ showToast("Lỗi: " + err.message, "err"); }
+  finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Lưu tất cả cài đặt'; }
+});
+
+async function pollPosts(){
+  try {
+    const list = await api("/posts");
+    allPosts = list;
+    renderAll();
+    if(currentAdmin) renderAdminPosts();
+    diag("dgApi", true, "API: OK (" + list.length + " bài)");
+  } catch(e){
+    console.warn("[pollPosts]", e);
+    diag("dgApi", false, "API: " + e.message);
+  }
+}
+async function pollNotices(){
+  try {
+    allNotices = await api("/notices");
+    renderNotices();
+    if(currentAdmin) renderAdminNotices();
+  } catch(e){ console.warn("[pollNotices]", e); }
+}
+async function pollDocs(){
+  try {
+    allDocs = await api("/documents");
+    renderDocs();
+    if(currentAdmin) renderAdminDocs();
+  } catch(e){ console.warn("[pollDocs]", e); }
+}
+async function pollSettings(){
+  try {
+    settings = await api("/settings");
+    applySettings(settings);
+    if(currentAdmin) fillSettingsForm();
+  } catch(e){ console.warn("[pollSettings]", e); }
+}
+async function pollStats(){
+  try {
+    realStats = await api("/stats");
+    renderStats();
+    diag("dgStat", true, "Stats: OK (" + realStats.total + " total)");
+  } catch(e){ console.warn("[pollStats]", e); }
+}
+
+function getSid(){
+  let s = sessionStorage.getItem("chaodau_sid");
+  if(!s){ s = "s_" + Date.now() + "_" + Math.random().toString(36).slice(2,9); sessionStorage.setItem("chaodau_sid", s); }
+  return s;
+}
+async function bumpVisit(){
+  try { await api("/stats/hit", { method: "POST" }); } catch(e){ console.warn(e); }
+}
+async function heartbeat(){
+  try { await api("/presence", { method: "POST", body: JSON.stringify({ sid: getSid() }) }); }
+  catch(e){}
+}
+function goodBye(){
+  try {
+    fetch(API_BASE + "/api/presence", {
+      method: "POST",
+      keepalive: true,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sid: getSid(), remove: true })
+    });
+  } catch(e){}
+}
+
+(function init(){
+  const today = new Date().toISOString().split("T")[0];
+  $("#pDate").value = today;
+  $("#dDate").value = today;
+  renderStats();
+
+  pollPosts();
+  pollNotices();
+  pollDocs();
+  pollSettings();
+  pollStats();
+  bumpVisit();
+  heartbeat();
+
+  pollTimers.posts    = setInterval(pollPosts, 3000);
+  pollTimers.notices  = setInterval(pollNotices, 5000);
+  pollTimers.docs     = setInterval(pollDocs, 5000);
+  pollTimers.settings = setInterval(pollSettings, 15000);
+  pollTimers.stats    = setInterval(pollStats, 10000);
+  pollTimers.presence = setInterval(heartbeat, 25000);
+
+  document.addEventListener("visibilitychange", () => {
+    if(document.visibilityState === "hidden"){
+      Object.values(pollTimers).forEach(t => clearInterval(t));
+    } else {
+      pollTimers.posts    = setInterval(pollPosts, 3000);
+      pollTimers.notices  = setInterval(pollNotices, 5000);
+      pollTimers.docs     = setInterval(pollDocs, 5000);
+      pollTimers.settings = setInterval(pollSettings, 15000);
+      pollTimers.stats    = setInterval(pollStats, 10000);
+      pollTimers.presence = setInterval(heartbeat, 25000);
+      pollPosts(); pollStats(); heartbeat();
+    }
+  });
+
+  window.addEventListener("beforeunload", goodBye);
+
+  if(TOKEN){
+    api("/posts").then(() => {
+      currentAdmin = true;
+      setAdmin(true);
+      diag("dgAuth", true, "Auth: admin (phiên cũ)");
+    }).catch(() => {
+      TOKEN = ""; localStorage.removeItem("chaodau_token");
+      diag("dgAuth", true, "Auth: chưa đăng nhập");
+    });
+  } else {
+    diag("dgAuth", true, "Auth: chưa đăng nhập");
+  }
+})();
+</script>
+</body>
+</html>
