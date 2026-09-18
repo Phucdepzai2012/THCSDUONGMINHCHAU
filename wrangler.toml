@@ -1,0 +1,20 @@
+name = "thcs-chaodau"
+main = "src/worker.js"
+compatibility_date = "2024-09-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "duongminhchau"
+database_id = "259c6a40-dc67-4733-859b-abcd1d67a6cb"
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "chaodau-files"
+
+[vars]
+ADMIN_USER = "admin"
+ADMIN_PASS = "doi_mat_khau_cua_ban"
+JWT_SECRET = "chuoi_bi_mat_that_dai_va_kho_doan"
+
+[site]
+bucket = "./public"
